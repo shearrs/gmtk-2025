@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using LostResort.SignalShuttles;
 
 public class DayTimer : MonoBehaviour
 {
@@ -20,14 +21,14 @@ public class DayTimer : MonoBehaviour
 
     //private Signals.SignalNoArgs _onLapCompleted;
 
-    private SignalBinding<OnLapCompleted> _testSignalBinding;
+    //private SignalBinding<OnLapCompleted> _testSignalBinding;
     
-    void Start()
+    void Awake()
     {
         mapCompletion = (float)_lapsCompleted / _lapsToComplete;
         //SignalShuttle.AddSignal(ref _onLapCompleted);
         
-        SubscribeSignals();
+        RegisterSignals();
     }
 
     void Update()
@@ -37,21 +38,20 @@ public class DayTimer : MonoBehaviour
 
     private void OnDestroy()
     {
-        UnsubscribeSignals();
+        DeregisterSignals();
     }
 
-    void SubscribeSignals()
+    void RegisterSignals()
     {
-        _testSignalBinding = new SignalBinding<OnLapCompleted>(OnLapCompleted);
-        SignalShuttle<OnLapCompleted>.Register(_testSignalBinding);
+        SignalShuttle<OnLapCompleted>.Register(OnLapCompleted);
     }
 
-    void UnsubscribeSignals()
+    void DeregisterSignals()
     {
-        SignalShuttle<OnLapCompleted>.Deregister(_testSignalBinding);
+        SignalShuttle<OnLapCompleted>.Deregister(OnLapCompleted);
     }
 
-    void OnLapCompleted()
+    void OnLapCompleted(OnLapCompleted signal)
     {
         Debug.Log("lap completed");
     }
