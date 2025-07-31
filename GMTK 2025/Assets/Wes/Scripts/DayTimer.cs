@@ -1,58 +1,78 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using LostResort.SignalShuttles;
 
 public class DayTimer : MonoBehaviour
 {
     /// <summary>
-    /// how many laps it takes to finish the day
+    /// How long is the game (in seconds).
     /// </summary>
-    [SerializeField] private int _lapsToComplete;
+    [SerializeField] private float _gameLength;
 
     /// <summary>
-    /// how many laps the player has finished
+    /// How much time has elapsed in the game in float.
     /// </summary>
-    private int _lapsCompleted;
-
+    public float TimeElapsed { get; private set; }
+    
     /// <summary>
-    /// what percent of the map the player has completed
+    /// How much time has elapsed in the game in int.
     /// </summary>
-    private float mapCompletion;
+    public int TimeElapsedInt { get; private set; }
 
-    //private Signals.SignalNoArgs _onLapCompleted;
-
-    //private SignalBinding<OnLapCompleted> _testSignalBinding;
+    private IEnumerator _gameTimer;
     
     void Awake()
     {
-        mapCompletion = (float)_lapsCompleted / _lapsToComplete;
-        //SignalShuttle.AddSignal(ref _onLapCompleted);
-        
+        AssignComponents();
         RegisterSignals();
-    }
-
-    void Update()
-    {
-        // SignalShuttle<TestSignal>.Raise(new TestSignal());
     }
 
     private void OnDestroy()
     {
         DeregisterSignals();
+        StopAllCoroutines();
     }
+    
+    private IEnumerator GameTimer(float maxTime)
+    {
+        while (TimeElapsed<=maxTime)
+        {
+            TimeElapsed += Time.deltaTime;
 
+            //update TimeElapsedInt
+            float tolerance = 0.001f;
+            if (TimeElapsed - Mathf.Floor(TimeElapsed) <= tolerance)
+            {
+                TimeElapsedInt = (int)Mathf.Floor(TimeElapsed);
+                //Debug.Log("Game Time: " + TimeElapsedInt);
+            }
+            
+            yield return null;
+        }
+        //end the game
+        SignalShuttle<OnGameEnd>.Emit(new OnGameEnd());
+        yield break;
+    }
+    
+    void StartTimer(OnGameStart signal)
+    {
+        StartCoroutine(_gameTimer);
+    }
+    
     void RegisterSignals()
     {
-        SignalShuttle<OnLapCompleted>.Register(OnLapCompleted);
+        SignalShuttle<OnGameStart>.Register(StartTimer);
     }
-
+    
     void DeregisterSignals()
     {
-        SignalShuttle<OnLapCompleted>.Deregister(OnLapCompleted);
+        SignalShuttle<OnGameStart>.Deregister(StartTimer);
     }
 
-    void OnLapCompleted(OnLapCompleted signal)
+    void AssignComponents()
     {
-        Debug.Log("lap completed");
+        _gameTimer = GameTimer(_gameLength);
     }
 }

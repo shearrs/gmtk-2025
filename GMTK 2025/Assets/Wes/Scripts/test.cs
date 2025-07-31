@@ -6,7 +6,7 @@ public class test : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        SignalShuttle<OnLapCompleted>.Emit(new OnLapCompleted());
+        SignalShuttle<OnGameStart>.Emit(new OnGameStart());
     }
 
     // Update is called once per frame
