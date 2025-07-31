@@ -3,9 +3,9 @@
 /workspace.xml
 # Rider ignored files
 /projectSettingsUpdater.xml
-/modules.xml
-/.idea.GMTK 2025.iml
 /contentModel.xml
+/.idea.GMTK 2025.iml
+/modules.xml
 # Editor-based HTTP Client requests
 /httpRequests/
 # Datasource local storage ignored files
