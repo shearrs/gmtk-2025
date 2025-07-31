@@ -9,7 +9,7 @@ public class DayTimer : MonoBehaviour
     /// <summary>
     /// How long is the game (in seconds).
     /// </summary>
-    [SerializeField] private float _gameLength;
+    [SerializeField] private float _gameDuration;
 
     /// <summary>
     /// How much time has elapsed in the game in float.
@@ -73,6 +73,6 @@ public class DayTimer : MonoBehaviour
 
     void AssignComponents()
     {
-        _gameTimer = GameTimer(_gameLength);
+        _gameTimer = GameTimer(_gameDuration);
     }
 }
