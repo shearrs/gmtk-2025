@@ -7,16 +7,29 @@ namespace LostResort.Passengers
     {
 
 
-        public float wanderRadius = 1f;
-        public float wanderTimer = 5f;
+        private float wanderRadius = 1f;
+        private float wanderTimer = 5f;
+
+        [SerializeField]
+        private float wanderRadiusMin;
+        [SerializeField]
+        private float wanderRadiusMax;
+        
+        [SerializeField]
+        private float wanderTimerMin;
+        [SerializeField]
+        private float wanderTimerMax;
 
         private NavMeshAgent agent;
         private float timer;
 
         void Start()
         {
+            
             agent = GetComponent<NavMeshAgent>();
             timer = wanderTimer;
+            wanderRadius = Random.Range(wanderRadiusMin, wanderRadiusMax);
+            wanderTimer = Random.Range(wanderTimerMin, wanderTimerMax);
         }
 
         void Update()
@@ -26,14 +39,9 @@ namespace LostResort.Passengers
             if (timer >= wanderTimer)
             {
                 Vector3 newPos = GetRandomNavMeshLocation(wanderRadius);
-                //agent.SetDestination(newPos);
+                agent.SetDestination(newPos);
                 timer = 0;
             }
-        }
-
-        public void GoToLocation(Vector3 location)
-        {
-            
         }
 
         Vector3 GetRandomNavMeshLocation(float radius)

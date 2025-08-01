@@ -10,6 +10,7 @@ namespace LostResort.Passengers
 
         public void OnCollisionEnter(Collision other)
         {
+            //Debug.Log(other.gameObject.name);
             if (other.gameObject.GetComponent<Passenger>() != null)
             {
                 Passenger passenger = other.gameObject.GetComponent<Passenger>();
@@ -19,6 +20,8 @@ namespace LostResort.Passengers
 
         public void OnTriggerEnter(Collider other)
         {
+            //Debug.Log(other.gameObject.name);
+
             if (other.gameObject.GetComponent<ResortLocation>() != null)
             {
                 ResortLocation location = other.gameObject.GetComponent<ResortLocation>();

@@ -26,7 +26,7 @@ namespace LostResort.Passengers
         
         public void DisableExclamationMark()
         {
-            DOTween.Kill(this);
+            DOTween.Kill(transform);
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(false);
@@ -41,11 +41,11 @@ namespace LostResort.Passengers
         private void Spawn()
         {
             EnableExclamationMark();
-            Vector3 jumpVector = transform.position + Vector3.up;
-            transform.DOJump(jumpVector, jumpVector.y, 1, 0.5f).SetEase(Ease.OutSine);
+            Vector3 jumpVector = transform.localPosition + Vector3.up;
+            transform.DOLocalJump(jumpVector, jumpVector.y, 1, 0.5f).SetEase(Ease.OutSine);
         }
 
-        public void BeginGrowAndShrink()
+        private void BeginGrowAndShrink()
         {
             Sequence sequence = DOTween.Sequence().SetLoops(-1);
 
