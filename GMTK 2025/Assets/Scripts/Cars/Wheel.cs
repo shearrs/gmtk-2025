@@ -24,6 +24,8 @@ namespace LostResort.Cars
 
         private IManagedInput moveInput;
 
+        public float Grip { get => grip; set => grip = value; }
+
         private void Awake()
         {
             moveInput = carInput.MoveInput;
