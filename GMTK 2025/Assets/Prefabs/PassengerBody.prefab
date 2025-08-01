@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exclamationMark: {fileID: 2115232421990097647}
   startingScoreWhenDroppedOff: 100
-  scoreWhenDroppedOffReductionRatePerSecond: 10
+  scoreWhenDroppedOffReductionRatePerSecond: 3
   scoreWhenDroppedOff: 0
   minimumScoreWhenDroppedOff: 20
   dropOffLocationBasedMaterials:
@@ -176,8 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30a3bca26a7c09843b96aa91d11991c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wanderRadius: 10
-  wanderTimer: 5
+  wanderRadiusMin: 0.5
+  wanderRadiusMax: 3
+  wanderTimerMin: 0.5
+  wanderTimerMax: 3
 --- !u!195 &6813346258742098986
 NavMeshAgent:
   m_ObjectHideFlags: 0
