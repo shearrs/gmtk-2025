@@ -15,9 +15,9 @@ namespace LostResort.Passengers
 
     public enum LocationType
     {
-        Lobby,
-        Villas,
-        Beach,
-        Restaurants
+        Hotel,
+        Conference,
+        Beach
+
     }
 }

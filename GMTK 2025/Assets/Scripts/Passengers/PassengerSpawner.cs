@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using LostResort.SignalShuttles;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,11 +12,11 @@ namespace LostResort.Passengers
         [SerializeField] private GameObject passengerPrefab;
         [SerializeField] private BoxCollider[] boxColliders;
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        
         void Start()
         {
+            SignalShuttle.Emit(new OnGameStart());
             StartCoroutine(ContinuouslySpawnPassengers());
-
         }
 
 
@@ -42,8 +43,6 @@ namespace LostResort.Passengers
 
         }
         
-        
-
         Vector3 GetRandomPointInBounds(Bounds bounds)
         {
             return new Vector3(

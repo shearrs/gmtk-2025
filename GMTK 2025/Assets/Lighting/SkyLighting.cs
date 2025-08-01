@@ -1,18 +1,22 @@
 using System;
 using System.Linq.Expressions;
+using LostResort.Timers;
 using UnityEngine;
 
 [ExecuteAlways]
 public class Lighting : MonoBehaviour
 {
    [SerializeField]
+   private DayTimer dayTimer;
+   
+   [SerializeField]
    private Light DirectionalLight;
    
    [SerializeField]
    private LightingPreset Preset;
    
-   [SerializeField, Range(0, 24)]
-   private float TimeOfDay;
+   //[SerializeField, Range(0, 24)]
+   //private float TimeOfDay;
 
    private void Update()
    {
@@ -22,13 +26,15 @@ public class Lighting : MonoBehaviour
          return;
       }
 
+      /*
       if (Application.isPlaying)
       {
          TimeOfDay += Time.deltaTime;
          TimeOfDay %= 24;
       }
+      */
 
-      UpdateLighting(TimeOfDay / 24f);
+      UpdateLighting(dayTimer.TimeElapsedPercent);
 
       
       
