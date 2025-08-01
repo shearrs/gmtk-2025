@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grid Floor
-  m_Shader: {fileID: -6465566751694194690, guid: 1249a1e3421fbcb4daf27e242928d806, type: 3}
+  m_Name: Bus Shadow
+  m_Shader: {fileID: -6465566751694194690, guid: b72a902d824cef844aa3fb5e477236c2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,13 +24,9 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Dither_Texture:
-        m_Texture: {fileID: 2800000, guid: 95cc4c7a0ce4fad4db400b19e932da09, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Main_Texture:
-        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 3000, y: 3000}
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
@@ -46,18 +42,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Dither_Size: 0
-    - _Dither_Smoothing: 0.25
-    - _Dither_Threshold: 0.685
+    - _Alpha_Clip_Threshold: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Albedo: {r: 0.9437936, g: 0.8509433, b: 1, a: 1}
-    - _Remap: {r: 0.25, g: 1, b: 0, a: 0}
-    - _Shadow_Color: {r: 0.18431373, g: 0.2, b: 0.53333336, a: 1}
+    - _Albedo: {r: 0.070252724, g: 0.07806608, b: 0.2603773, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &6802979895424850013
+--- !u!114 &5144174069095914876
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

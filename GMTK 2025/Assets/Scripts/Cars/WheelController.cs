@@ -1,3 +1,4 @@
+using Shears.Input;
 using UnityEngine;
 
 namespace LostResort.Cars
