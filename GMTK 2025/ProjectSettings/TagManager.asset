@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Passenger
   - Location
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
