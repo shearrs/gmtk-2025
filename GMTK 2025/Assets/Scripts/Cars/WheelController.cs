@@ -6,6 +6,7 @@ namespace LostResort.Cars
     public class WheelController : MonoBehaviour
     {
         [Header("References")]
+        [SerializeField] private Car car;
         [SerializeField] private CarInput carInput;
         [SerializeField] private Rigidbody carRigidBody;
         [SerializeField] private CarMovementData movementData;
@@ -34,12 +35,10 @@ namespace LostResort.Cars
             {
                 Vector3 euler = wheel.transform.localEulerAngles;
 
-                float velocityT = carRigidBody.linearVelocity.sqrMagnitude / (movementData.MaxSpeed * movementData.MaxSpeed);
+                float velocityT = car.GetMaxSpeedPercentage();
                 float maxSteerAngle = Mathf.Lerp(maxSteeringAngle, maxSpeedSteeringAngle, velocityT);
                 float targetRot = rotationInput.x * maxSteerAngle;
                 float currentHandling = handling;
-
-
 
                 euler.y = Mathf.MoveTowardsAngle(euler.y, targetRot, currentHandling * Time.fixedDeltaTime);
 

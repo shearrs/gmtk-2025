@@ -131,8 +131,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carRigidBody: {fileID: 8988805833627153373}
   carInput: {fileID: 5548998795581848671}
+  carRigidBody: {fileID: 8988805833627153373}
+  model: {fileID: 6217651627942559182}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
@@ -143,6 +144,7 @@ MonoBehaviour:
   springDamping: 8000
   grip: 1
   drag: 500
+  modelPadding: 0.45
 --- !u!1 &1958734603834837540
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,8 +243,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carRigidBody: {fileID: 8988805833627153373}
   carInput: {fileID: 5548998795581848671}
+  carRigidBody: {fileID: 8988805833627153373}
+  model: {fileID: 2320271343649350111}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
@@ -253,6 +256,7 @@ MonoBehaviour:
   springDamping: 8000
   grip: 1
   drag: 500
+  modelPadding: 0.45
 --- !u!1 &2803923658006841555
 GameObject:
   m_ObjectHideFlags: 0
@@ -383,6 +387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cb959d4c33f4848b9bbc2d0396ead7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  car: {fileID: 6811755135693848246}
   carInput: {fileID: 5548998795581848671}
   carRigidBody: {fileID: 8988805833627153373}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
@@ -437,8 +442,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carRigidBody: {fileID: 8988805833627153373}
   carInput: {fileID: 5548998795581848671}
+  carRigidBody: {fileID: 8988805833627153373}
+  model: {fileID: 7172887583966502471}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
@@ -449,6 +455,7 @@ MonoBehaviour:
   springDamping: 8000
   grip: 1
   drag: 500
+  modelPadding: 0.45
 --- !u!1 &3347425291486719833
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,6 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 8988805833627153373}
+  movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   minSpeed: 0.01
 --- !u!1 &4277132764622544312
 GameObject:
@@ -618,6 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79d7996b7554e2c4d95e3be2fae40039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  car: {fileID: 6811755135693848246}
   carInput: {fileID: 5548998795581848671}
   gripDriftWheels:
   - {fileID: 310942104039356160}
@@ -625,9 +634,13 @@ MonoBehaviour:
   slipDriftWheels:
   - {fileID: 8419866978900849867}
   - {fileID: 4763452630078279721}
+  chassis: {fileID: 5763419094402127038}
   defaultGrip: 1
   driftGrip: 1
-  driftSlip: 0.2
+  driftSlip: 0.15
+  normalChassisRotation: 10
+  driftChassisRotation: 20
+  chassisRotationSpeed: 5
 --- !u!1 &4457480777348651166
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,12 +925,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5566806410107230598}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalRotation: {x: -0.7071067, y: -0.000000029802322, z: 0.000000029802322, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100.000015, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4247650997879601452}
+  m_Father: {fileID: 5763419094402127038}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2148047965535297320
 MeshFilter:
@@ -999,13 +1012,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5668767106715690380}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071067, y: -0.000000030908616, z: 0.000000030908623, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalRotation: {x: -0.7071067, y: 0.00000017881393, z: -0.0000002682209, w: 0.70710695}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4247650997879601452}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Father: {fileID: 5763419094402127038}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6534378282378363377
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1088,13 +1101,45 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 137494417741891705}
+  - {fileID: 5763419094402127038}
   - {fileID: 2403571269794421379}
   - {fileID: 1000476796879622497}
   - {fileID: 1677453015152708042}
   - {fileID: 6938050361596695095}
-  - {fileID: 462926999907612576}
   m_Father: {fileID: 8563741535195632137}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7456271023977902340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5763419094402127038}
+  m_Layer: 0
+  m_Name: Chassis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5763419094402127038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456271023977902340}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 137494417741891705}
+  - {fileID: 462926999907612576}
+  m_Father: {fileID: 4247650997879601452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8040406011073544460
 GameObject:
@@ -1141,8 +1186,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carRigidBody: {fileID: 8988805833627153373}
   carInput: {fileID: 5548998795581848671}
+  carRigidBody: {fileID: 8988805833627153373}
+  model: {fileID: 5711857949293744728}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
@@ -1153,6 +1199,7 @@ MonoBehaviour:
   springDamping: 8000
   grip: 1
   drag: 500
+  modelPadding: 0.45
 --- !u!1 &8878794131214343556
 GameObject:
   m_ObjectHideFlags: 0

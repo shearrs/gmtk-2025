@@ -5,6 +5,7 @@ namespace LostResort.Cars
     public class Car : MonoBehaviour
     {
         [SerializeField] private Rigidbody rigidBody;
+        [SerializeField] private CarMovementData movementData;
         [SerializeField] private float minSpeed = 0.01f;
 
         private void FixedUpdate()
@@ -19,6 +20,11 @@ namespace LostResort.Cars
                 verticalVelocity.z = 0;
                 rigidBody.linearVelocity = verticalVelocity;
             }
+        }
+
+        public float GetMaxSpeedPercentage()
+        {
+            return rigidBody.linearVelocity.sqrMagnitude / (movementData.MaxSpeed * movementData.MaxSpeed);
         }
     }
 }

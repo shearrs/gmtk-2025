@@ -6,8 +6,9 @@ namespace LostResort.Cars
     public class Wheel : MonoBehaviour
     {
         [Header("Car References")]
-        [SerializeField] private Rigidbody carRigidBody;
         [SerializeField] private CarInput carInput;
+        [SerializeField] private Rigidbody carRigidBody;
+        [SerializeField] private Transform model;
         [SerializeField] private CarMovementData movementData;
 
         [Header("Collision Settings")]
@@ -22,6 +23,10 @@ namespace LostResort.Cars
         [Header("Steering Settings")]
         [SerializeField] private float grip = 0.5f;
         [SerializeField] private float drag = 500f;
+
+
+        [Header("Model Settings")]
+        [SerializeField] private float modelPadding = 0.5f;
 
         private IManagedInput moveInput;
         private float accelerationInput;
@@ -45,6 +50,7 @@ namespace LostResort.Cars
                 ApplySuspension(hit);
                 ApplySteering();
                 ApplyAcceleration();
+                UpdateModel(hit.point);
             }
         }
 
@@ -101,6 +107,12 @@ namespace LostResort.Cars
             carRigidBody.AddForceAtPosition(dragForce, transform.position);
         }
 
+        private void UpdateModel(Vector3 position)
+        {
+            position.y += modelPadding;
+            model.position = position;
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
@@ -108,6 +120,9 @@ namespace LostResort.Cars
 
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, -transform.up * raycastDistance);
+
+            Gizmos.color = Color.darkGoldenRod;
+            Gizmos.DrawRay(transform.position, -transform.up * modelPadding);
         }
     }
 }
