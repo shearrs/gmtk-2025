@@ -27,6 +27,15 @@ namespace LostResort.Cars
             carInput.DriftInput.Canceled -= OnDriftInputEnd;
         }
 
+        private void Awake()
+        {
+            foreach (var wheel in gripDriftWheels)
+                wheel.Grip = defaultGrip;
+
+            foreach (var wheel in slipDriftWheels)
+                wheel.Grip = defaultGrip;
+        }
+
         private void OnDriftInputBegin(ManagedInputInfo info)
         {
             foreach (var wheel in gripDriftWheels)

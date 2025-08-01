@@ -6,7 +6,7 @@ namespace LostResort.Cameras
     public class CarCamera : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Rigidbody target;
+        [SerializeField] private Transform target;
 
         [Header("Positioning")]
         [SerializeField] private Vector3 offset;
@@ -17,16 +17,32 @@ namespace LostResort.Cameras
         [SerializeField] private LayerMask occlusionLayers;
         [SerializeField] private float occlusionRadius = 0.5f;
         [SerializeField] private float occlusionPadding = 0.1f;
-        [SerializeField] private float occlusionFixTime = 0.1f;
 
         private Vector3 targetPosition;
         private Vector3 occludedPosition;
         private bool isOccluded;
         private Vector3 currentVel;
-        private Vector3 currentOccludedVel;
 
-        private Vector3 Offset => target.transform.TransformPoint(offset);
-        private Vector3 LookAtOffset => target.transform.TransformPoint(lookAtOffset);
+        private Vector3 Offset
+        {
+            get
+            {
+                var off = target.TransformPoint(offset);
+                off.y = target.position.y + offset.y;
+
+                return off;
+            }
+        }
+        private Vector3 LookAtOffset
+        {
+            get
+            {
+                var offset = target.TransformPoint(lookAtOffset);
+                offset.y = target.position.y + lookAtOffset.y;
+
+                return offset;
+            }
+        }
 
         private void OnValidate()
         {
@@ -66,7 +82,6 @@ namespace LostResort.Cameras
             if (!Physics.SphereCast(LookAtOffset, occlusionRadius, direction, out var hit, distance, occlusionLayers))
             {
                 isOccluded = false;
-                currentOccludedVel = Vector3.zero;
                 return;
             }
 
@@ -75,12 +90,12 @@ namespace LostResort.Cameras
             float targetDistance = hit.distance - occlusionPadding;
             Vector3 targetOccludedPos = LookAtOffset + direction * targetDistance;
 
-            occludedPosition = Vector3.SmoothDamp(transform.position, targetOccludedPos, ref currentOccludedVel, occlusionFixTime);
+            occludedPosition = targetOccludedPos;
         }
 
         private void UpdateTargetPosition()
         {
-            targetPosition = Vector3.SmoothDamp(targetPosition, Offset, ref currentVel, smoothTime);
+            targetPosition = Offset;
         }
 
         private void UpdateRotation()
@@ -92,9 +107,9 @@ namespace LostResort.Cameras
 
         private void UpdatePosition()
         {
-            var targetPos = isOccluded ? occludedPosition : targetPosition;
+            Vector3 targetPos = isOccluded ? occludedPosition : targetPosition;
 
-            transform.position = targetPos;
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref currentVel, smoothTime);
         }
 
         private void OnDrawGizmosSelected()

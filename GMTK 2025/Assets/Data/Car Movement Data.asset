@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598a913ad9c5ff84e8733ec420e580e9, type: 3}
   m_Name: Car Movement Data
   m_EditorClassIdentifier: 
-  maxSpeed: 2500
+  acceleration: 3000
+  maxSpeed: 50
