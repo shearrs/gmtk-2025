@@ -94,7 +94,7 @@ namespace LostResort.Cameras
         {
             var targetPos = isOccluded ? occludedPosition : targetPosition;
 
-            transform.position = targetPosition;
+            transform.position = targetPos;
         }
 
         private void OnDrawGizmosSelected()
