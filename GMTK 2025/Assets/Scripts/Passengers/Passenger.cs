@@ -21,6 +21,8 @@ namespace LostResort.Passengers
         [SerializeField] private float scoreWhenDroppedOffReductionRatePerSecond;
 
         [SerializeField] private float scoreWhenDroppedOff;
+        
+        [SerializeField] private float minimumScoreWhenDroppedOff;
 
 
         [SerializeField] private Material[] dropOffLocationBasedMaterials;
@@ -37,6 +39,10 @@ namespace LostResort.Passengers
 
         void Update()
         {
+            if (inShuttle)
+            {
+                return;
+            }
             AdjustScoreWhenDroppedOff();
         }
 
@@ -49,7 +55,7 @@ namespace LostResort.Passengers
         {
             float secondsPassedSinceLastFrame = Time.deltaTime;
             scoreWhenDroppedOff -= secondsPassedSinceLastFrame * scoreWhenDroppedOffReductionRatePerSecond;
-            Mathf.Clamp(scoreWhenDroppedOff, 0, scoreWhenDroppedOff);
+            scoreWhenDroppedOff = Mathf.Clamp(scoreWhenDroppedOff, minimumScoreWhenDroppedOff, scoreWhenDroppedOff);
             exclamationMark.ReceiveScoreWhenDroppedOff(scoreWhenDroppedOff);
         }
 
@@ -67,8 +73,7 @@ namespace LostResort.Passengers
         /// </summary>
         public void PickUp()
         {
-            Debug.Log(
-                $"Picked up a player from {passengerData.startingLocation} who intends to travel to {passengerData.dropOffLocation}!");
+            //Debug.Log($"Picked up a player from {passengerData.startingLocation} who intends to travel to {passengerData.dropOffLocation}!");
             meshRenderer.enabled = false;
             exclamationMark.DisableExclamationMark();
             capsuleCollider.enabled = false;
@@ -78,8 +83,7 @@ namespace LostResort.Passengers
 
         public void DropOff()
         {
-            Debug.Log(
-                $"Dropped off a player at {passengerData.dropOffLocation} who originally came from {passengerData.startingLocation}!");
+            Debug.Log($"Dropped off a player at {passengerData.dropOffLocation} who originally came from {passengerData.startingLocation}!");
             inShuttle = false;
             IncrementScore((int)scoreWhenDroppedOff);
             Destroy(gameObject);

@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3846048271603030993}
   - component: {fileID: 2441642811277692466}
   - component: {fileID: 1749093469153721908}
+  - component: {fileID: 5271835436399027679}
+  - component: {fileID: 6813346258742098986}
   m_Layer: 0
   m_Name: PassengerBody
   m_TagString: Passenger
@@ -156,11 +158,48 @@ MonoBehaviour:
   startingScoreWhenDroppedOff: 100
   scoreWhenDroppedOffReductionRatePerSecond: 10
   scoreWhenDroppedOff: 0
+  minimumScoreWhenDroppedOff: 20
   dropOffLocationBasedMaterials:
   - {fileID: 2100000, guid: a934263dc19558c43b1e3a1f6bdccc68, type: 2}
   - {fileID: 2100000, guid: a3551759d91df0841ade8da3dd63e1db, type: 2}
   - {fileID: 2100000, guid: f735cbb743c565747a93082aa829ca05, type: 2}
   - {fileID: 2100000, guid: 13108312a18be234e849b08ecf3949af, type: 2}
+--- !u!114 &5271835436399027679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443602438367071161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a3bca26a7c09843b96aa91d11991c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderRadius: 10
+  wanderTimer: 5
+--- !u!195 &6813346258742098986
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443602438367071161}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &4836198555151180517
 PrefabInstance:
   m_ObjectHideFlags: 0

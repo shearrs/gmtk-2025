@@ -23,7 +23,7 @@ namespace LostResort.Score
         }
 
         /*
-        public struct AddScore : ISignal {
+        public struct AddScoreSignal : ISignal {
             public int additionalScore;
         }
 

@@ -46,7 +46,7 @@ namespace LostResort.Passengers
         {
             EnableExclamationMark();
             Vector3 jumpVector = transform.position + Vector3.up;
-            transform.DOJump(jumpVector, jumpVector.y, 1, 0.5f).SetEase(Ease.OutSine);
+            transform.DOLocalJump(jumpVector, jumpVector.y, 1, 0.5f).SetEase(Ease.OutSine);
         }
 
         public void BeginGrowAndShrink()
