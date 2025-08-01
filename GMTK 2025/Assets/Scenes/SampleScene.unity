@@ -337,20 +337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b1058b6ee55a22418d11955e3ae9251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputProvider: {fileID: 852035738}
-  rb: {fileID: 245684280}
-  wheels:
-  - {fileID: 428971434}
-  - {fileID: 587141998}
-  - {fileID: 124905897}
-  - {fileID: 1790287378}
-  centerOfMassOffset: -1
-  motorTorque: 2000
-  brakeTorque: 2000
-  maxSpeed: 20
-  handling: 50
-  steeringRange: 30
-  steeringRangeAtMaxSpeed: 20
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1167,7 +1153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: 259cda390ae800a489b00b63d3c61549, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
