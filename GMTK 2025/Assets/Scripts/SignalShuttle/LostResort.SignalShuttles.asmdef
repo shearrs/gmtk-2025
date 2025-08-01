@@ -1,3 +1,14 @@
 {
-	"name": "LostResort.SignalShuttles"
+    "name": "LostResort.SignalShuttles",
+    "rootNamespace": "LostResort.SignalShuttles",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
