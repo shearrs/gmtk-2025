@@ -26,8 +26,6 @@ public class ShadowCaster : MonoBehaviour
             return;
         }
 
-        Debug.Log("hit: " + hit.collider.name);
-
         shadow.SetActive(true);
 
         Vector3 origin = transform.TransformPoint(shadowOrigin);
@@ -36,10 +34,7 @@ public class ShadowCaster : MonoBehaviour
         Vector3 shadowPos;
 
         if (distanceToGround * distanceToGround <= sqrOriginDistance)
-        {
-            Debug.Log("origin");
             shadowPos = origin;
-        }
         else
         {
             shadowPos = hit.point;
