@@ -21,14 +21,21 @@ namespace LostResort.Cars
 
         [Header("Steering Settings")]
         [SerializeField] private float grip = 0.5f;
+        [SerializeField] private float drag = 500f;
 
         private IManagedInput moveInput;
+        private float accelerationInput;
 
         public float Grip { get => grip; set => grip = value; }
 
         private void Awake()
         {
             moveInput = carInput.MoveInput;
+        }
+
+        private void Update()
+        {
+            accelerationInput = moveInput.ReadValue<Vector2>().y;
         }
 
         private void FixedUpdate()
@@ -70,13 +77,17 @@ namespace LostResort.Cars
         private void ApplyAcceleration()
         {
             Vector3 accelDirection = transform.forward;
-            float accelInput = moveInput.ReadValue<Vector2>().y;
 
-            if (Mathf.Abs(accelInput) < 0.1f)
-                return;
+            if (Mathf.Abs(accelerationInput) < 0.1f)
+            {
+                var carVel = carRigidBody.linearVelocity;
+                var dragForce = (drag * -carVel);
+
+                carRigidBody.AddForceAtPosition(dragForce, transform.position);
+            }
 
             //float carSpeed = Vector3.Dot(carRigidBody.transform.forward, carRigidBody.linearVelocity);
-            float availableTorque = accelInput * movementData.MaxSpeed;
+            float availableTorque = accelerationInput * movementData.MaxSpeed;
 
             carRigidBody.AddForceAtPosition(accelDirection * availableTorque, transform.position);
         }

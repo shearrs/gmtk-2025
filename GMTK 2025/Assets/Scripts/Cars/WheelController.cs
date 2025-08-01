@@ -16,24 +16,29 @@ namespace LostResort.Cars
         [SerializeField] private float maxSteeringAngle = 30f;
         [SerializeField] private float maxSpeedSteeringAngle = 10f;
 
+        private Vector3 rotationInput;
+
         private void Update()
+        {
+            rotationInput = carInput.MoveInput.ReadValue<Vector2>();
+        }
+
+        private void FixedUpdate()
         {
             UpdateRotation();
         }
 
         private void UpdateRotation()
         {
-            var rotationInput = carInput.MoveInput.ReadValue<Vector2>().x;
-
             foreach (var wheel in wheels)
             {
                 Vector3 euler = wheel.transform.localEulerAngles;
 
                 float velocityT = (movementData.MaxSpeed * movementData.MaxSpeed) / carRigidBody.linearVelocity.sqrMagnitude;
                 float maxSteerAngle = Mathf.Lerp(maxSteeringAngle, maxSpeedSteeringAngle, velocityT);
-                float targetRot = rotationInput * maxSteerAngle;
+                float targetRot = rotationInput.x * maxSteerAngle;
                 
-                euler.y = Mathf.MoveTowardsAngle(euler.y, targetRot, handling * Time.deltaTime);
+                euler.y = Mathf.MoveTowardsAngle(euler.y, targetRot, handling * Time.fixedDeltaTime);
 
                 wheel.transform.localEulerAngles = euler;
             }
