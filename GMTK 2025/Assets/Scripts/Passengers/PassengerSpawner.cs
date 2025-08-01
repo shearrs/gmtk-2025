@@ -41,6 +41,8 @@ namespace LostResort.Passengers
             passenger.InitializeLocation(location);
 
         }
+        
+        
 
         Vector3 GetRandomPointInBounds(Bounds bounds)
         {

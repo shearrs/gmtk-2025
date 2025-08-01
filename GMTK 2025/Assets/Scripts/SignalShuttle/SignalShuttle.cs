@@ -18,6 +18,11 @@ namespace LostResort.SignalShuttles
         private readonly struct SignalBindings<TSignal> : ISignalBindings where TSignal : ISignal
         {
             public readonly List<Action<TSignal>> listeners;
+
+            public SignalBindings(List<Action<TSignal>> listeners)
+            {
+                this.listeners = listeners;
+            }
             
             public readonly void AddListener(Action<TSignal> listener)
             {
@@ -58,7 +63,7 @@ namespace LostResort.SignalShuttles
         {
             if (!signals.TryGetValue(typeof(TSignal), out var bindings))
             {
-                bindings = new SignalBindings<TSignal>();
+                bindings = new SignalBindings<TSignal>(new List<Action<TSignal>>());
                 signals[typeof(TSignal)] = bindings;
             }
 
