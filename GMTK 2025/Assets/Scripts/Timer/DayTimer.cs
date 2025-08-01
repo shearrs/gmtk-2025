@@ -89,7 +89,7 @@ namespace LostResort.Timers
                 yield return null;
             }
             //end the game
-            SignalShuttle<OnGameEnd>.Emit(new OnGameEnd());
+            SignalShuttle.Emit(new OnGameEnd());
             yield break;
         }
         
@@ -100,14 +100,14 @@ namespace LostResort.Timers
         
         void RegisterSignals()
         {
-            SignalShuttle<OnGameStart>.Register(StartTimer);
-            SignalShuttle<OnGameEnd>.Register(ClearUI);
+            SignalShuttle.Register<OnGameStart>(StartTimer);
+            SignalShuttle.Register<OnGameEnd>(ClearUI);
         }
         
         void DeregisterSignals()
         {
-            SignalShuttle<OnGameStart>.Deregister(StartTimer);
-            SignalShuttle<OnGameEnd>.Deregister(ClearUI);
+            SignalShuttle.Deregister<OnGameStart>(StartTimer);
+            SignalShuttle.Deregister<OnGameEnd>(ClearUI);
         }
     
         void AssignComponents()
