@@ -1,0 +1,18 @@
+using Shears.Input;
+using UnityEngine;
+
+namespace LostResort.Cars
+{
+    [DefaultExecutionOrder(-100)]
+    public class CarInput : MonoBehaviour
+    {
+        [SerializeField] private ManagedInputMap inputMap;
+
+        public IManagedInput MoveInput { get; private set; }
+
+        private void Awake()
+        {
+            inputMap.GetInputs(("Move", (i) => MoveInput = i));
+        }
+    }
+}

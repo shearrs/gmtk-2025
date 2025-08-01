@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 namespace Shears.Input
 {
     [CreateAssetMenu(fileName = "New Managed Input Map", menuName = "Shears Library/Managed Input/Map")]
-    public class ManagedInputMap : ManagedInputProvider
+    public class ManagedInputMap : ScriptableObject, IManagedInputProvider
     {
         [Header("Input Actions")]
         [SerializeField] private InputActionAsset inputActions;
@@ -23,9 +23,9 @@ namespace Shears.Input
             ID ??= Guid.NewGuid().ToString();
         }
 
-        public override IManagedInput GetInput(string name) => GetRuntimeMap().GetInput(name);
+        public IManagedInput GetInput(string name) => GetRuntimeMap().GetInput(name);
 
-        public override void GetInputs(params (string name, Action<IManagedInput> action)[] inputs)
+        public void GetInputs(params (string name, Action<IManagedInput> action)[] inputs)
             => GetRuntimeMap().GetInputs(inputs);
 
         public ManagedInputGroup GetInputGroup(params (string name, ManagedInputPhase phase, ManagedInputEvent action)[] bindings)
