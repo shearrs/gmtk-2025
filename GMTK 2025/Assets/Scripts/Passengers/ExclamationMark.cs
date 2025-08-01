@@ -26,6 +26,7 @@ namespace LostResort.Passengers
         
         public void DisableExclamationMark()
         {
+            DOTween.Kill(this);
             foreach (Transform child in transform)
             {
                 child.gameObject.SetActive(false);
@@ -35,11 +36,6 @@ namespace LostResort.Passengers
         public void InitializeStartingScoreWhenDroppedOff(float _startingScoreWhenDroppedOff)
         {
             startingScoreWhenDroppedOff = _startingScoreWhenDroppedOff;
-        }
-        public void OnEnable()
-        {
-            Vector3 jumpVector = transform.position + Vector3.up;
-            transform.DOJump(jumpVector, jumpVector.y, 1, 0.5f).SetEase(Ease.OutSine);
         }
 
         private void Spawn()

@@ -6,22 +6,11 @@ namespace LostResort.Passengers
     public class PassengerInteractor : MonoBehaviour
     {
         private List<Passenger> passengers = new List<Passenger>();
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
 
         public void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.CompareTag("Passenger"))
+            if (other.gameObject.GetComponent<Passenger>() != null)
             {
                 Passenger passenger = other.gameObject.GetComponent<Passenger>();
                 PickUpPassenger(passenger);
@@ -30,7 +19,7 @@ namespace LostResort.Passengers
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag("Location"))
+            if (other.gameObject.GetComponent<ResortLocation>() != null)
             {
                 ResortLocation location = other.gameObject.GetComponent<ResortLocation>();
                 LetPassengersOutAtLocation(location.GetLocationType());

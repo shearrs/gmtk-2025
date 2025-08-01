@@ -1,4 +1,7 @@
+using LostResort.Score;
+using LostResort.SignalShuttles;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace LostResort.Passengers
 {
@@ -9,6 +12,7 @@ namespace LostResort.Passengers
         private bool inShuttle;
         private MeshRenderer meshRenderer; 
         private CapsuleCollider capsuleCollider;
+        private NavMeshAgent navMeshAgent;
 
 
         [SerializeField] private ExclamationMark exclamationMark;
@@ -21,12 +25,15 @@ namespace LostResort.Passengers
         [SerializeField] private float scoreWhenDroppedOffReductionRatePerSecond;
 
         [SerializeField] private float scoreWhenDroppedOff;
+        
+        [SerializeField] private float minimumScoreWhenDroppedOff;
 
 
         [SerializeField] private Material[] dropOffLocationBasedMaterials;
 
         private void Awake()
         {
+            navMeshAgent = GetComponent<NavMeshAgent>();
             score = FindAnyObjectByType<Score.Score>();
             capsuleCollider = GetComponent<CapsuleCollider>();
             meshRenderer = GetComponent<MeshRenderer>();
@@ -37,6 +44,10 @@ namespace LostResort.Passengers
 
         void Update()
         {
+            if (inShuttle)
+            {
+                return;
+            }
             AdjustScoreWhenDroppedOff();
         }
 
@@ -49,7 +60,7 @@ namespace LostResort.Passengers
         {
             float secondsPassedSinceLastFrame = Time.deltaTime;
             scoreWhenDroppedOff -= secondsPassedSinceLastFrame * scoreWhenDroppedOffReductionRatePerSecond;
-            Mathf.Clamp(scoreWhenDroppedOff, 0, scoreWhenDroppedOff);
+            scoreWhenDroppedOff = Mathf.Clamp(scoreWhenDroppedOff, minimumScoreWhenDroppedOff, scoreWhenDroppedOff);
             exclamationMark.ReceiveScoreWhenDroppedOff(scoreWhenDroppedOff);
         }
 
@@ -67,19 +78,18 @@ namespace LostResort.Passengers
         /// </summary>
         public void PickUp()
         {
-            Debug.Log(
-                $"Picked up a player from {passengerData.startingLocation} who intends to travel to {passengerData.dropOffLocation}!");
+            //Debug.Log($"Picked up a player from {passengerData.startingLocation} who intends to travel to {passengerData.dropOffLocation}!");
             meshRenderer.enabled = false;
             exclamationMark.DisableExclamationMark();
             capsuleCollider.enabled = false;
+            navMeshAgent.enabled = true;
             inShuttle = true;
         }
 
 
         public void DropOff()
         {
-            Debug.Log(
-                $"Dropped off a player at {passengerData.dropOffLocation} who originally came from {passengerData.startingLocation}!");
+            Debug.Log($"Dropped off a player at {passengerData.dropOffLocation} who originally came from {passengerData.startingLocation}!");
             inShuttle = false;
             IncrementScore((int)scoreWhenDroppedOff);
             Destroy(gameObject);
@@ -89,7 +99,7 @@ namespace LostResort.Passengers
 
         private void IncrementScore(int additionalScore)
         {
-            score.AddScore(additionalScore);
+            SignalShuttle.Emit(new AddScoreSignal(additionalScore));
         }
     }
 }
