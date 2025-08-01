@@ -1,3 +1,4 @@
+using System;
 using System.Linq.Expressions;
 using UnityEngine;
 
@@ -28,10 +29,16 @@ public class Lighting : MonoBehaviour
       }
 
       UpdateLighting(TimeOfDay / 24f);
+
+      
+      
    }
    private void UpdateLighting(float timePercent)
    {
-      Debug.Log(timePercent);
+      RenderSettings.skybox.SetColor("_Tint",Preset.SunRise.Evaluate(timePercent));
+      
+      DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
+
       RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
       RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
 
