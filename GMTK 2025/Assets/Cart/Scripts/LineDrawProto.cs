@@ -9,6 +9,8 @@ public class LineDrawProto : MonoBehaviour
     InputAction moveAction;
     InputAction driftAction;
 
+    float rotateMult = .2f;
+
     LineRenderer lineDraw;
 
     private List<Vector3> points = new List<Vector3>();
@@ -22,22 +24,24 @@ public class LineDrawProto : MonoBehaviour
         lineDraw = GetComponent<LineRenderer>();
         lineDraw.startWidth = 2f;
         lineDraw.endWidth = 2f;
+        lineDraw.positionCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //if(moveAction.IsPressed())
-        //{
-        //    Vector2 moveDir = moveAction.ReadValue<Vector2>();
-        //    gameObject.transform.Translate(Vector3.forward * -moveDir.y * Time.deltaTime * 20f);
-        //    gameObject.transform.Rotate(new Vector3(0f, moveDir.x / 5, 0f));
-        //}
+        if (moveAction.IsPressed())
+        {
+            Vector2 moveDir = moveAction.ReadValue<Vector2>();
+            gameObject.transform.Translate(Vector3.forward * -moveDir.y * Time.deltaTime * 30f);
+            gameObject.transform.Rotate(new Vector3(0f, moveDir.x * rotateMult, 0f));
+        }
 
-        if(driftAction.WasPressedThisFrame())
+        if (driftAction.WasPressedThisFrame())
         {
             points.Clear();
+            rotateMult = .4f;
         }
 
         if (driftAction.IsPressed())
@@ -59,6 +63,7 @@ public class LineDrawProto : MonoBehaviour
         if(driftAction.WasReleasedThisFrame())
         {
             lineDraw.positionCount = 0;
+            rotateMult = .2f;
         }
     }
 
