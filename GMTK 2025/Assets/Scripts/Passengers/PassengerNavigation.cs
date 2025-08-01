@@ -26,9 +26,14 @@ namespace LostResort.Passengers
             if (timer >= wanderTimer)
             {
                 Vector3 newPos = GetRandomNavMeshLocation(wanderRadius);
-                agent.SetDestination(newPos);
+                //agent.SetDestination(newPos);
                 timer = 0;
             }
+        }
+
+        public void GoToLocation(Vector3 location)
+        {
+            
         }
 
         Vector3 GetRandomNavMeshLocation(float radius)

@@ -1,4 +1,7 @@
+using LostResort.Score;
+using LostResort.SignalShuttles;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace LostResort.Passengers
 {
@@ -9,6 +12,7 @@ namespace LostResort.Passengers
         private bool inShuttle;
         private MeshRenderer meshRenderer; 
         private CapsuleCollider capsuleCollider;
+        private NavMeshAgent navMeshAgent;
 
 
         [SerializeField] private ExclamationMark exclamationMark;
@@ -29,6 +33,7 @@ namespace LostResort.Passengers
 
         private void Awake()
         {
+            navMeshAgent = GetComponent<NavMeshAgent>();
             score = FindAnyObjectByType<Score.Score>();
             capsuleCollider = GetComponent<CapsuleCollider>();
             meshRenderer = GetComponent<MeshRenderer>();
@@ -77,6 +82,7 @@ namespace LostResort.Passengers
             meshRenderer.enabled = false;
             exclamationMark.DisableExclamationMark();
             capsuleCollider.enabled = false;
+            navMeshAgent.enabled = true;
             inShuttle = true;
         }
 
@@ -93,7 +99,7 @@ namespace LostResort.Passengers
 
         private void IncrementScore(int additionalScore)
         {
-            score.AddScore(additionalScore);
+            SignalShuttle.Emit(new AddScoreSignal(additionalScore));
         }
     }
 }

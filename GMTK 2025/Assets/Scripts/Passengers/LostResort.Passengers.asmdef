@@ -2,7 +2,8 @@
     "name": "LostResort.Passengers",
     "rootNamespace": "LostResort.Passengers",
     "references": [
-        "GUID:ea798edb0701e6040b66170a841a0a6a"
+        "GUID:ea798edb0701e6040b66170a841a0a6a",
+        "GUID:42c151e0dcf26dc4488bf485ef2fd7b1"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
