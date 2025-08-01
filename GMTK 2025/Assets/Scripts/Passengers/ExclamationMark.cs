@@ -1,11 +1,13 @@
+using Shears.Tweens;
 using UnityEngine;
-using DG.Tweening;
+
 namespace LostResort.Passengers
 {
-
-
     public class ExclamationMark : MonoBehaviour
     {
+        [SerializeField] private TweenData spawnTweenData;
+        [SerializeField] private TweenData growTweenData;
+
         private float startingScoreWhenDroppedOff;
         
         private ExclamationMarkState exclamationMarkState = ExclamationMarkState.notYetEnabled;
@@ -15,22 +17,17 @@ namespace LostResort.Passengers
             normal,
             growingAndShrinking
         }
-
+        
         private void EnableExclamationMark()
         {
             foreach (Transform child in transform)
-            {
                 child.gameObject.SetActive(true);
-            }
         }
         
         public void DisableExclamationMark()
         {
-            DOTween.Kill(transform);
             foreach (Transform child in transform)
-            {
                 child.gameObject.SetActive(false);
-            }
         }
         
         public void InitializeStartingScoreWhenDroppedOff(float _startingScoreWhenDroppedOff)
@@ -42,18 +39,15 @@ namespace LostResort.Passengers
         {
             EnableExclamationMark();
             Vector3 jumpVector = transform.localPosition + Vector3.up;
-            transform.DOLocalJump(jumpVector, jumpVector.y, 1, 0.5f).SetEase(Ease.OutSine);
+            transform.DoMoveLocalTween(jumpVector, spawnTweenData);
         }
 
         private void BeginGrowAndShrink()
         {
-            Sequence sequence = DOTween.Sequence().SetLoops(-1);
-
             Vector3 originalScale = transform.localScale;
             Vector3 increasedScale = originalScale * 1.5f;
 
-            sequence.Append(transform.DOScale(increasedScale, 0.5f).SetEase(Ease.OutSine));
-            sequence.Append(transform.DOScale(originalScale, 0.5f).SetEase(Ease.OutSine));
+            transform.DoScaleLocalTween(increasedScale, growTweenData);
         }
 
         public void ReceiveScoreWhenDroppedOff(float scoreWhenDroppedOff)
@@ -89,14 +83,6 @@ namespace LostResort.Passengers
                 BeginGrowAndShrink();
                 return;
             }
-            
-            
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }
