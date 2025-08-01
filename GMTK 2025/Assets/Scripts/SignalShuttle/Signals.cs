@@ -7,6 +7,10 @@ public interface ISignal { }
 
 public struct OnLapCompleted : ISignal { }
 
+public struct OnGameStart : ISignal { }
+
+public struct OnGameEnd : ISignal { }
+
 public struct TestSignal : ISignal {
     public int health;
     public int mana;
