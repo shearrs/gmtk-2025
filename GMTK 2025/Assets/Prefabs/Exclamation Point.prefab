@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44f6d3afa4fc7864fab3866dd6f98b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTweenData: {fileID: 11400000, guid: 3f40ad8217453b24fba31251f3a783cc, type: 2}
+  growTweenData: {fileID: 11400000, guid: 5c4b99ca2ae7b7744ab48faa394da4e5, type: 2}
 --- !u!1 &6136338691869159539
 GameObject:
   m_ObjectHideFlags: 0
