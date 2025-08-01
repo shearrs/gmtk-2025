@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace LostResort.Cameras
 {
+    [DefaultExecutionOrder(1000)]
     public class CarCamera : MonoBehaviour
     {
         [Header("References")]
@@ -38,11 +39,17 @@ namespace LostResort.Cameras
             transform.SetPositionAndRotation(Offset, rotation);
         }
 
+        private void Awake()
+        {
+            targetPosition = transform.position;
+            occludedPosition = transform.position;
+        }
+
         private void LateUpdate()
         {
             UpdateTargetPosition();
-            UpdateRotation();
             UpdatePosition();
+            UpdateRotation();
         }
 
         private void FixedUpdate()
@@ -87,7 +94,7 @@ namespace LostResort.Cameras
         {
             var targetPos = isOccluded ? occludedPosition : targetPosition;
 
-            transform.position = targetPos;
+            transform.position = targetPosition;
         }
 
         private void OnDrawGizmosSelected()
