@@ -6,6 +6,8 @@ namespace LostResort.Cars
     {
         [Header("References")]
         [SerializeField] private CarInput carInput;
+        [SerializeField] private Rigidbody carRigidBody;
+        [SerializeField] private CarMovementData movementData;
         [SerializeField] private Wheel[] wheels;
 
         [Header("Settings")]
@@ -25,7 +27,10 @@ namespace LostResort.Cars
             foreach (var wheel in wheels)
             {
                 Vector3 euler = wheel.transform.localEulerAngles;
-                float targetRot = rotationInput * maxSteeringAngle;
+
+                float velocityT = (movementData.MaxSpeed * movementData.MaxSpeed) / carRigidBody.linearVelocity.sqrMagnitude;
+                float maxSteerAngle = Mathf.Lerp(maxSteeringAngle, maxSpeedSteeringAngle, velocityT);
+                float targetRot = rotationInput * maxSteerAngle;
                 
                 euler.y = Mathf.MoveTowardsAngle(euler.y, targetRot, handling * Time.deltaTime);
 

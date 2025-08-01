@@ -5,8 +5,10 @@ namespace LostResort.Cars
 {
     public class Wheel : MonoBehaviour
     {
+        [Header("Car References")]
         [SerializeField] private Rigidbody carRigidBody;
         [SerializeField] private CarInput carInput;
+        [SerializeField] private CarMovementData movementData;
 
         [Header("Collision Settings")]
         [SerializeField] private LayerMask collisionLayer;
@@ -19,9 +21,6 @@ namespace LostResort.Cars
 
         [Header("Steering Settings")]
         [SerializeField] private float grip = 0.5f;
-
-        [Header("Acceleration Settings")]
-        [SerializeField] private float maxSpeed = 300f;
 
         private IManagedInput moveInput;
 
@@ -63,7 +62,7 @@ namespace LostResort.Cars
             float desiredAcceleration = desiredVelocityChange / Time.fixedDeltaTime;
             float tireMass = 0.25f * carRigidBody.mass;
 
-            carRigidBody.AddForceAtPosition(steeringDirection * tireMass * desiredAcceleration, transform.position);
+            carRigidBody.AddForceAtPosition(desiredAcceleration * tireMass * steeringDirection, transform.position);
         }
 
         private void ApplyAcceleration()
@@ -75,7 +74,7 @@ namespace LostResort.Cars
                 return;
 
             //float carSpeed = Vector3.Dot(carRigidBody.transform.forward, carRigidBody.linearVelocity);
-            float availableTorque = accelInput * maxSpeed;
+            float availableTorque = accelInput * movementData.MaxSpeed;
 
             carRigidBody.AddForceAtPosition(accelDirection * availableTorque, transform.position);
         }
