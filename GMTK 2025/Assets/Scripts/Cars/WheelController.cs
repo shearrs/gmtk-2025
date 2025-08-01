@@ -34,11 +34,15 @@ namespace LostResort.Cars
             {
                 Vector3 euler = wheel.transform.localEulerAngles;
 
-                float velocityT = (movementData.MaxSpeed * movementData.MaxSpeed) / carRigidBody.linearVelocity.sqrMagnitude;
+                float velocityT = carRigidBody.linearVelocity.sqrMagnitude / (movementData.MaxSpeed * movementData.MaxSpeed);
+                Debug.Log("t: " + velocityT);
                 float maxSteerAngle = Mathf.Lerp(maxSteeringAngle, maxSpeedSteeringAngle, velocityT);
                 float targetRot = rotationInput.x * maxSteerAngle;
-                
-                euler.y = Mathf.MoveTowardsAngle(euler.y, targetRot, handling * Time.fixedDeltaTime);
+                float currentHandling = handling;
+
+
+
+                euler.y = Mathf.MoveTowardsAngle(euler.y, targetRot, currentHandling * Time.fixedDeltaTime);
 
                 wheel.transform.localEulerAngles = euler;
             }

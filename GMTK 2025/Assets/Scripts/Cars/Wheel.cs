@@ -85,7 +85,7 @@ namespace LostResort.Cars
             }
 
             float carSpeed = Vector3.Dot(carRigidBody.transform.forward, carRigidBody.linearVelocity);
-            float availableTorque = accelerationInput * movementData.MaxSpeed;
+            float availableTorque = accelerationInput * movementData.Acceleration;
 
             if (Mathf.Sign(accelerationInput) != Mathf.Sign(carSpeed))
                 ApplyDrag();

@@ -6,7 +6,7 @@ namespace LostResort.Cameras
     public class CarCamera : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Rigidbody target;
+        [SerializeField] private Transform target;
 
         [Header("Positioning")]
         [SerializeField] private Vector3 offset;
@@ -23,8 +23,26 @@ namespace LostResort.Cameras
         private bool isOccluded;
         private Vector3 currentVel;
 
-        private Vector3 Offset => target.transform.TransformPoint(offset);
-        private Vector3 LookAtOffset => target.transform.TransformPoint(lookAtOffset);
+        private Vector3 Offset
+        {
+            get
+            {
+                var off = target.TransformPoint(offset);
+                off.y = target.position.y + offset.y;
+
+                return off;
+            }
+        }
+        private Vector3 LookAtOffset
+        {
+            get
+            {
+                var offset = target.TransformPoint(lookAtOffset);
+                offset.y = target.position.y + lookAtOffset.y;
+
+                return offset;
+            }
+        }
 
         private void OnValidate()
         {

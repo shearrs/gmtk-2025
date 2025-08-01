@@ -183,16 +183,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da0f8e238f2fde94c8357198b352d752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 6610505316245992345}
+  target: {fileID: 5898335925367886413}
   offset: {x: 0, y: 8, z: -10}
   lookAtOffset: {x: 0, y: 3.5, z: 0}
-  smoothTime: 0.1
+  smoothTime: 0.065
   occlusionLayers:
     serializedVersion: 2
     m_Bits: 64
   occlusionRadius: 0.5
   occlusionPadding: 0.1
-  occlusionFixTime: 0.1
 --- !u!1001 &2811262976372392004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -253,10 +252,5 @@ PrefabInstance:
 --- !u!4 &5898335925367886413 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8563741535195632137, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-  m_PrefabInstance: {fileID: 2811262976372392004}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &6610505316245992345 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 8988805833627153373, guid: 141cbff2f3414484391878a0513956ac, type: 3}
   m_PrefabInstance: {fileID: 2811262976372392004}
   m_PrefabAsset: {fileID: 0}
