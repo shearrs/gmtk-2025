@@ -1,7 +1,9 @@
 {
-    "name": "LostResort.SignalShuttles",
-    "rootNamespace": "LostResort.SignalShuttles",
-    "references": [],
+    "name": "LostResort.Timers",
+    "rootNamespace": "",
+    "references": [
+        "GUID:42c151e0dcf26dc4488bf485ef2fd7b1"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

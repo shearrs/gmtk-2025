@@ -10,7 +10,7 @@ namespace Shears.Input
         [SerializeField] private bool enableOnStart = true;
 
         [Header("Inputs")]
-        [SerializeField] private ManagedInputProvider inputProvider;
+        [SerializeField] private IManagedInputProvider inputProvider;
         [SerializeField] private List<InputEvent> inputEvents;
 
         private bool initialized = false;

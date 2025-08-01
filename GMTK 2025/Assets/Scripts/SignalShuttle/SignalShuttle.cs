@@ -1,54 +1,96 @@
-//based on https://github.com/adammyhre/Unity-Event-Bus/tree/master
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace LostResort.SignalShuttles
-{
-    public static class SignalShuttle<T> where T : ISignal {
-        static readonly HashSet<ISignalBinding<T>> bindings = new HashSet<ISignalBinding<T>>();
+{ 
+    public static class SignalShuttle
+    {
+        private static readonly Dictionary<Type, ISignalBindings> signals = new();
 
-        static readonly Dictionary<Action<T>, SignalBinding<T>> signalBindings = new();
-    
-        //public static void Register(SignalBinding<T> binding) => bindings.Add(binding);
-        //public static void Deregister(SignalBinding<T> binding) => bindings.Remove(binding);
-
-        public static void Register(Action<T> listener)
+        private interface ISignalBindings
         {
-            if (!signalBindings.TryGetValue(listener, out var binding))
-            {
-                binding = new SignalBinding<T>(listener);
-                signalBindings.Add(listener, binding);
-            }
-
-            bindings.Add(signalBindings[listener]);
+            void AddListener(Action<ISignal> listener);
+            void RemoveListener(Action<ISignal> listener);
+            void Invoke(ISignal signal);
         }
 
-        public static void Deregister(Action<T> listener)
+        private readonly struct SignalBindings<TSignal> : ISignalBindings where TSignal : ISignal
         {
-            if (signalBindings.TryGetValue(listener, out var binding))
+            public readonly List<Action<TSignal>> listeners;
+            
+            public readonly void AddListener(Action<TSignal> listener)
             {
-                //signalBindings.Remove(listener); TODO: for some reason key is not found when deregistering
-                bindings.Remove(signalBindings[listener]);
+                listeners.Add(listener);
+            }
+
+            public readonly void RemoveListener(Action<TSignal> listener)
+            {
+                listeners.Remove(listener);
+            }
+
+            public readonly void Invoke(ISignal signal)
+            {
+                foreach (var listener in listeners)
+                    listener?.Invoke((TSignal)signal);
+            }
+
+            void ISignalBindings.AddListener(Action<ISignal> listener)
+            {
+                if (listener is Action<TSignal> action)
+                    AddListener(action);
+            }
+
+            void ISignalBindings.RemoveListener(Action<ISignal> listener)
+            {
+                if (listener is Action<TSignal> action)
+                    RemoveListener(action);
             }
         }
 
-        public static void Emit(T @signal) {
-            var snapshot = new HashSet<ISignalBinding<T>>(bindings);
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void InitializeSignals()
+        {
+            signals.Clear();
+        }
 
-            foreach (var binding in snapshot) {
-                if (bindings.Contains(binding)) {
-                    binding.OnSignal.Invoke(@signal);
-                    binding.OnSignalNoArgs.Invoke();
+        public static void Register<TSignal>(Action<TSignal> listener) where TSignal : ISignal
+        {
+            if (!signals.TryGetValue(typeof(TSignal), out var bindings))
+            {
+                bindings = new SignalBindings<TSignal>();
+                signals[typeof(TSignal)] = bindings;
+            }
+
+            if (bindings is not SignalBindings<TSignal> typedBindings)
+            {
+                Debug.LogError($"Signal type {typeof(TSignal)} is already registered with a different listener type.");
+                return;
+            }
+
+            typedBindings.AddListener(listener);
+        }
+
+        public static void Deregister<TSignal>(Action<TSignal> listener) where TSignal : ISignal
+        {
+            if (signals.TryGetValue(typeof(TSignal), out var bindings))
+            {
+                if (bindings is not SignalBindings<TSignal> typedBindings)
+                {
+                    Debug.LogError($"Signal type {typeof(TSignal)} is already registered with a different listener type.");
+                    return;
                 }
+
+                typedBindings.RemoveListener(listener);
             }
         }
 
-        static void Clear() {
-            Debug.Log($"Clearing {typeof(T).Name} bindings");
-            bindings.Clear();
+        public static void Emit<TSignal>(TSignal signal) where TSignal : ISignal
+        {
+            if (signals.TryGetValue(typeof(TSignal), out var bindings))
+            {
+                bindings.Invoke(signal);
+            }
         }
     }
 }
