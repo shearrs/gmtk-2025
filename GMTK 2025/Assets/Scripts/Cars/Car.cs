@@ -5,7 +5,7 @@ namespace LostResort.Cars
     public class Car : MonoBehaviour
     {
         [SerializeField] private Rigidbody rigidBody;
-        [SerializeField] private float minSpeed = 0.1f;
+        [SerializeField] private float minSpeed = 0.01f;
 
         private void FixedUpdate()
         {

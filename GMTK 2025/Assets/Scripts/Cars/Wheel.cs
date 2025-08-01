@@ -80,16 +80,25 @@ namespace LostResort.Cars
 
             if (Mathf.Abs(accelerationInput) < 0.1f)
             {
-                var carVel = carRigidBody.linearVelocity;
-                var dragForce = (drag * -carVel);
-
-                carRigidBody.AddForceAtPosition(dragForce, transform.position);
+                ApplyDrag();
+                return;
             }
 
-            //float carSpeed = Vector3.Dot(carRigidBody.transform.forward, carRigidBody.linearVelocity);
+            float carSpeed = Vector3.Dot(carRigidBody.transform.forward, carRigidBody.linearVelocity);
             float availableTorque = accelerationInput * movementData.MaxSpeed;
 
+            if (Mathf.Sign(accelerationInput) != Mathf.Sign(carSpeed))
+                ApplyDrag();
+
             carRigidBody.AddForceAtPosition(accelDirection * availableTorque, transform.position);
+        }
+
+        private void ApplyDrag()
+        {
+            var carVel = carRigidBody.linearVelocity;
+            var dragForce = (drag * -carVel);
+
+            carRigidBody.AddForceAtPosition(dragForce, transform.position);
         }
 
         private void OnDrawGizmos()
