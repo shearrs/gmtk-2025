@@ -1,11 +1,7 @@
 {
-    "name": "LostResort.Cars",
-    "rootNamespace": "LostResort.Cars",
-    "references": [
-        "GUID:b28a31c08beef024d83a7aa1ec3f2f6d",
-        "GUID:624a85509f829424398b0fa44ae4b076",
-        "GUID:6e88282d4763c9c4d98531de1c48ecc2"
-    ],
+    "name": "LostResort.Interaction",
+    "rootNamespace": "LostResort.Interaction",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
