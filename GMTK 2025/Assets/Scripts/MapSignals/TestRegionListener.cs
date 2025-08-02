@@ -15,7 +15,7 @@ public class TestRegionListener : MonoBehaviour
 
     void OnRegionChange(RegionChange signal)
     {
-            
+            //Debug.Log("Entered region: " + signal.NewRegion);
     }
 
     void RegisterSignals()
