@@ -9,7 +9,6 @@ namespace LostResort.Cars
         [SerializeField] private Car car;
         [SerializeField] private CarInput carInput;
         [SerializeField] private Rigidbody carRigidBody;
-        [SerializeField] private CarMovementData movementData;
         [SerializeField] private Wheel[] wheels;
 
         [Header("Settings")]

@@ -7,7 +7,6 @@ namespace LostResort.Cars
     {
         [Header("References")]
         [SerializeField] private Car car;
-        [SerializeField] private CarInput carInput;
         [SerializeField] private Wheel[] gripDriftWheels;
         [SerializeField] private Wheel[] slipDriftWheels;
         [SerializeField] private Transform chassis;
@@ -24,14 +23,14 @@ namespace LostResort.Cars
 
         private void OnEnable()
         {
-            carInput.DriftInput.Started += OnDriftInputBegin;
-            carInput.DriftInput.Canceled += OnDriftInputEnd;
+            car.Input.DriftInput.Started += OnDriftInputBegin;
+            car.Input.DriftInput.Canceled += OnDriftInputEnd;
         }
 
         private void OnDisable()
         {
-            carInput.DriftInput.Started -= OnDriftInputBegin;
-            carInput.DriftInput.Canceled -= OnDriftInputEnd;
+            car.Input.DriftInput.Started -= OnDriftInputBegin;
+            car.Input.DriftInput.Canceled -= OnDriftInputEnd;
         }
 
         private void Awake()
@@ -68,9 +67,9 @@ namespace LostResort.Cars
 
         private void UpdateChassisRotation()
         {
-            var moveInput = carInput.MoveInput.ReadValue<Vector2>().x;
+            var moveInput = car.Input.MoveInput.ReadValue<Vector2>().x;
 
-            float maxRotation = carInput.DriftInput.IsPressed() ? driftChassisRotation : normalChassisRotation;
+            float maxRotation = car.Input.DriftInput.IsPressed() ? driftChassisRotation : normalChassisRotation;
             maxRotation *= car.GetMaxSpeedPercentage() * moveInput;
 
             Vector3 rotation = chassis.localEulerAngles;

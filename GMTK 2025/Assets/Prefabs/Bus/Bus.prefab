@@ -131,10 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carInput: {fileID: 5548998795581848671}
-  carRigidBody: {fileID: 8988805833627153373}
+  car: {fileID: 6811755135693848246}
   model: {fileID: 6217651627942559182}
-  movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -145,6 +143,7 @@ MonoBehaviour:
   grip: 1
   drag: 500
   modelPadding: 0.45
+  modelFallSpeed: 10
 --- !u!1 &1958734603834837540
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,10 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carInput: {fileID: 5548998795581848671}
-  carRigidBody: {fileID: 8988805833627153373}
+  car: {fileID: 6811755135693848246}
   model: {fileID: 2320271343649350111}
-  movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -257,6 +254,7 @@ MonoBehaviour:
   grip: 1
   drag: 500
   modelPadding: 0.45
+  modelFallSpeed: 10
 --- !u!1 &2803923658006841555
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +388,6 @@ MonoBehaviour:
   car: {fileID: 6811755135693848246}
   carInput: {fileID: 5548998795581848671}
   carRigidBody: {fileID: 8988805833627153373}
-  movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   wheels:
   - {fileID: 310942104039356160}
   - {fileID: 5855331909182654044}
@@ -442,10 +439,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carInput: {fileID: 5548998795581848671}
-  carRigidBody: {fileID: 8988805833627153373}
+  car: {fileID: 6811755135693848246}
   model: {fileID: 7172887583966502471}
-  movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -456,6 +451,7 @@ MonoBehaviour:
   grip: 1
   drag: 500
   modelPadding: 0.45
+  modelFallSpeed: 10
 --- !u!1 &3347425291486719833
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,9 +575,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15860230660c47049880fcfc542b89c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidBody: {fileID: 8988805833627153373}
+  rb: {fileID: 8988805833627153373}
+  input: {fileID: 5548998795581848671}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
-  minSpeed: 0.01
 --- !u!1 &4277132764622544312
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 6811755135693848246}
-  carInput: {fileID: 5548998795581848671}
   gripDriftWheels:
   - {fileID: 310942104039356160}
   - {fileID: 5855331909182654044}
@@ -1186,10 +1181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4558084418418c24da15408091aad6b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carInput: {fileID: 5548998795581848671}
-  carRigidBody: {fileID: 8988805833627153373}
+  car: {fileID: 6811755135693848246}
   model: {fileID: 5711857949293744728}
-  movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
   collisionLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -1200,6 +1193,7 @@ MonoBehaviour:
   grip: 1
   drag: 500
   modelPadding: 0.45
+  modelFallSpeed: 10
 --- !u!1 &8878794131214343556
 GameObject:
   m_ObjectHideFlags: 0

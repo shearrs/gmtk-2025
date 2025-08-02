@@ -4,27 +4,32 @@ namespace LostResort.Cars
 {
     public class Car : MonoBehaviour
     {
-        [SerializeField] private Rigidbody rigidBody;
+        [Header("References")]
+        [SerializeField] private Rigidbody rb;
+        [SerializeField] private CarInput input;
         [SerializeField] private CarMovementData movementData;
-        [SerializeField] private float minSpeed = 0.01f;
+
+        public Rigidbody Rigidbody => rb;
+        public CarInput Input => input;
+        public CarMovementData MovementData => movementData;
 
         private void FixedUpdate()
         {
-            Vector3 horizontalVelocity = rigidBody.linearVelocity;
+            Vector3 horizontalVelocity = rb.linearVelocity;
             horizontalVelocity.y = 0;
 
-            if (horizontalVelocity.sqrMagnitude < minSpeed * minSpeed)
+            if (horizontalVelocity.sqrMagnitude < movementData.MinSpeed * movementData.MinSpeed)
             {
-                Vector3 verticalVelocity = rigidBody.linearVelocity;
+                Vector3 verticalVelocity = rb.linearVelocity;
                 verticalVelocity.x = 0;
                 verticalVelocity.z = 0;
-                rigidBody.linearVelocity = verticalVelocity;
+                rb.linearVelocity = verticalVelocity;
             }
         }
 
         public float GetMaxSpeedPercentage()
         {
-            return rigidBody.linearVelocity.sqrMagnitude / (movementData.MaxSpeed * movementData.MaxSpeed);
+            return rb.linearVelocity.sqrMagnitude / (movementData.MaxSpeed * movementData.MaxSpeed);
         }
     }
 }
