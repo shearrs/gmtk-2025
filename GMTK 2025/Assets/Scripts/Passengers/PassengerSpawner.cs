@@ -15,7 +15,6 @@ namespace LostResort.Passengers
         
         void Start()
         {
-            SignalShuttle.Emit(new OnGameStart());
             StartCoroutine(ContinuouslySpawnPassengers());
         }
 
