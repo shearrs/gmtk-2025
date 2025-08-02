@@ -8,8 +8,12 @@ namespace LostResort.Passengers
         [SerializeField] private Vector3 pickupPosition;
         [SerializeField] private Vector3 dropoffPosition;
         [SerializeField] private List<Accessory> accessories;
+        [SerializeField] private List<Material> maleMaterials;
+        [SerializeField] private List<Material> femaleMaterials;
 
         public IReadOnlyList<Accessory> Accessories => accessories;
+        public IReadOnlyList<Material> MaleMaterials => maleMaterials;
+        public IReadOnlyList<Material> FemaleMaterials => femaleMaterials;
 
         public Vector3 GetPickupPosition() => transform.TransformPoint(pickupPosition);
         public Vector3 GetDropoffPosition() => transform.TransformPoint(dropoffPosition);

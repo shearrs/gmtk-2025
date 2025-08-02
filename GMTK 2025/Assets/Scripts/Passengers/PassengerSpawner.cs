@@ -8,7 +8,8 @@ namespace LostResort.Passengers
     public class PassengerSpawner : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] private Passenger passengerPrefab;
+        [SerializeField] private Passenger malePassengerPrefab;
+        [SerializeField] private Passenger femalePassengerPrefab;
         [SerializeField] private ResortLocation[] locations;
 
         [Header("Settings")]
@@ -29,7 +30,10 @@ namespace LostResort.Passengers
 
                 var originLocation = GetOriginLocation();
                 var targetLocation = GetTargetLocation(originLocation);
-                Passenger.Create(passengerPrefab, originLocation, targetLocation);
+                int random = Random.Range(0, 2);
+                var prefab = (random == 0) ? malePassengerPrefab : femalePassengerPrefab;
+
+                Passenger.Create(prefab, originLocation, targetLocation);
             }
         }
 

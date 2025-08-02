@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HawaiianDress 1
+  m_Name: Female Gym
   m_Shader: {fileID: -6465566751694194690, guid: 1249a1e3421fbcb4daf27e242928d806, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -53,8 +53,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Main_Texture:
-        m_Texture: {fileID: 2800000, guid: eab8240b1dba73544b8b3b00918b1c58, type: 3}
-        m_Scale: {x: 1.12, y: 1}
+        m_Texture: {fileID: 2800000, guid: 137bdcb6e037b09448e7c92e8b84103c, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}

@@ -14,10 +14,15 @@ namespace LostResort.Passengers
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Rigidbody rb;
         [SerializeField] private Collider col;
+        [SerializeField] private SkinnedMeshRenderer mesh;
 
         [Header("Settings")]
+        [SerializeField] private bool isMale = true;
         [SerializeField] private float waitingTime = 30.0f;
         [SerializeField] private int scoreValue = 100;
+
+        [Header("Skin Tones")]
+        [SerializeField] private Material[] skinMaterials;
 
         [Header("Clothes Slots")]
         [SerializeField] private Transform hatSlot;
@@ -40,6 +45,7 @@ namespace LostResort.Passengers
             passenger.originLocation = originLocation;
             passenger.targetLocation = targetLocation;
             passenger.SetAccessories();
+            passenger.SetMaterials();
 
             passenger.agent.SetDestination(originLocation.GetPickupPosition());
             passenger.BeginWaitingTime();
@@ -69,6 +75,20 @@ namespace LostResort.Passengers
                     secondInstance.transform.localPosition = Vector3.zero;
                 }
             }
+        }
+
+        private void SetMaterials()
+        {
+            var materialList = isMale ? targetLocation.MaleMaterials : targetLocation.FemaleMaterials;
+            var materials = mesh.materials;
+            
+            int clothesRandom = Random.Range(0, materialList.Count);
+            materials[0] = materialList[clothesRandom];
+
+            int skinRandom = Random.Range(0, skinMaterials.Length);
+            materials[1] = skinMaterials[skinRandom];
+
+            mesh.materials = materials;
         }
 
         private void BeginWaitingTime()
