@@ -32,6 +32,7 @@ namespace LostResort.Passengers
         private ResortLocation targetLocation;
 
         public bool IsPickedUp { get; private set; } = false;
+        public ResortLocation TargetLocation => targetLocation;
 
         public static Passenger Create(Passenger prefab, ResortLocation originLocation, ResortLocation targetLocation)
         {

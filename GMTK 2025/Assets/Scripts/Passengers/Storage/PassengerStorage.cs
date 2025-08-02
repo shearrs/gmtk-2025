@@ -9,6 +9,7 @@ namespace LostResort.Passengers
 
         private readonly List<PassengerSlot> openSlots = new();
         private readonly List<PassengerSlot> reservedSlots = new();
+        private readonly List<Passenger> instancePassengers = new();
 
         private void Awake()
         {
@@ -50,6 +51,20 @@ namespace LostResort.Passengers
             openSlots.Add(targetSlot);
 
             passenger.OnDropoff();
+        }
+
+        public void DropoffAtLocation(ResortLocation location)
+        {
+            instancePassengers.Clear();
+
+            foreach (var slot in reservedSlots)
+            {
+                if (slot.Passenger.TargetLocation == location)
+                    instancePassengers.Add(slot.Passenger);
+            }
+
+            foreach (var passenger in instancePassengers)
+                RemovePassenger(passenger);
         }
     }
 }

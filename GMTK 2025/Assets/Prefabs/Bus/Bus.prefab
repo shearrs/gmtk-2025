@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 938512831902779074}
   - component: {fileID: 6574624647121947869}
   - component: {fileID: 1494225833946167574}
+  - component: {fileID: 5213034465655350832}
   m_Layer: 0
   m_Name: Interaction
   m_TagString: Untagged
@@ -338,6 +339,7 @@ MonoBehaviour:
   trailRenderer: {fileID: 3037237994688457461}
   interactors:
   - {fileID: 1494225833946167574}
+  - {fileID: 5213034465655350832}
   testRadius: 3
   interactionLayer:
     serializedVersion: 2
@@ -352,6 +354,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b8faab57602d384ebe48b1485363898, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengerStorage: {fileID: 1225938207085720183}
+--- !u!114 &5213034465655350832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2261327515163073001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ce4b3c9d8fdbb49be9e39e0aafd19f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   passengerStorage: {fileID: 1225938207085720183}

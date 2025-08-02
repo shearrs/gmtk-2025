@@ -107,7 +107,6 @@ namespace LostResort.Cars
         {
             Vector3 center = Vector3.zero;
 
-            Debug.Log("test positions: " + testPositions.Count);
             foreach (var position in testPositions)
                 center += position;
 
@@ -156,7 +155,6 @@ namespace LostResort.Cars
 
                 if (sqrDistance > furthestDistance)
                 {
-                    Debug.Log("furthest point");
                     furthestPoint = point;
                     furthestDistance = sqrDistance;
                 }
