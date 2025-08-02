@@ -37,7 +37,6 @@ namespace LostResort.MapSignals
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("penis");
             //Check if trigger was a region entry trigger
             if(!Array.Exists(_regionEntryTriggers, x => x.gameObject == other.gameObject))
             {
