@@ -623,6 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   car: {fileID: 6811755135693848246}
+  wheelController: {fileID: 6822595541825437705}
   gripDriftWheels:
   - {fileID: 310942104039356160}
   - {fileID: 5855331909182654044}
@@ -632,7 +633,10 @@ MonoBehaviour:
   chassis: {fileID: 5763419094402127038}
   defaultGrip: 1
   driftGrip: 1
-  driftSlip: 0.15
+  minDriftSlip: 0.25
+  maxDriftSlip: 0.45
+  minDriftSteeringAngle: 5
+  maxDriftSteeringAngle: 10
   normalChassisRotation: 10
   driftChassisRotation: 20
   chassisRotationSpeed: 5
