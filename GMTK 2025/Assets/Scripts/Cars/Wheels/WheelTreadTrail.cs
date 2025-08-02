@@ -11,6 +11,10 @@ namespace LostResort.Cars
 
         private void Update()
         {
+            Vector3 rotation = transform.eulerAngles;
+            rotation.x = 90.0f;
+            transform.eulerAngles = rotation;
+
             if (!isLocked)
                 UpdateOnGround();
         }

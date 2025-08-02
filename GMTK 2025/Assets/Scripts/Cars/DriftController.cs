@@ -1,5 +1,6 @@
 using Shears;
 using Shears.Input;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -40,6 +41,9 @@ namespace LostResort.Cars
         private bool isDrifting = false;
         private Coroutine driftCoroutine;
         private readonly Timer speedupTimer = new();
+
+        public event Action BeganDrifting;
+        public event Action EndedDrifting;
 
         private void OnEnable()
         {
@@ -131,6 +135,7 @@ namespace LostResort.Cars
                 wheel.Grip = defaultGrip;
 
             isDrifting = false;
+            EndedDrifting?.Invoke();
         }
 
         private IEnumerator IEBeginDrift()
@@ -144,6 +149,7 @@ namespace LostResort.Cars
                 wheel.Grip = minDriftSlip;
 
             isDrifting = true;
+            BeganDrifting?.Invoke();
         }
 
         private void UpdateDrift()

@@ -14337,13 +14337,14 @@ GameObject:
   m_Component:
   - component: {fileID: 462955818}
   - component: {fileID: 462955819}
+  - component: {fileID: 462955820}
   m_Layer: 0
   m_Name: DriftLine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &462955818
 Transform:
   m_ObjectHideFlags: 0
@@ -14464,8 +14465,23 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &462955820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462955817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6786e8a6888a44a8fa25ae29b6dde6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  driftController: {fileID: 1437866537}
+  trailRenderer: {fileID: 462955819}
+  startRadius: 3
 --- !u!1 &473092403
 GameObject:
   m_ObjectHideFlags: 0
@@ -43053,6 +43069,7 @@ GameObject:
   - component: {fileID: 1204587401}
   - component: {fileID: 1204587400}
   - component: {fileID: 1204587399}
+  - component: {fileID: 1204587403}
   m_Layer: 6
   m_Name: POI_Cyl
   m_TagString: Untagged
@@ -43077,7 +43094,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -43152,6 +43169,18 @@ Transform:
   - {fileID: 981087009}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1204587403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204587398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d0dc355db0030245bbf2022d5f346b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1219856078
 GameObject:
   m_ObjectHideFlags: 0
@@ -58950,6 +58979,17 @@ Transform:
   - {fileID: 505156268}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1437866537 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+  m_PrefabInstance: {fileID: 1591177422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79d7996b7554e2c4d95e3be2fae40039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1452267501
 GameObject:
   m_ObjectHideFlags: 0
