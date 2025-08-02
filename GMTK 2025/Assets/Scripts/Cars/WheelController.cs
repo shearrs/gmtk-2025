@@ -19,7 +19,10 @@ namespace LostResort.Cars
         private Vector3 rotationInput;
         private bool isLocked = false;
         private float lockedRotationInput;
-        private Vector2 lockedRotationRange;
+        float lockedMinSteeringAngle;
+        float lockedMaxSteeringAngle;
+        float lockedMaxSpeedSteeringAngle;
+        private float lockedHandling;
 
         private void Update()
         {
@@ -31,14 +34,17 @@ namespace LostResort.Cars
             UpdateRotation();
         }
 
-        public void LockWheelRotationForDrifting(float minSteeringAngle, float maxSteeringAngle)
+        public void LockWheelRotationForDrifting(float minSteeringAngle, float maxSteeringAngle, float maxSpeedSteeringAngle)
         {
             if (isLocked)
                 return;
 
             float rotDirection = rotationInput.x;
-            lockedRotationRange = new(rotDirection * minSteeringAngle, rotDirection * maxSteeringAngle);
+            lockedMinSteeringAngle = rotDirection * minSteeringAngle;
+            lockedMaxSteeringAngle = rotDirection * maxSteeringAngle;
+            lockedMaxSpeedSteeringAngle = rotDirection * maxSpeedSteeringAngle;
             lockedRotationInput = Mathf.Sign(rotDirection);
+            lockedHandling = handling;
 
             isLocked = true;
         }
@@ -56,10 +62,13 @@ namespace LostResort.Cars
                 {
                     Vector3 euler = wheel.transform.localEulerAngles;
 
-                    float inputT = 1.0f - (0.5f * Mathf.Abs(lockedRotationInput - rotationInput.x));
-                    float steerAngle = Mathf.Lerp(lockedRotationRange.x, lockedRotationRange.y, inputT);
+                    float velocityT = car.GetMaxSpeedPercentage();
+                    float maxSteeringAngle = Mathf.Lerp(lockedMaxSteeringAngle, lockedMaxSpeedSteeringAngle, velocityT);
 
-                    euler.y = Mathf.MoveTowardsAngle(euler.y, steerAngle, handling * Time.fixedDeltaTime);
+                    float inputT = 1.0f - (0.5f * Mathf.Abs(lockedRotationInput - rotationInput.x));
+                    float steerAngle = Mathf.Lerp(lockedMinSteeringAngle, maxSteeringAngle, inputT);
+
+                    euler.y = Mathf.MoveTowardsAngle(euler.y, steerAngle, lockedHandling * Time.fixedDeltaTime);
 
                     wheel.transform.localEulerAngles = euler;
                 }

@@ -8,12 +8,38 @@ namespace LostResort.Cars
         [SerializeField] private Rigidbody rb;
         [SerializeField] private CarInput input;
         [SerializeField] private CarMovementData movementData;
+        [SerializeField] private Wheel[] wheels;
 
         public Rigidbody Rigidbody => rb;
         public CarInput Input => input;
         public CarMovementData MovementData => movementData;
 
         private void FixedUpdate()
+        {
+            ClampHorizontalVelocity();
+            ApplyFallSpeed();
+        }
+
+        private void ApplyFallSpeed()
+        {
+            bool isOnGround = true;
+
+            foreach (var wheel in wheels)
+            {
+                if (!wheel.IsOnGround())
+                {
+                    isOnGround = false;
+                    break;
+                }    
+            }
+
+            if (isOnGround)
+                return;
+
+            rb.AddForce(movementData.FallAcceleration * Vector3.down);
+        }
+
+        private void ClampHorizontalVelocity()
         {
             Vector3 horizontalVelocity = rb.linearVelocity;
             horizontalVelocity.y = 0;

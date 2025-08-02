@@ -725,22 +725,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bus and Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
-      propertyPath: maxDriftSlip
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
-      propertyPath: minDriftSlip
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
-      propertyPath: maxDriftSteeringAngle
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
-      propertyPath: minDriftSteeringAngle
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

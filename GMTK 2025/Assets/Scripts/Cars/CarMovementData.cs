@@ -10,8 +10,12 @@ namespace LostResort.Cars
         [SerializeField] private float maxSpeed = 50f;
         [SerializeField] private float minSpeed = 0.01f;
 
+        [Header("Aerial Settings")]
+        [SerializeField] private float fallAcceleration = 500f;
+
         public float Acceleration => acceleration;
         public float MaxSpeed => maxSpeed;
         public float MinSpeed => minSpeed;
+        public float FallAcceleration => fallAcceleration;
     }
 }

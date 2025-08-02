@@ -578,6 +578,11 @@ MonoBehaviour:
   rb: {fileID: 8988805833627153373}
   input: {fileID: 5548998795581848671}
   movementData: {fileID: 11400000, guid: 93aac2de0e4d0c54aa7b14a2be8bfc34, type: 2}
+  wheels:
+  - {fileID: 310942104039356160}
+  - {fileID: 5855331909182654044}
+  - {fileID: 8419866978900849867}
+  - {fileID: 4763452630078279721}
 --- !u!1 &4277132764622544312
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +641,8 @@ MonoBehaviour:
   minDriftSlip: 0.25
   maxDriftSlip: 0.45
   minDriftSteeringAngle: 5
-  maxDriftSteeringAngle: 10
+  maxDriftSteeringAngle: 20
+  maxSpeedDriftSteeringAngle: 8
   normalChassisRotation: 10
   driftChassisRotation: 20
   chassisRotationSpeed: 5

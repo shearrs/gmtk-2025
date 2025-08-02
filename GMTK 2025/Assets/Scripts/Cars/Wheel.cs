@@ -55,6 +55,11 @@ namespace LostResort.Cars
                 ApplyGravityToModel();
         }
 
+        public bool IsOnGround()
+        {
+            return Physics.Raycast(transform.position, -transform.up, raycastDistance, collisionLayer);
+        }
+
         private void ApplySuspension(RaycastHit hit)
         {
             Vector3 springDirection = transform.up;

@@ -15,3 +15,4 @@ MonoBehaviour:
   acceleration: 3000
   maxSpeed: 50
   minSpeed: 0.01
+  fallAcceleration: 10000

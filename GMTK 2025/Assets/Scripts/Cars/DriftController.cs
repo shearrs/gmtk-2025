@@ -17,8 +17,9 @@ namespace LostResort.Cars
         [SerializeField] private float driftGrip = 1.0f;
         [SerializeField] private float minDriftSlip = 0.15f;
         [SerializeField] private float maxDriftSlip = 0.35f;
-        [SerializeField] private float minDriftSteeringAngle = 10.0f;
+        [SerializeField] private float minDriftSteeringAngle = 5.0f;
         [SerializeField] private float maxDriftSteeringAngle = 20.0f;
+        [SerializeField] private float maxSpeedDriftSteeringAngle = 8.0f;
 
         [Header("Chassis Settings")]
         [SerializeField] private float normalChassisRotation = 10.0f;
@@ -66,7 +67,7 @@ namespace LostResort.Cars
 
             moveInputDirection = Mathf.Sign(moveInputDirection);
             isDrifting = true;
-            wheelController.LockWheelRotationForDrifting(minDriftSteeringAngle, maxDriftSteeringAngle);
+            wheelController.LockWheelRotationForDrifting(minDriftSteeringAngle, maxDriftSteeringAngle, maxSpeedDriftSteeringAngle);
 
             foreach (var wheel in gripDriftWheels)
                 wheel.Grip = driftGrip;
