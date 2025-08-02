@@ -4,20 +4,19 @@ namespace LostResort.Passengers
 {
     public class ResortLocation : MonoBehaviour
     {
-        [SerializeField] private LocationType locationType;
+        [SerializeField] private Vector3 pickupPosition;
+        [SerializeField] private Vector3 dropoffPosition;
 
-        public LocationType GetLocationType()
+        public Vector3 GetPickupPosition() => transform.TransformPoint(pickupPosition);
+        public Vector3 GetDropoffPosition() => transform.TransformPoint(dropoffPosition);
+
+        private void OnDrawGizmosSelected()
         {
-            return locationType;
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.TransformPoint(pickupPosition), 1.0f);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.TransformPoint(dropoffPosition), 1.0f);
         }
-
-    }
-
-    public enum LocationType
-    {
-        Hotel,
-        Conference,
-        Beach
-
     }
 }

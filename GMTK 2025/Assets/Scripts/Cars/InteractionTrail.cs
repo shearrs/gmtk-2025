@@ -110,7 +110,7 @@ namespace LostResort.Cars
             var furthestPoint = GetFurthestPoint(center);
             float radius = (furthestPoint - center).magnitude;
 
-            int hits = Physics.OverlapSphereNonAlloc(center, radius, overlapColliders);
+            int hits = Physics.OverlapSphereNonAlloc(center, radius, overlapColliders, -1, QueryTriggerInteraction.Collide);
 
             for (int i = 0; i < hits; i++)
             {

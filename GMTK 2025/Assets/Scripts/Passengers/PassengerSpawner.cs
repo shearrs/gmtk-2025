@@ -1,55 +1,54 @@
-using System;
+using Shears;
 using System.Collections;
-using LostResort.SignalShuttles;
+using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace LostResort.Passengers
 {
     public class PassengerSpawner : MonoBehaviour
     {
-        [SerializeField] private float timeBetweenSpawns = 5f;
-        [SerializeField] private GameObject passengerPrefab;
-        [SerializeField] private BoxCollider[] boxColliders;
+        [Header("References")]
+        [SerializeField] private Passenger passengerPrefab;
+        [SerializeField] private ResortLocation[] locations;
 
-        
-        void Start()
+        [Header("Settings")]
+        [SerializeField] private float spawnTime;
+
+        private readonly List<ResortLocation> instanceLocations = new();
+
+        private void Start()
         {
-            SignalShuttle.Emit(new OnGameStart());
-            StartCoroutine(ContinuouslySpawnPassengers());
+            StartCoroutine(IESpawn());
         }
 
-
-        IEnumerator ContinuouslySpawnPassengers()
+        private IEnumerator IESpawn()
         {
             while (true)
             {
-                RandomlySpawnPassenger();
+                yield return CoroutineUtil.WaitForSeconds(spawnTime);
 
-                yield return new WaitForSeconds(timeBetweenSpawns);
+                var originLocation = GetOriginLocation();
+                var targetLocation = GetTargetLocation(originLocation);
+                Passenger.Create(passengerPrefab, originLocation, targetLocation);
             }
         }
 
-        private void RandomlySpawnPassenger()
+        private ResortLocation GetOriginLocation()
         {
-            Array locations = Enum.GetValues(typeof(LocationType));
-            int randomIndex = Random.Range(0, locations.Length);
-            LocationType location = (LocationType)locations.GetValue(randomIndex);
+            int random = Random.Range(0, locations.Length);
 
-            Vector3 randomPoint = GetRandomPointInBounds(boxColliders[randomIndex].bounds);
-            Passenger passenger = Instantiate(passengerPrefab, randomPoint, Quaternion.identity, transform)
-                .GetComponent<Passenger>();
-            passenger.InitializeLocation(location);
-
+            return locations[random];
         }
-        
-        Vector3 GetRandomPointInBounds(Bounds bounds)
+
+        private ResortLocation GetTargetLocation(ResortLocation origin)
         {
-            return new Vector3(
-                Random.Range(bounds.min.x, bounds.max.x),
-                Random.Range(bounds.min.y, bounds.max.y),
-                Random.Range(bounds.min.z, bounds.max.z)
-            );
+            instanceLocations.Clear();
+            instanceLocations.AddRange(locations);
+            instanceLocations.Remove(origin);
+
+            int random = Random.Range(0, instanceLocations.Count);
+
+            return instanceLocations[random];
         }
     }
 }

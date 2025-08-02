@@ -7,99 +7,36 @@ namespace LostResort.Passengers
 {
     public class Passenger : MonoBehaviour
     {
-        public PassengerData passengerData { get; private set; }
+        [Header("References")]
+        [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private Rigidbody rb;
 
-        private bool inShuttle;
-        private MeshRenderer meshRenderer; 
-        private CapsuleCollider capsuleCollider;
-        private NavMeshAgent navMeshAgent;
+        [Header("Settings")]
+        [SerializeField] private float waitingTime = 30.0f;
+        [SerializeField] private int scoreValue = 100;
+        private ResortLocation originLocation;
+        private ResortLocation targetLocation;
 
-
-        [SerializeField] private ExclamationMark exclamationMark;
-
-        //should be changed to use the event bus (signal shuttle)
-        private Score.Score score;
-
-        [SerializeField] private float startingScoreWhenDroppedOff;
-
-        [SerializeField] private float scoreWhenDroppedOffReductionRatePerSecond;
-
-        [SerializeField] private float scoreWhenDroppedOff;
-        
-        [SerializeField] private float minimumScoreWhenDroppedOff;
-
-
-        [SerializeField] private Material[] dropOffLocationBasedMaterials;
-
-        private void Awake()
+        public static Passenger Create(Passenger prefab, ResortLocation originLocation, ResortLocation targetLocation)
         {
-            navMeshAgent = GetComponent<NavMeshAgent>();
-            score = FindAnyObjectByType<Score.Score>();
-            capsuleCollider = GetComponent<CapsuleCollider>();
-            meshRenderer = GetComponent<MeshRenderer>();
+            var passenger = Instantiate(prefab, originLocation.GetPickupPosition(), Quaternion.identity);
+            passenger.originLocation = originLocation;
+            passenger.targetLocation = targetLocation;
 
-            scoreWhenDroppedOff = startingScoreWhenDroppedOff;
-            exclamationMark.InitializeStartingScoreWhenDroppedOff(startingScoreWhenDroppedOff);
+            passenger.agent.SetDestination(originLocation.GetPickupPosition());
+
+            return passenger;
         }
 
-        void Update()
+        public void Pickup()
         {
-            if (inShuttle)
-            {
-                return;
-            }
-            AdjustScoreWhenDroppedOff();
+            agent.enabled = false;
         }
 
-
-        /// <summary>
-        /// Adjusts the scoreWhenDroppedOffVariable based on how much time has elapsed during the last frame.
-        /// Also sends this information to the child exclamationMark object.
-        /// </summary>
-        private void AdjustScoreWhenDroppedOff()
+        public void Dropoff()
         {
-            float secondsPassedSinceLastFrame = Time.deltaTime;
-            scoreWhenDroppedOff -= secondsPassedSinceLastFrame * scoreWhenDroppedOffReductionRatePerSecond;
-            scoreWhenDroppedOff = Mathf.Clamp(scoreWhenDroppedOff, minimumScoreWhenDroppedOff, scoreWhenDroppedOff);
-            exclamationMark.ReceiveScoreWhenDroppedOff(scoreWhenDroppedOff);
-        }
-
-
-        public void InitializeLocation(LocationType locationType)
-        {
-            passengerData = new PassengerData(locationType);
-            meshRenderer.material = dropOffLocationBasedMaterials[(int)passengerData.dropOffLocation];
-        }
-
-        /// <summary>
-        /// Picks up the passenger. This is called from some player behavior script. The passenger should be saved in a list of passengers which is stored in the player.
-        /// This script, or where its called, should hide the passenger (or have them join the shuttle).
-        /// It also changed the boolean 'inShuttle' to false.
-        /// </summary>
-        public void PickUp()
-        {
-            //Debug.Log($"Picked up a player from {passengerData.startingLocation} who intends to travel to {passengerData.dropOffLocation}!");
-            meshRenderer.enabled = false;
-            exclamationMark.DisableExclamationMark();
-            capsuleCollider.enabled = false;
-            navMeshAgent.enabled = true;
-            inShuttle = true;
-        }
-
-
-        public void DropOff()
-        {
-            Debug.Log($"Dropped off a player at {passengerData.dropOffLocation} who originally came from {passengerData.startingLocation}!");
-            inShuttle = false;
-            IncrementScore((int)scoreWhenDroppedOff);
+            SignalShuttle.Emit(new AddScoreSignal(scoreValue));
             Destroy(gameObject);
-
-            //increase score
-        }
-
-        private void IncrementScore(int additionalScore)
-        {
-            SignalShuttle.Emit(new AddScoreSignal(additionalScore));
         }
     }
 }
