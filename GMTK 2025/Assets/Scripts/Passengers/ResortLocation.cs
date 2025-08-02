@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace LostResort.Passengers
@@ -6,6 +7,9 @@ namespace LostResort.Passengers
     {
         [SerializeField] private Vector3 pickupPosition;
         [SerializeField] private Vector3 dropoffPosition;
+        [SerializeField] private List<Accessory> accessories;
+
+        public IReadOnlyList<Accessory> Accessories => accessories;
 
         public Vector3 GetPickupPosition() => transform.TransformPoint(pickupPosition);
         public Vector3 GetDropoffPosition() => transform.TransformPoint(dropoffPosition);
