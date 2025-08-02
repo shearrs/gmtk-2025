@@ -1,9 +1,14 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Shears
 {
+    [DefaultExecutionOrder(100)]
     public class DampedFollower : MonoBehaviour
     {
+        [SerializeField] private bool fixedUpdate = false;
+        
         [Header("Target")]
         [SerializeField] private Transform targetTransform;
 
@@ -22,6 +27,15 @@ namespace Shears
         private Quaternion targetRotation = Quaternion.identity;
 
         private bool isEnabled = true;
+        private DampedFollower waitTarget;
+
+        public event Action Updated;
+
+        private void Start()
+        {
+            if (targetTransform.TryGetComponent(out waitTarget))
+                waitTarget.Updated += DampedFollow;
+        }
 
         public void Enable()
         {
@@ -33,9 +47,17 @@ namespace Shears
             isEnabled = false;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (!isEnabled)
+            if (!isEnabled || fixedUpdate || waitTarget != null)
+                return;
+
+            DampedFollow();
+        }
+
+        private void FixedUpdate()
+        {
+            if (!isEnabled || !fixedUpdate || waitTarget != null)
                 return;
 
             DampedFollow();
@@ -48,6 +70,8 @@ namespace Shears
 
             if (followRotation)
                 DampedRotation();
+
+            Updated?.Invoke();
         }
 
         private void DampedPosition()

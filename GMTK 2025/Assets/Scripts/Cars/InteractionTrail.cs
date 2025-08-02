@@ -10,9 +10,11 @@ namespace LostResort.Cars
         [Header("References")]
         [SerializeField] private DriftController driftController;
         [SerializeField] private TrailRenderer trailRenderer;
+        [SerializeField] private Interactor[] interactors;
 
         [Header("Settings")]
         [SerializeField] private float testRadius = 0.5f;
+        [SerializeField] private LayerMask interactionLayer;
 
         private readonly Collider[] overlapColliders = new Collider[10];
         private readonly List<Vector3> testPositions = new();
@@ -33,9 +35,9 @@ namespace LostResort.Cars
 
         private void Update()
         {
-            Vector3 rotation = transform.eulerAngles;
+            Vector3 rotation = trailRenderer.transform.eulerAngles;
             rotation.x = 90;
-            transform.eulerAngles = rotation;
+            trailRenderer.transform.eulerAngles = rotation;
 
             if (isDrifting)
             {
@@ -84,7 +86,7 @@ namespace LostResort.Cars
 
                 if (sqrDistance < testRadius * testRadius)
                 {
-                    InteractWithLoop(position);
+                    InteractWithLoop();
 
                     createdLoop = true;
                     break;
@@ -94,11 +96,12 @@ namespace LostResort.Cars
             if (createdLoop)
             {
                 testPositions.Clear();
+                trailRenderer.Clear();
                 UpdateTestPosition();
             }
         }
 
-        private void InteractWithLoop(Vector3 testPos)
+        private void InteractWithLoop()
         {
             Vector3 center = Vector3.zero;
 
@@ -110,15 +113,29 @@ namespace LostResort.Cars
             var furthestPoint = GetFurthestPoint(center);
             float radius = (furthestPoint - center).magnitude;
 
-            int hits = Physics.OverlapSphereNonAlloc(center, radius, overlapColliders, -1, QueryTriggerInteraction.Collide);
+            int hits = Physics.OverlapSphereNonAlloc(center, radius, overlapColliders, interactionLayer, QueryTriggerInteraction.Collide);
 
             for (int i = 0; i < hits; i++)
             {
                 var hit = overlapColliders[i];
 
-                if (hit.TryGetComponent(out Interactable interactable))
-                    interactable.Interact();
+                if (hit.TryGetComponent(out IInteractable interactable))
+                    TryInteract(interactable);
             }
+        }
+
+        private void TryInteract(IInteractable interactable)
+        {
+            foreach (var interactor in interactors)
+            {
+                if (interactor.CanInteractWith(interactable))
+                {
+                    interactable.Interact(interactor);
+                    return;
+                }
+            }
+
+            interactable.Interact(null);
         }
 
         private Vector3 GetFurthestPoint(Vector3 center)

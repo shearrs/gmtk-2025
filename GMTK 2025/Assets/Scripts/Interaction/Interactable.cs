@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace LostResort.Interaction
 {
-    public class Interactable : MonoBehaviour
+    public class Interactable : MonoBehaviour, IInteractable
     {
         public event Action Interacted;
 
-        public void Interact()
+        public void Interact(Interactor interactor)
         {
-            Debug.Log("interacted!");
             Interacted?.Invoke();
         }
     }
