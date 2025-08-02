@@ -32,13 +32,14 @@ public class Lighting : MonoBehaviour
          return;
       }
 
-      /*
-      if (Application.isPlaying)
+
+      if (!Application.isPlaying)
       {
-         TimeOfDay += Time.deltaTime;
-         TimeOfDay %= 24;
+         UpdateLighting(0.5f);
+         return;
       }
-      */
+
+
       //Debug.Log(dayTimer.TimeElapsedPercent + "from lighting");
       UpdateLighting(dayTimer.TimeElapsedPercent);
 
