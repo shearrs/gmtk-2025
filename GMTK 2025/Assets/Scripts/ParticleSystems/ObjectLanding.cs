@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using LostResort.Cars;
 
@@ -6,30 +7,54 @@ namespace LostResort.ParticleSystems
 {
     public class ObjectLanding : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem[] _impactLineParticles;
-        [SerializeField] private ParticleSystem _rubble;
+        [SerializeField] private ParticleSystem _impactLineParticles;
 
         [SerializeField] private Wheel[] _wheels;
-        [SerializeField] private Car _car;
-
-        private bool _isCarGrounded = false;
 
         /// <summary>
-        /// x is particle speed at car speed 0, y is particle speed at car speed 1
+        /// How many seconds must the car be in the air before landing will cause an impact?
         /// </summary>
-        [SerializeField] private Vector2 _speedRange;
+        [SerializeField] private float _minimumHangTime = 1f;
 
-        private float _carSpeed = 0f;
+        private bool _isCarGrounded = false;
+        private bool _canImpact = false;
 
         private void Update()
         {
-            
-            
-            for (int i = 0; i < _impactLineParticles.Length; i++)
+            if (_isCarGrounded && Array.TrueForAll(_wheels, x => !x.IsOnGround()))
             {
-                var mainModule = _impactLineParticles[i].main;
-                mainModule.startSpeedMultiplier = Mathf.Lerp(_speedRange.x, _speedRange.y, _carSpeed);
+                _isCarGrounded = false;
+                
+                StopAllCoroutines();
+                StartCoroutine(AirTime());
             }
+            
+            if (!_isCarGrounded && Array.Exists(_wheels, x => x.IsOnGround()))
+            {
+                _isCarGrounded = true;
+
+                if (_canImpact)
+                {
+                    _impactLineParticles.Play();
+                }
+                else
+                {
+                    StopAllCoroutines();
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            StopAllCoroutines();
+        }
+
+        private IEnumerator AirTime()
+        {
+            yield return new WaitForSeconds(_minimumHangTime);
+
+            _canImpact = true;
+            yield break;
         }
     }
 }
