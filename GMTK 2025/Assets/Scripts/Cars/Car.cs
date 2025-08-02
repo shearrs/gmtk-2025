@@ -4,21 +4,73 @@ namespace LostResort.Cars
 {
     public class Car : MonoBehaviour
     {
-        [SerializeField] private Rigidbody rigidBody;
-        [SerializeField] private float minSpeed = 0.01f;
+        [Header("References")]
+        [SerializeField] private Rigidbody rb;
+        [SerializeField] private CarInput input;
+        [SerializeField] private CarMovementData movementData;
+        [SerializeField] private Wheel[] wheels;
+
+        public Rigidbody Rigidbody => rb;
+        public CarInput Input => input;
+        public CarMovementData MovementData => movementData;
 
         private void FixedUpdate()
         {
-            Vector3 horizontalVelocity = rigidBody.linearVelocity;
+            ClampHorizontalVelocity();
+            ApplyFallSpeed();
+        }
+
+        public bool IsOnGround()
+        {
+            bool isOnGround = true;
+
+            foreach (var wheel in wheels)
+            {
+                if (!wheel.IsOnGround())
+                {
+                    isOnGround = false;
+                    break;
+                }
+            }
+
+            return isOnGround;
+        }
+
+        private void ApplyFallSpeed()
+        {
+            if (IsOnGround())
+                return;
+
+            rb.AddForce(movementData.FallAcceleration * Vector3.down);
+        }
+
+        private void ClampHorizontalVelocity()
+        {
+            Vector3 horizontalVelocity = rb.linearVelocity;
             horizontalVelocity.y = 0;
 
-            if (horizontalVelocity.sqrMagnitude < minSpeed * minSpeed)
+            float horizontalSqrMagnitude = horizontalVelocity.sqrMagnitude;
+
+            if (horizontalSqrMagnitude < movementData.MinSpeed * movementData.MinSpeed)
             {
-                Vector3 verticalVelocity = rigidBody.linearVelocity;
+                Vector3 verticalVelocity = rb.linearVelocity;
                 verticalVelocity.x = 0;
                 verticalVelocity.z = 0;
-                rigidBody.linearVelocity = verticalVelocity;
+                rb.linearVelocity = verticalVelocity;
             }
+            else if (horizontalSqrMagnitude > movementData.MaxSpeed * movementData.MaxSpeed)
+            {
+                Vector3 clampedVelocity = horizontalVelocity.normalized;
+                clampedVelocity *= movementData.MaxSpeed;
+                clampedVelocity.y = rb.linearVelocity.y;
+
+                rb.linearVelocity = clampedVelocity;
+            }
+        }
+
+        public float GetMaxSpeedPercentage()
+        {
+            return rb.linearVelocity.sqrMagnitude / (movementData.MaxSpeed * movementData.MaxSpeed);
         }
     }
 }
