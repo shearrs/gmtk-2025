@@ -9,6 +9,7 @@ namespace Shears
 
         [Header("Position")]
         [SerializeField] private bool followPosition = true;
+        [SerializeField] private Vector3 offset = Vector3.zero;
         [SerializeField] private float positionSmoothTime = 0.1f;
 
         [Header("Rotation")]
@@ -51,7 +52,8 @@ namespace Shears
 
         private void DampedPosition()
         {
-            transform.position = Vector3.SmoothDamp(transform.position, targetTransform.position, ref refPosVelocity, positionSmoothTime);
+            var targetPos = targetTransform.TransformPoint(offset);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref refPosVelocity, positionSmoothTime);
         }
 
         private void DampedRotation()
@@ -60,6 +62,15 @@ namespace Shears
                     targetRotation = targetTransform.rotation;
 
             transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation, targetRotation, ref refRotVelocity, rotationSmoothTime);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (targetTransform == null)
+                return;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(targetTransform.TransformPoint(offset), 0.5f);
         }
     }
 }
