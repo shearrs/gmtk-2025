@@ -891,6 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupPosition: {x: 0, y: 0, z: 0}
   dropoffPosition: {x: 2.7, y: 0, z: 2.7}
+  spawnRadius: 8
   accessories:
   - {fileID: 4624508870745565075, guid: dfe9fd3f2d5c38b46bf8730e9b9fe4f1, type: 3}
   - {fileID: 6306683226794159710, guid: 5f8005762bcff8f4cb21b4756b3559fc, type: 3}
@@ -42895,6 +42896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupPosition: {x: 0, y: 0, z: 0}
   dropoffPosition: {x: -6, y: 0, z: 0}
+  spawnRadius: 8
   accessories:
   - {fileID: 4461420643642180946, guid: 8c60ba857e3733b48a48c55f2d3d9e29, type: 3}
   - {fileID: 5913882553002657961, guid: 163a156f28eef8841b66ca764e30fecd, type: 3}

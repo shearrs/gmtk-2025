@@ -5,8 +5,12 @@ namespace LostResort.Passengers
 {
     public class ResortLocation : MonoBehaviour
     {
+        [Header("Positions")]
         [SerializeField] private Vector3 pickupPosition;
         [SerializeField] private Vector3 dropoffPosition;
+        [SerializeField] private float spawnRadius = 3f;
+
+        [Header("Customization")]
         [SerializeField] private List<Accessory> accessories;
         [SerializeField] private List<Material> maleMaterials;
         [SerializeField] private List<Material> femaleMaterials;
@@ -15,7 +19,17 @@ namespace LostResort.Passengers
         public IReadOnlyList<Material> MaleMaterials => maleMaterials;
         public IReadOnlyList<Material> FemaleMaterials => femaleMaterials;
 
-        public Vector3 GetPickupPosition() => transform.TransformPoint(pickupPosition);
+        public Vector3 GetPickupPosition()
+        {
+            var pos = transform.TransformPoint(pickupPosition);
+
+            Vector2 offset = Random.insideUnitCircle * spawnRadius;
+
+            pos.x += offset.x;
+            pos.z += offset.y;
+
+            return pos;
+        }
         public Vector3 GetDropoffPosition() => transform.TransformPoint(dropoffPosition);
 
         private void OnDrawGizmosSelected()
@@ -25,6 +39,9 @@ namespace LostResort.Passengers
 
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.TransformPoint(dropoffPosition), 1.0f);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.TransformPoint(pickupPosition), spawnRadius);
         }
     }
 }
