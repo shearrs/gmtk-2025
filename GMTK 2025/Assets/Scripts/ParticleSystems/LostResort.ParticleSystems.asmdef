@@ -1,0 +1,16 @@
+{
+    "name": "LostResort.ParticleSystems",
+    "rootNamespace": "",
+    "references": [
+        "GUID:42c151e0dcf26dc4488bf485ef2fd7b1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
