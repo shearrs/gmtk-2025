@@ -18,6 +18,7 @@ namespace LostResort.Cars
 
         private Vector3 rotationInput;
         private bool isLocked = false;
+        private bool isDrifting = false;
         private float lockedRotationInput;
         float lockedMinSteeringAngle;
         float lockedMaxSteeringAngle;
@@ -31,12 +32,23 @@ namespace LostResort.Cars
 
         private void FixedUpdate()
         {
-            UpdateRotation();
+            if (!isLocked)
+                UpdateRotation();
+        }
+
+        public void LockWheelRotation()
+        {
+            isLocked = true;
+        }
+
+        public void UnlockWheelRotation()
+        {
+            isLocked = false;
         }
 
         public void LockWheelRotationForDrifting(float minSteeringAngle, float maxSteeringAngle, float maxSpeedSteeringAngle)
         {
-            if (isLocked)
+            if (isDrifting)
                 return;
 
             float rotDirection = rotationInput.x;
@@ -46,17 +58,25 @@ namespace LostResort.Cars
             lockedRotationInput = Mathf.Sign(rotDirection);
             lockedHandling = handling;
 
-            isLocked = true;
+            foreach (Wheel wheel in wheels)
+            {
+                Vector3 euler = wheel.transform.localEulerAngles;
+                euler.y = lockedMinSteeringAngle;
+
+                wheel.transform.localEulerAngles = euler;
+            }
+
+            isDrifting = true;
         }
 
-        public void UnlockWheelRotation()
+        public void UnlockWheelDrifting()
         {
-            isLocked = false;
+            isDrifting = false;
         }
 
         private void UpdateRotation()
         {
-            if (isLocked)
+            if (isDrifting)
             {
                 foreach (var wheel in wheels)
                 {

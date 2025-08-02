@@ -141,7 +141,7 @@ MonoBehaviour:
   springStrength: 35000
   springDamping: 8000
   grip: 1
-  drag: 500
+  drag: 250
   modelPadding: 0.45
   modelFallSpeed: 10
 --- !u!1 &1958734603834837540
@@ -252,7 +252,7 @@ MonoBehaviour:
   springStrength: 35000
   springDamping: 8000
   grip: 1
-  drag: 500
+  drag: 250
   modelPadding: 0.45
   modelFallSpeed: 10
 --- !u!1 &2803923658006841555
@@ -391,9 +391,9 @@ MonoBehaviour:
   wheels:
   - {fileID: 310942104039356160}
   - {fileID: 5855331909182654044}
-  handling: 80
-  maxSteeringAngle: 20
-  maxSpeedSteeringAngle: 5
+  handling: 50
+  maxSteeringAngle: 8
+  maxSpeedSteeringAngle: 2
 --- !u!1 &3296400348810910185
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
   springStrength: 35000
   springDamping: 8000
   grip: 1
-  drag: 500
+  drag: 250
   modelPadding: 0.45
   modelFallSpeed: 10
 --- !u!1 &3347425291486719833
@@ -638,11 +638,11 @@ MonoBehaviour:
   chassis: {fileID: 5763419094402127038}
   defaultGrip: 1
   driftGrip: 1
-  minDriftSlip: 0.25
-  maxDriftSlip: 0.45
-  minDriftSteeringAngle: 5
-  maxDriftSteeringAngle: 20
-  maxSpeedDriftSteeringAngle: 8
+  minDriftSlip: 0.75
+  maxDriftSlip: 0.5
+  minDriftSteeringAngle: 1
+  maxDriftSteeringAngle: 15
+  maxSpeedDriftSteeringAngle: 6
   normalChassisRotation: 10
   driftChassisRotation: 20
   chassisRotationSpeed: 5
@@ -1201,7 +1201,7 @@ MonoBehaviour:
   springStrength: 35000
   springDamping: 8000
   grip: 1
-  drag: 500
+  drag: 250
   modelPadding: 0.45
   modelFallSpeed: 10
 --- !u!1 &8878794131214343556

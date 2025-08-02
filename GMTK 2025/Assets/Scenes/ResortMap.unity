@@ -59792,16 +59792,36 @@ PrefabInstance:
       value: Bus and Camera
       objectReference: {fileID: 0}
     - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
-      propertyPath: driftHandling
-      value: 15
+      propertyPath: driftHopForce
+      value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
       propertyPath: maxDriftSteeringAngle
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5086009036744786014, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
-      propertyPath: maxSpeedDriftSteeringAngle
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097676485001895982, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.935258
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097676485001895982, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.1360645
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097676485001895982, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.65090615
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097676485001895982, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.13970703
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097676485001895982, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7295765
+      objectReference: {fileID: 0}
+    - target: {fileID: 7097676485001895982, guid: c554684a99ae8fa4ca270561c502aa35, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.15659244
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

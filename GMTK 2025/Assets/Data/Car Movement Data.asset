@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Car Movement Data
   m_EditorClassIdentifier: 
   acceleration: 3000
-  maxSpeed: 50
+  maxSpeed: 80
   minSpeed: 0.01
-  fallAcceleration: 10000
+  fallAcceleration: 30000

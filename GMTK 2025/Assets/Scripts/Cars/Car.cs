@@ -20,7 +20,7 @@ namespace LostResort.Cars
             ApplyFallSpeed();
         }
 
-        private void ApplyFallSpeed()
+        public bool IsOnGround()
         {
             bool isOnGround = true;
 
@@ -30,10 +30,15 @@ namespace LostResort.Cars
                 {
                     isOnGround = false;
                     break;
-                }    
+                }
             }
 
-            if (isOnGround)
+            return isOnGround;
+        }
+
+        private void ApplyFallSpeed()
+        {
+            if (IsOnGround())
                 return;
 
             rb.AddForce(movementData.FallAcceleration * Vector3.down);
@@ -44,12 +49,23 @@ namespace LostResort.Cars
             Vector3 horizontalVelocity = rb.linearVelocity;
             horizontalVelocity.y = 0;
 
-            if (horizontalVelocity.sqrMagnitude < movementData.MinSpeed * movementData.MinSpeed)
+            float horizontalSqrMagnitude = horizontalVelocity.sqrMagnitude;
+
+            if (horizontalSqrMagnitude < movementData.MinSpeed * movementData.MinSpeed)
             {
                 Vector3 verticalVelocity = rb.linearVelocity;
                 verticalVelocity.x = 0;
                 verticalVelocity.z = 0;
                 rb.linearVelocity = verticalVelocity;
+            }
+            else if (horizontalSqrMagnitude > movementData.MaxSpeed * movementData.MaxSpeed)
+            {
+                Debug.Log("clamped speed");
+                Vector3 clampedVelocity = horizontalVelocity.normalized;
+                clampedVelocity *= movementData.MaxSpeed;
+                clampedVelocity.y = rb.linearVelocity.y;
+
+                rb.linearVelocity = clampedVelocity;
             }
         }
 
