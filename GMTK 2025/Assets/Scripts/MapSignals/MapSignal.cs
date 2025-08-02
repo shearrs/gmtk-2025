@@ -21,6 +21,9 @@ namespace LostResort.MapSignals
 {
     public class MapSignal : MonoBehaviour
     {
+        /// <summary>
+        /// Triggers must be indexed in the same order corresponding to RegionChange.Regions
+        /// </summary>
         [SerializeField] private Collider[] _regionEntryTriggers;
 
         private RegionChange.Regions _currentRegion;
