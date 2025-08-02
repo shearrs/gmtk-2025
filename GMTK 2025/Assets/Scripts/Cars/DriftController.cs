@@ -1,3 +1,4 @@
+using Shears;
 using Shears.Input;
 using System.Collections;
 using UnityEngine;
@@ -14,7 +15,6 @@ namespace LostResort.Cars
         [SerializeField] private Transform chassis;
 
         [Header("Drift Settings")]
-        [SerializeField] private float driftHopForce = 500.0f;
         [SerializeField] private float defaultGrip = 1.0f;
         [SerializeField] private float driftGrip = 1.0f;
         [SerializeField] private float minDriftSlip = 0.15f;
@@ -23,15 +23,23 @@ namespace LostResort.Cars
         [SerializeField] private float maxDriftSteeringAngle = 20.0f;
         [SerializeField] private float maxSpeedDriftSteeringAngle = 8.0f;
 
+        [Header("Drift Speed Settings")]
+        [SerializeField] private float driftStartupTime = 0.1f;
+        [SerializeField] private float driftSlowdownForce = 100.0f;
+        [SerializeField] private float driftSpeedupForce = 200.0f;
+        [SerializeField] private float speedupRequiredTime = 1.5f;
+
         [Header("Chassis Settings")]
         [SerializeField] private float normalChassisRotation = 10.0f;
         [SerializeField] private float driftChassisRotation = 30.0f;
         [SerializeField] private float chassisRotationSpeed = 5.0f;
 
+        private WheelTreadTrail backLeftWheelTreads;
+        private WheelTreadTrail backRightWheelTreads;
         private float moveInputDirection;
-        private float angularDamping;
         private bool isDrifting = false;
         private Coroutine driftCoroutine;
+        private readonly Timer speedupTimer = new();
 
         private void OnEnable()
         {
@@ -52,6 +60,17 @@ namespace LostResort.Cars
 
             foreach (var wheel in slipDriftWheels)
                 wheel.Grip = defaultGrip;
+
+            if (slipDriftWheels[0].transform.localPosition.x < slipDriftWheels[1].transform.localPosition.x)
+            {
+                backLeftWheelTreads = slipDriftWheels[0].GetComponentInChildren<WheelTreadTrail>();
+                backRightWheelTreads = slipDriftWheels[1].GetComponentInChildren<WheelTreadTrail>();
+            }
+            else
+            {
+                backLeftWheelTreads = slipDriftWheels[1].GetComponentInChildren<WheelTreadTrail>();
+                backRightWheelTreads = slipDriftWheels[0].GetComponentInChildren<WheelTreadTrail>();
+            }
         }
 
         private void Update()
@@ -69,11 +88,13 @@ namespace LostResort.Cars
             if (Mathf.Abs(moveInputDirection) < 0.01f)
                 return;
 
-            angularDamping = car.Rigidbody.angularDamping;
-            car.Rigidbody.angularDamping = 5.0f;
-            car.Rigidbody.AddForce(driftHopForce * Vector3.up, ForceMode.Impulse);
-            wheelController.LockWheelRotation();
             wheelController.LockWheelRotationForDrifting(minDriftSteeringAngle, maxDriftSteeringAngle, maxSpeedDriftSteeringAngle);
+
+            Vector3 forceDirection = -car.Rigidbody.linearVelocity.normalized;
+            car.Rigidbody.AddForce(driftSlowdownForce * forceDirection, ForceMode.Impulse);
+
+            speedupTimer.Stop();
+            speedupTimer.Start(speedupRequiredTime);
 
             if (driftCoroutine != null)
             {
@@ -89,31 +110,32 @@ namespace LostResort.Cars
             if (driftCoroutine != null)
                 StopCoroutine(driftCoroutine);
 
-            car.Rigidbody.angularDamping = angularDamping;
-            wheelController.UnlockWheelRotation();
             wheelController.UnlockWheelDrifting();
             moveInputDirection = 0.0f;
-            isDrifting = false;
 
             if (!isDrifting)
                 return;
+
+            if (speedupTimer.IsDone)
+            {
+                Vector3 forceDirection = car.transform.forward;
+                car.Rigidbody.AddForce(driftSpeedupForce * forceDirection, ForceMode.Impulse);
+            }
+
+            speedupTimer.Stop();
 
             foreach (var wheel in gripDriftWheels)
                 wheel.Grip = defaultGrip;
 
             foreach (var wheel in slipDriftWheels)
                 wheel.Grip = defaultGrip;
+
+            isDrifting = false;
         }
 
         private IEnumerator IEBeginDrift()
         {
-            while (car.IsOnGround())
-                yield return null;
-
-            while (!car.IsOnGround())
-                yield return null;
-
-            wheelController.UnlockWheelRotation();
+            yield return CoroutineUtil.WaitForSeconds(driftStartupTime);
 
             foreach (var wheel in gripDriftWheels)
                 wheel.Grip = driftGrip;
@@ -143,6 +165,26 @@ namespace LostResort.Cars
             float angle = rotation.z;
 
             rotation.z = Mathf.LerpAngle(angle, maxRotation, chassisRotationSpeed * Time.deltaTime);
+            
+
+            if (isDrifting && Mathf.DeltaAngle(rotation.z, maxRotation) <= 2.5f)
+            {
+                if (moveInputDirection > 0)
+                {
+                    backRightWheelTreads.Disable();
+                    backRightWheelTreads.Lock();
+                }
+                else
+                {
+                    backLeftWheelTreads.Disable();
+                    backLeftWheelTreads.Lock();
+                }
+            }
+            else
+            {
+                backRightWheelTreads.Unlock();
+                backLeftWheelTreads.Unlock();
+            }
 
             chassis.localEulerAngles = rotation;
         }

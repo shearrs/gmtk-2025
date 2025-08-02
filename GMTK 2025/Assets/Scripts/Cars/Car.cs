@@ -60,7 +60,6 @@ namespace LostResort.Cars
             }
             else if (horizontalSqrMagnitude > movementData.MaxSpeed * movementData.MaxSpeed)
             {
-                Debug.Log("clamped speed");
                 Vector3 clampedVelocity = horizontalVelocity.normalized;
                 clampedVelocity *= movementData.MaxSpeed;
                 clampedVelocity.y = rb.linearVelocity.y;

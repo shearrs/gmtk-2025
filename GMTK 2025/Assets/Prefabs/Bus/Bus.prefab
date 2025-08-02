@@ -641,8 +641,12 @@ MonoBehaviour:
   minDriftSlip: 0.75
   maxDriftSlip: 0.5
   minDriftSteeringAngle: 1
-  maxDriftSteeringAngle: 15
+  maxDriftSteeringAngle: 12
   maxSpeedDriftSteeringAngle: 6
+  driftStartupTime: 0.15
+  driftSlowdownForce: 5000
+  driftSpeedupForce: 20000
+  speedupRequiredTime: 1.5
   normalChassisRotation: 10
   driftChassisRotation: 20
   chassisRotationSpeed: 5
