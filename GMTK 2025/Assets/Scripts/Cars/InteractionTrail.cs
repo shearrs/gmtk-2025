@@ -48,6 +48,8 @@ namespace LostResort.Cars
 
         private void OnBeganDrifting()
         {
+            trailRenderer.Clear();
+            testPositions.Clear();
             testPositions.Add(transform.position);
             currentTestPosition = transform.position;
             trailRenderer.emitting = true;
@@ -105,6 +107,7 @@ namespace LostResort.Cars
         {
             Vector3 center = Vector3.zero;
 
+            Debug.Log("test positions: " + testPositions.Count);
             foreach (var position in testPositions)
                 center += position;
 
@@ -114,6 +117,8 @@ namespace LostResort.Cars
             float radius = 0.85f * (furthestPoint - center).magnitude;
 
             int hits = Physics.OverlapSphereNonAlloc(center, radius, overlapColliders, interactionLayer, QueryTriggerInteraction.Collide);
+
+            Debug.DrawLine(center, furthestPoint, Color.red, 1000f);
 
             for (int i = 0; i < hits; i++)
             {
@@ -151,6 +156,7 @@ namespace LostResort.Cars
 
                 if (sqrDistance > furthestDistance)
                 {
+                    Debug.Log("furthest point");
                     furthestPoint = point;
                     furthestDistance = sqrDistance;
                 }

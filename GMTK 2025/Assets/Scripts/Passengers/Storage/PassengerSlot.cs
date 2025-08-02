@@ -5,7 +5,7 @@ namespace LostResort.Passengers
     public class PassengerSlot : MonoBehaviour
     {
         [SerializeField] private Passenger passenger;
-        [SerializeField] private FixedJoint joint;
+        [SerializeField] private Joint joint;
 
         public Passenger Passenger => passenger;
 

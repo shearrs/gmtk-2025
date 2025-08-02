@@ -138,8 +138,8 @@ Rigidbody:
   m_GameObject: {fileID: 2407827171132533144}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 6
-  m_AngularDamping: 5
+  m_LinearDamping: 8
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -170,7 +170,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_Spring: 25000
-  m_Damper: 80
+  m_Damper: 5
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -254,8 +254,8 @@ Rigidbody:
   m_GameObject: {fileID: 2624214199410354377}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 6
-  m_AngularDamping: 10
+  m_LinearDamping: 10
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -285,8 +285,8 @@ SpringJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_Spring: 40000
-  m_Damper: 70
+  m_Spring: 60000
+  m_Damper: 50
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -737,7 +737,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!195 &805811179213410019
@@ -805,8 +805,8 @@ Rigidbody:
   m_GameObject: {fileID: 5900939459422039164}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 6
-  m_AngularDamping: 10
+  m_LinearDamping: 50
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -836,8 +836,8 @@ SpringJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_Spring: 40000
-  m_Damper: 60
+  m_Spring: 60000
+  m_Damper: 50
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -1048,8 +1048,8 @@ Rigidbody:
   m_GameObject: {fileID: 8342786399029394232}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 6
-  m_AngularDamping: 5
+  m_LinearDamping: 10
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1080,7 +1080,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_Spring: 25000
-  m_Damper: 80
+  m_Damper: 5
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025
@@ -1135,8 +1135,8 @@ Rigidbody:
   m_GameObject: {fileID: 8788360985279727491}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 6
-  m_AngularDamping: 5
+  m_LinearDamping: 8
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1167,7 +1167,7 @@ SpringJoint:
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
   m_Spring: 25000
-  m_Damper: 80
+  m_Damper: 5
   m_MinDistance: 0
   m_MaxDistance: 0
   m_Tolerance: 0.025

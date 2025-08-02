@@ -1,5 +1,7 @@
 using LostResort.Score;
 using LostResort.SignalShuttles;
+using Shears;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -39,6 +41,7 @@ namespace LostResort.Passengers
             passenger.SetAccessories();
 
             passenger.agent.SetDestination(originLocation.GetPickupPosition());
+            passenger.BeginWaitingTime();
 
             return passenger;
         }
@@ -67,7 +70,24 @@ namespace LostResort.Passengers
             }
         }
 
-        public void SetAnchor(FixedJoint joint)
+        private void BeginWaitingTime()
+        {
+            StartCoroutine(IEWaitingTime());
+        }
+        
+        private IEnumerator IEWaitingTime()
+        {
+            yield return CoroutineUtil.WaitForSeconds(waitingTime);
+
+            agent.SetDestination(targetLocation.GetDropoffPosition());
+
+            while (!agent.isStopped)
+                yield return null;
+
+            Destroy(gameObject);
+        }
+
+        public void SetAnchor(Joint joint)
         {
             rb.position = joint.transform.position;
             rb.rotation = joint.transform.rotation;
@@ -77,10 +97,11 @@ namespace LostResort.Passengers
 
         public void OnPickup()
         {
+            StopAllCoroutines();
+
             IsPickedUp = true;
             agent.enabled = false;
             rb.useGravity = false;
-            rb.interpolation = RigidbodyInterpolation.Interpolate;
             col.enabled = false;
         }
 
