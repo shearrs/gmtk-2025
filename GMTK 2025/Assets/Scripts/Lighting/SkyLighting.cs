@@ -15,7 +15,7 @@ public class Lighting : MonoBehaviour
    
    [SerializeField]
    private LightingPreset Preset;
-   
+
    //[SerializeField, Range(0, 24)]
    //private float TimeOfDay;
 
@@ -49,7 +49,12 @@ public class Lighting : MonoBehaviour
    private void UpdateLighting(float timePercent)
    {
       //Debug.Log(timePercent);
-      RenderSettings.skybox.SetColor("_Tint",Preset.SunRise.Evaluate(timePercent));
+      if(dayTimer.dayOne)
+         RenderSettings.skybox.SetColor("_Tint",Preset.DayOne.Evaluate(timePercent));
+      else
+      {
+         RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
+      }
       
       DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
 

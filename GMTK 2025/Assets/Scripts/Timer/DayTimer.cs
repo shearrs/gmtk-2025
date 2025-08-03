@@ -13,6 +13,13 @@ namespace LostResort.Timers
         /// If the timer should loop
         /// </summary>
         [SerializeField] private bool doesLoop;
+
+        /// <summary>
+        /// if on the first day (of two). Set to true on awake
+        /// </summary>
+        public bool dayOne {private set; get;}
+
+        
         /// <summary>
         /// How long is the game (in seconds).
         /// </summary>
@@ -40,6 +47,7 @@ namespace LostResort.Timers
         
         void Awake()
         {
+            dayOne = true;
             AssignComponents();
             RegisterSignals();
         }
@@ -90,8 +98,9 @@ namespace LostResort.Timers
                 yield return null;
             }
 
-            if (doesLoop)
+            if (doesLoop || dayOne)
             {
+                dayOne = false;
                 ResetUI();
                 StopAllCoroutines();
                 _gameTimer = GameTimer(_gameDuration);
