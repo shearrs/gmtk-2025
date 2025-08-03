@@ -26,7 +26,14 @@ namespace LostResort.Passengers
             carriedPassengers.TryAdd(signal.resortLocation, 0);
             
             ResortLocation.ResortLocationName resortLocation = signal.resortLocation;
-            carriedPassengers[resortLocation]++;
+            
+            if(signal.passengerEntered)
+                carriedPassengers[resortLocation]++;
+            else
+            {
+                carriedPassengers[resortLocation]--;
+
+            }
 
             TMP_Text passengersCarriedText;
             
