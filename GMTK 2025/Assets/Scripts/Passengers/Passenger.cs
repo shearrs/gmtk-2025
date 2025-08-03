@@ -34,7 +34,7 @@ namespace LostResort.Passengers
         [SerializeField] private Transform feetSlot;
 
         private ResortLocation originLocation;
-        private ResortLocation targetLocation;
+        public ResortLocation targetLocation {private set; get;}
         private bool alive = true;
 
         public bool IsPickedUp { get; private set; } = false;
