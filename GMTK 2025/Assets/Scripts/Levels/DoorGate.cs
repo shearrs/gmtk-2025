@@ -18,6 +18,11 @@ namespace LostResort.Levels
         private ITween firstTween;
         private ITween secondTween;
 
+        private void Awake()
+        {
+            isOpen = openByDefault;
+        }
+
         public override void ToggleOpen()
         {
             if (firstTween != null && firstTween.IsPlaying)

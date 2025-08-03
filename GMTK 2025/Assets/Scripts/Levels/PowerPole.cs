@@ -1,5 +1,7 @@
 using LostResort.Interaction;
 using LostResort.Levels;
+using LostResort.Passengers;
+using LostResort.SignalShuttles;
 using UnityEngine;
 
 public class PowerPole : MonoBehaviour
@@ -19,6 +21,8 @@ public class PowerPole : MonoBehaviour
 
     private void OnInteracted()
     {
+        SignalShuttle.Emit(new InteractableAudioTriggeredSignal());
+
         foreach (var gate in gates)
             gate.ToggleOpen();
     }

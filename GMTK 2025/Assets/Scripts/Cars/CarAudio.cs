@@ -83,7 +83,6 @@ namespace LostResort.Cars
 
         private void OnInteracted(InteractableAudioTriggeredSignal interactableAudioTriggered)
         {
-            //remember to make this happen when the player goes around a interactable pole too
             twoBeeps.Play();
         }
 
