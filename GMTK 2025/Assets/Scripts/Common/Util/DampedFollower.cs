@@ -1,14 +1,20 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace Shears
 {
+    [DefaultExecutionOrder(100)]
     public class DampedFollower : MonoBehaviour
     {
+        [SerializeField] private bool fixedUpdate = false;
+        
         [Header("Target")]
         [SerializeField] private Transform targetTransform;
 
         [Header("Position")]
         [SerializeField] private bool followPosition = true;
+        [SerializeField] private Vector3 offset = Vector3.zero;
         [SerializeField] private float positionSmoothTime = 0.1f;
 
         [Header("Rotation")]
@@ -21,6 +27,15 @@ namespace Shears
         private Quaternion targetRotation = Quaternion.identity;
 
         private bool isEnabled = true;
+        private DampedFollower waitTarget;
+
+        public event Action Updated;
+
+        private void Start()
+        {
+            if (targetTransform.TryGetComponent(out waitTarget))
+                waitTarget.Updated += DampedFollow;
+        }
 
         public void Enable()
         {
@@ -32,9 +47,17 @@ namespace Shears
             isEnabled = false;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
-            if (!isEnabled)
+            if (!isEnabled || fixedUpdate || waitTarget != null)
+                return;
+
+            DampedFollow();
+        }
+
+        private void FixedUpdate()
+        {
+            if (!isEnabled || !fixedUpdate || waitTarget != null)
                 return;
 
             DampedFollow();
@@ -47,11 +70,14 @@ namespace Shears
 
             if (followRotation)
                 DampedRotation();
+
+            Updated?.Invoke();
         }
 
         private void DampedPosition()
         {
-            transform.position = Vector3.SmoothDamp(transform.position, targetTransform.position, ref refPosVelocity, positionSmoothTime);
+            var targetPos = targetTransform.TransformPoint(offset);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPos, ref refPosVelocity, positionSmoothTime);
         }
 
         private void DampedRotation()
@@ -60,6 +86,15 @@ namespace Shears
                     targetRotation = targetTransform.rotation;
 
             transform.rotation = QuaternionUtil.SmoothDamp(transform.rotation, targetRotation, ref refRotVelocity, rotationSmoothTime);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (targetTransform == null)
+                return;
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(targetTransform.TransformPoint(offset), 0.5f);
         }
     }
 }
