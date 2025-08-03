@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace LostResort.Passengers
 {
     public class ResortLocation : MonoBehaviour
     {
+        
         [Header("Positions")]
         [SerializeField] private Vector3 pickupPosition;
         [SerializeField] private Vector3 dropoffPosition;
@@ -15,6 +18,18 @@ namespace LostResort.Passengers
         [SerializeField] private List<Material> maleMaterials;
         [SerializeField] private List<Material> femaleMaterials;
 
+        public enum ResortLocationName
+        {
+            Default,
+            Conference,
+            Hotel,
+            Beach,
+            Gym,
+        }
+        
+        [field: SerializeField]
+        public ResortLocationName resortLocationName {get; private set;}
+        
         public IReadOnlyList<Accessory> Accessories => accessories;
         public IReadOnlyList<Material> MaleMaterials => maleMaterials;
         public IReadOnlyList<Material> FemaleMaterials => femaleMaterials;
