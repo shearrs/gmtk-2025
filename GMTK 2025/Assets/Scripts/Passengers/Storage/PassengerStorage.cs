@@ -30,8 +30,7 @@ namespace LostResort.Passengers
             passenger.OnPickup();
             slot.SetPassenger(passenger);
             
-            //Debug.Log(passenger.targetLocation.resortLocationName);
-            SignalShuttle.Emit(new PassengersChangedSignal(true, passenger.targetLocation.resortLocationName));
+            SignalShuttle.Emit(new PassengersChangedSignal(GetPassengers()));
         }
 
         public void RemovePassenger(Passenger passenger)
@@ -50,7 +49,7 @@ namespace LostResort.Passengers
             if (targetSlot == null)
                 return;
 
-            SignalShuttle.Emit(new PassengersChangedSignal(false, passenger.targetLocation.resortLocationName));
+            SignalShuttle.Emit(new PassengersChangedSignal(GetPassengers()));
             targetSlot.ClearPassenger();
             reservedSlots.Remove(targetSlot);
             openSlots.Add(targetSlot);
@@ -60,14 +59,18 @@ namespace LostResort.Passengers
 
         public void ClearPassengers()
         {
+            List<Passenger> destroyTargets = new();
+
             foreach (var slot in reservedSlots)
             {
-                Destroy(slot.Passenger);
+                slot.Passenger.FullyDestroy();
                 slot.ClearPassenger();
             }
 
             openSlots.AddRange(reservedSlots);
             reservedSlots.Clear();
+
+            SignalShuttle.Emit(new PassengersChangedSignal(GetPassengers()));
         }
 
         public void DropoffAtLocation(ResortLocation location)
@@ -82,6 +85,18 @@ namespace LostResort.Passengers
 
             foreach (var passenger in instancePassengers)
                 RemovePassenger(passenger);
+        }
+
+        private List<Passenger> GetPassengers()
+        {
+            instancePassengers.Clear();
+
+            foreach (var slot in reservedSlots)
+            {
+                instancePassengers.Add(slot.Passenger);
+            }
+
+            return instancePassengers;
         }
     }
 }

@@ -8,98 +8,83 @@ namespace LostResort.Passengers
 {
     public class CarryPassengersUI : MonoBehaviour
     {
-
         [SerializeField]
         private TMP_Text passengersCarriedConferenceText;
+
         [SerializeField]
         private TMP_Text passengersCarriedHotelText;
+
         [SerializeField]
         private TMP_Text passengersCarriedBeachText;
+
         [SerializeField]
         private TMP_Text passengersCarriedGymText;
-        
-        private Dictionary<ResortLocation.ResortLocationName, int> carriedPassengers = new  Dictionary<ResortLocation.ResortLocationName, int>();
 
         private void UpdatePassengersCarriedUI(PassengersChangedSignal signal)
         {
+            int conferenceCount = 0;
+            int hotelCount = 0;
+            int beachCount = 0;
+            int gymCount = 0;
 
-            carriedPassengers.TryAdd(signal.resortLocation, 0);
-            
-            ResortLocation.ResortLocationName resortLocation = signal.resortLocation;
-            
-            if(signal.passengerEntered)
-                carriedPassengers[resortLocation]++;
-            else
+            Debug.Log(signal.Passengers == null);
+
+            foreach (var passenger in signal.Passengers)
             {
-                carriedPassengers[resortLocation]--;
+                if (passenger == null || passenger.TargetLocation == null)
+                    continue;
 
+                switch (passenger.TargetLocation.resortLocationName)
+                {
+                    case ResortLocation.ResortLocationName.Conference:
+                        conferenceCount++;
+                        break;
+                    case ResortLocation.ResortLocationName.Hotel:
+                        hotelCount++;
+                        break;
+                    case ResortLocation.ResortLocationName.Beach:
+                        beachCount++;
+                        break;
+                    case ResortLocation.ResortLocationName.Gym:
+                        gymCount++;
+                        break;
+                }
             }
 
-            TMP_Text passengersCarriedText;
-            
-            
-            
-            switch (resortLocation)
-            {
-                case ResortLocation.ResortLocationName.Conference:
-                    passengersCarriedText = passengersCarriedConferenceText;
-                    break;
-                case ResortLocation.ResortLocationName.Hotel:
-                    passengersCarriedText = passengersCarriedHotelText;
-                    break;
-                case ResortLocation.ResortLocationName.Beach:
-                    passengersCarriedText = passengersCarriedBeachText;
-                    break;
-                case ResortLocation.ResortLocationName.Gym:
-                    passengersCarriedText = passengersCarriedGymText;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(resortLocation), resortLocation, null);
-            }
-            
-            
-            UpdatePassengersCarriedText(passengersCarriedText, resortLocation);
+            UpdateText(passengersCarriedConferenceText, conferenceCount);
+            UpdateText(passengersCarriedHotelText, hotelCount);
+            UpdateText(passengersCarriedBeachText, beachCount);
+            UpdateText(passengersCarriedGymText, gymCount);
         }
         
 
-        private void UpdatePassengersCarriedText(TMP_Text passengersCarriedText, ResortLocation.ResortLocationName resortLocation)
+        private void UpdateText(TMP_Text text, int count)
         {
-            passengersCarriedText.gameObject.SetActive(carriedPassengers[resortLocation] != 0);
+            text.gameObject.SetActive(count != 0);
 
-            passengersCarriedText.text = "x" + carriedPassengers[resortLocation];
+            text.text = "x" + count;
         }
 
         void OnEnable()
         {
-            RegisterSignals();
+            SignalShuttle.Register<PassengersChangedSignal>(UpdatePassengersCarriedUI);
         }
 
         void OnDisable()
         {
-            DeregisterSignals();
-        }
-        
-        void RegisterSignals()
-        {
-            SignalShuttle.Register<PassengersChangedSignal>(UpdatePassengersCarriedUI);
-        }
-        
-        void DeregisterSignals()
-        {
             SignalShuttle.Deregister<PassengersChangedSignal>(UpdatePassengersCarriedUI);
         }
-        
     }
 
-    public struct PassengersChangedSignal : ISignal
+    public readonly struct PassengersChangedSignal : ISignal
     {
-        public bool passengerEntered {private set; get;}
-        public ResortLocation.ResortLocationName resortLocation {private set; get;}
+        private readonly List<Passenger> passengers;
 
-        public PassengersChangedSignal(bool passengerEntered, ResortLocation.ResortLocationName resortLocation)
+        public readonly IReadOnlyCollection<Passenger> Passengers => passengers;
+
+        public PassengersChangedSignal(List<Passenger> passengers)
         {
-            this.passengerEntered = passengerEntered;
-            this.resortLocation = resortLocation;
+            this.passengers = passengers;
         }
     }
 

@@ -107,14 +107,14 @@ namespace LostResort.Passengers
             while (!agent.isStopped)
                 yield return null;
 
-            Destroy(gameObject);
+            FullyDestroy();
         }
 
         private IEnumerator IEDyingTime()
         {
             yield return CoroutineUtil.WaitForSeconds(10f);
 
-            Destroy(gameObject);
+            FullyDestroy();
         }
 
         public void SetParent(Transform parent)
@@ -150,8 +150,7 @@ namespace LostResort.Passengers
         {
             IsPickedUp = false;
             SignalShuttle.Emit(new AddScoreSignal(scoreValue));
-            Destroy(agent.gameObject);
-            Destroy(gameObject);
+            FullyDestroy();
         }
 
         public Transform GetSlotForAccessory(Accessory accessory)
@@ -183,6 +182,12 @@ namespace LostResort.Passengers
 
             rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
             rb.AddTorque(-transform.forward * 1, ForceMode.Impulse);
+        }
+
+        public void FullyDestroy()
+        {
+            Destroy(agent.gameObject);
+            Destroy(gameObject);
         }
     }
 }
