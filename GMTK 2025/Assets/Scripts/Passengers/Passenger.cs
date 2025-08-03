@@ -1,5 +1,8 @@
 using LostResort.Score;
 using LostResort.SignalShuttles;
+using Shears;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,99 +10,179 @@ namespace LostResort.Passengers
 {
     public class Passenger : MonoBehaviour
     {
-        public PassengerData passengerData { get; private set; }
+        [Header("References")]
+        [SerializeField] private NavMeshAgent agent;
+        [SerializeField] private Collider col;
+        [SerializeField] private SkinnedMeshRenderer mesh;
+        [SerializeField] private Rigidbody rb;
 
-        private bool inShuttle;
-        private MeshRenderer meshRenderer; 
-        private CapsuleCollider capsuleCollider;
-        private NavMeshAgent navMeshAgent;
+        [Header("Settings")]
+        [SerializeField] private bool isMale = true;
+        [SerializeField] private float waitingTime = 30.0f;
+        [SerializeField] private int scoreValue = 100;
 
+        [Header("Skin Tones")]
+        [SerializeField] private Material[] skinMaterials;
 
-        [SerializeField] private ExclamationMark exclamationMark;
+        [Header("Clothes Slots")]
+        [SerializeField] private Transform hatSlot;
+        [SerializeField] private Transform faceSlot;
+        [SerializeField] private Transform neckSlot;
+        [SerializeField] private Transform handSlot;
+        [SerializeField] private Transform[] wristSlots;
+        [SerializeField] private Transform waistSlot;
+        [SerializeField] private Transform feetSlot;
 
-        //should be changed to use the event bus (signal shuttle)
-        private Score.Score score;
+        private ResortLocation originLocation;
+        private ResortLocation targetLocation;
+        private bool alive = true;
 
-        [SerializeField] private float startingScoreWhenDroppedOff;
+        public bool IsPickedUp { get; private set; } = false;
+        public bool IsAlive => alive;
+        public ResortLocation TargetLocation => targetLocation;
 
-        [SerializeField] private float scoreWhenDroppedOffReductionRatePerSecond;
-
-        [SerializeField] private float scoreWhenDroppedOff;
-        
-        [SerializeField] private float minimumScoreWhenDroppedOff;
-
-
-        [SerializeField] private Material[] dropOffLocationBasedMaterials;
-
-        private void Awake()
+        public static Passenger Create(Passenger prefab, ResortLocation originLocation, ResortLocation targetLocation)
         {
-            navMeshAgent = GetComponent<NavMeshAgent>();
-            score = FindAnyObjectByType<Score.Score>();
-            capsuleCollider = GetComponent<CapsuleCollider>();
-            meshRenderer = GetComponent<MeshRenderer>();
+            var passenger = Instantiate(prefab, originLocation.GetPickupPosition(), Quaternion.identity);
+            passenger.originLocation = originLocation;
+            passenger.targetLocation = targetLocation;
+            passenger.SetAccessories();
+            passenger.SetMaterials();
 
-            scoreWhenDroppedOff = startingScoreWhenDroppedOff;
-            exclamationMark.InitializeStartingScoreWhenDroppedOff(startingScoreWhenDroppedOff);
+            passenger.agent.SetDestination(originLocation.GetPickupPosition());
+            passenger.BeginWaitingTime();
+
+            return passenger;
         }
 
-        void Update()
+        private void SetAccessories()
         {
-            if (inShuttle)
+            int random = Random.Range(1, targetLocation.Accessories.Count);
+
+            for (int i = 0; i < random; i++)
             {
-                return;
+                int accessoryIndex = Random.Range(0, targetLocation.Accessories.Count);
+
+                var accessory = targetLocation.Accessories[accessoryIndex];
+                var instance = Instantiate(accessory);
+                var slot = GetSlotForAccessory(instance);
+                instance.transform.parent = slot;
+                instance.transform.localPosition = Vector3.zero;
+
+                if (instance.Type == Accessory.AccessoryType.Wrist)
+                {
+                    var secondInstance = Instantiate(accessory);
+                    var secondSlot = wristSlots[1];
+                    secondInstance.transform.parent = secondSlot;
+                    secondInstance.transform.localPosition = Vector3.zero;
+                }
             }
-            AdjustScoreWhenDroppedOff();
         }
 
-
-        /// <summary>
-        /// Adjusts the scoreWhenDroppedOffVariable based on how much time has elapsed during the last frame.
-        /// Also sends this information to the child exclamationMark object.
-        /// </summary>
-        private void AdjustScoreWhenDroppedOff()
+        private void SetMaterials()
         {
-            float secondsPassedSinceLastFrame = Time.deltaTime;
-            scoreWhenDroppedOff -= secondsPassedSinceLastFrame * scoreWhenDroppedOffReductionRatePerSecond;
-            scoreWhenDroppedOff = Mathf.Clamp(scoreWhenDroppedOff, minimumScoreWhenDroppedOff, scoreWhenDroppedOff);
-            exclamationMark.ReceiveScoreWhenDroppedOff(scoreWhenDroppedOff);
+            var materialList = isMale ? targetLocation.MaleMaterials : targetLocation.FemaleMaterials;
+            var materials = mesh.materials;
+            
+            int clothesRandom = Random.Range(0, materialList.Count);
+            materials[0] = materialList[clothesRandom];
+
+            int skinRandom = Random.Range(0, skinMaterials.Length);
+            materials[1] = skinMaterials[skinRandom];
+
+            mesh.materials = materials;
         }
 
-
-        public void InitializeLocation(LocationType locationType)
+        private void BeginWaitingTime()
         {
-            passengerData = new PassengerData(locationType);
-            meshRenderer.material = dropOffLocationBasedMaterials[(int)passengerData.dropOffLocation];
+            StartCoroutine(IEWaitingTime());
         }
-
-        /// <summary>
-        /// Picks up the passenger. This is called from some player behavior script. The passenger should be saved in a list of passengers which is stored in the player.
-        /// This script, or where its called, should hide the passenger (or have them join the shuttle).
-        /// It also changed the boolean 'inShuttle' to false.
-        /// </summary>
-        public void PickUp()
+        
+        private IEnumerator IEWaitingTime()
         {
-            //Debug.Log($"Picked up a player from {passengerData.startingLocation} who intends to travel to {passengerData.dropOffLocation}!");
-            meshRenderer.enabled = false;
-            exclamationMark.DisableExclamationMark();
-            capsuleCollider.enabled = false;
-            navMeshAgent.enabled = true;
-            inShuttle = true;
-        }
+            yield return CoroutineUtil.WaitForSeconds(waitingTime);
 
+            agent.SetDestination(targetLocation.GetDropoffPosition());
 
-        public void DropOff()
-        {
-            Debug.Log($"Dropped off a player at {passengerData.dropOffLocation} who originally came from {passengerData.startingLocation}!");
-            inShuttle = false;
-            IncrementScore((int)scoreWhenDroppedOff);
+            while (!agent.isStopped)
+                yield return null;
+
             Destroy(gameObject);
-
-            //increase score
         }
 
-        private void IncrementScore(int additionalScore)
+        private IEnumerator IEDyingTime()
         {
-            SignalShuttle.Emit(new AddScoreSignal(additionalScore));
+            yield return CoroutineUtil.WaitForSeconds(10f);
+
+            Destroy(gameObject);
+        }
+
+        public void SetParent(Transform parent)
+        {
+            agent.transform.parent = parent;
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            agent.transform.position = position;
+        }
+
+        public void SetRotation(Quaternion rotation)
+        {
+            agent.transform.rotation = rotation;
+        }
+
+        public void SetLocalScale(Vector3 scale)
+        {
+            agent.transform.localScale = scale;
+        }
+
+        public void OnPickup()
+        {
+            StopAllCoroutines();
+
+            IsPickedUp = true;
+            agent.enabled = false;
+            col.enabled = false;
+        }
+
+        public void OnDropoff()
+        {
+            IsPickedUp = false;
+            SignalShuttle.Emit(new AddScoreSignal(scoreValue));
+            Destroy(agent.gameObject);
+            Destroy(gameObject);
+        }
+
+        public Transform GetSlotForAccessory(Accessory accessory)
+        {
+            return (accessory.Type) switch
+            {
+                Accessory.AccessoryType.Hat => hatSlot,
+                Accessory.AccessoryType.Face => faceSlot,
+                Accessory.AccessoryType.Neck => neckSlot,
+                Accessory.AccessoryType.Hand => handSlot,
+                Accessory.AccessoryType.Wrist => wristSlots[0],
+                Accessory.AccessoryType.Waist => waistSlot,
+                Accessory.AccessoryType.Feet => feetSlot,
+                _ => null
+            };
+        }
+
+        public void Die()
+        {
+            if (!alive || IsPickedUp)
+                return;
+
+            StopAllCoroutines();
+            StartCoroutine(IEDyingTime());
+
+            agent.enabled = false;
+            rb.isKinematic = false;
+            alive = false;
+
+            rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            rb.AddTorque(-transform.forward * 1, ForceMode.Impulse);
         }
     }
 }
