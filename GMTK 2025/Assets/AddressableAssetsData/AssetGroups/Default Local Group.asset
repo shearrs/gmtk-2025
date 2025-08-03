@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Default Local Group
   m_GUID: b47bbcbe9b5b8b44181c33f3e2a14625
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: a6eea4b9cdf668e47ba87ff2b7f6caeb
+    m_Address: StartScreen
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: afd3527473ee9414595d4a67fb1ea818
+    m_Address: ResortMap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 503644ff512197745baf4875345d96f5, type: 2}
   m_SchemaSet:
