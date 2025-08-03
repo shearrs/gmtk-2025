@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using LostResort.Cars;
+using LostResort.SignalShuttles;
 
 namespace LostResort.ParticleSystems
 {
@@ -42,6 +43,7 @@ namespace LostResort.ParticleSystems
                 {
                     //Debug.Log("Playing impact particles");
                     _impactLineParticles.Play();
+                    SignalShuttle.Emit(new HitSomethingSignal());
                 }
                 else
                 {
@@ -63,4 +65,5 @@ namespace LostResort.ParticleSystems
             yield break;
         }
     }
+    
 }
