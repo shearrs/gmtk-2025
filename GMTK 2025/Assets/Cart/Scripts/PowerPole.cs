@@ -8,6 +8,12 @@ public class PowerPole : MonoBehaviour
     public GameObject thingToTrigger1;
     public GameObject thingToTrigger2;
     public GameObject thingToTrigger3;
+    public GameObject thingToTrigger4;
+    public GameObject thingToTrigger5;
+    public GameObject thingToTrigger6;
+
+    public bool bridge;
+    private bool toggle = false;
 
     private void OnEnable()
     {
@@ -21,8 +27,7 @@ public class PowerPole : MonoBehaviour
 
     private void OnInteracted()
     {
-        Debug.Log("DO SOMETHING");
-        if(thingToTrigger1 != null)
+        if (thingToTrigger1 != null)
         {
             thingToTrigger1.GetComponent<GateAnimation>().playAnimation();
         }
@@ -32,7 +37,19 @@ public class PowerPole : MonoBehaviour
         }
         if (thingToTrigger3 != null)
         {
-
+            thingToTrigger3.GetComponent<GateAnimation>().playAnimation();
+        }
+        if (thingToTrigger4 != null)
+        {
+            thingToTrigger4.GetComponent<GateAnimation>().playAnimation();
+        }
+        if (thingToTrigger5 != null)
+        {
+            thingToTrigger5.GetComponent<GateAnimation>().playAnimation();
+        }
+        if (thingToTrigger6 != null)
+        {
+            thingToTrigger6.GetComponent<GateAnimation>().playAnimation();
         }
     }
 
