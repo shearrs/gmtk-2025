@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using LostResort.SignalShuttles;
 using LostResort.Timers;
+using Shears.Tweens;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -42,31 +43,48 @@ public class Lighting : MonoBehaviour
 
       //Debug.Log(dayTimer.TimeElapsedPercent + "from lighting");
       UpdateLighting(dayTimer.TimeElapsedPercent);
-
-      
-      
    }
+
    private void UpdateLighting(float timePercent)
    {
-      if (dayTimer.dayOne)
-         RenderSettings.skybox.SetColor("_Tint",Preset.DayOne.Evaluate(timePercent));
-      else
-      {
-         RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
+        if (dayTimer.dayOne)
+        {
+            RenderSettings.skybox.SetColor("_Tint", Preset.DayOne.Evaluate(timePercent));
+            RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
+            DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
 
-      }
-      
-      DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
+            var start = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.x, 170, 0));
+            var end = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.y, 170, 0));
 
-      RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
-      RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
+            start.ToAngleAxis(out float sourceAngle, out Vector3 sourceAxis);
+            end.ToAngleAxis(out float targetAngle, out Vector3 targetAxis);
 
-      if (DirectionalLight != null)
-      {
-         DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
-         DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 180f), 170, 0));
-      }
-      
+            float angle = Mathf.LerpUnclamped(sourceAngle, targetAngle, timePercent);
+            Vector3 axis = Vector3.SlerpUnclamped(sourceAxis, targetAxis, timePercent);
+
+            DirectionalLight.transform.localRotation = Quaternion.AngleAxis(angle, axis);
+        }
+         
+        else
+        {
+            RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
+            RenderSettings.ambientLight = Preset.DayTwoAmbientColor.Evaluate(timePercent);
+            DirectionalLight.color = Preset.DayTwoDirectionalColor.Evaluate(timePercent);
+
+            var start = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.x, 170, 0));
+            var end = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.y, 170, 0));
+
+            start.ToAngleAxis(out float sourceAngle, out Vector3 sourceAxis);
+            end.ToAngleAxis(out float targetAngle, out Vector3 targetAxis);
+
+            float angle = Mathf.LerpUnclamped(sourceAngle, targetAngle, timePercent);
+            Vector3 axis = Vector3.SlerpUnclamped(sourceAxis, targetAxis, timePercent);
+
+            DirectionalLight.transform.localRotation = Quaternion.AngleAxis(angle, axis);
+        }
+
+        DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
+        RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);      
    }
 
    //try to find a directional light if one has not been signed
@@ -83,7 +101,7 @@ public class Lighting : MonoBehaviour
       }
       else
       {
-         Light[] lights = GameObject.FindObjectsByType<Light>(sortMode: FindObjectsSortMode.None);
+         Light[] lights = FindObjectsByType<Light>(sortMode: FindObjectsSortMode.None);
          foreach (Light light in lights)
          {
             if (light.type == LightType.Directional)
