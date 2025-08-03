@@ -14,6 +14,7 @@ namespace LostResort.Cars
         [SerializeField] private Wheel[] gripDriftWheels;
         [SerializeField] private Wheel[] slipDriftWheels;
         [SerializeField] private Transform chassis;
+        [SerializeField] private ParticleSystem[] driftParticles;
 
         [Header("Drift Settings")]
         [SerializeField] private float defaultGrip = 1.0f;
@@ -132,6 +133,9 @@ namespace LostResort.Cars
 
             speedupTimer.Stop();
 
+            foreach (var particles in driftParticles)
+                particles.Stop();
+
             foreach (var wheel in gripDriftWheels)
                 wheel.Grip = defaultGrip;
 
@@ -154,6 +158,9 @@ namespace LostResort.Cars
 
             isDrifting = true;
             BeganDrifting?.Invoke();
+
+            foreach (var particles in driftParticles)
+                particles.Play();
         }
 
         private void UpdateDrift()
