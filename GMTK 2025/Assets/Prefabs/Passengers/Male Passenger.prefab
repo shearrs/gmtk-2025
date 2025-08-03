@@ -143,7 +143,7 @@ MonoBehaviour:
   targetTransform: {fileID: 980461440140062816}
   followPosition: 1
   offset: {x: 0, y: 0.00415, z: 0}
-  positionSmoothTime: 0.005
+  positionSmoothTime: 0.01
   followRotation: 1
   rotationSmoothTime: 0.1
   minimumAngleToFollow: 10
@@ -197,7 +197,7 @@ MonoBehaviour:
   targetTransform: {fileID: 5936702309941762975}
   followPosition: 1
   offset: {x: 0.0048, y: -0.0024, z: 0}
-  positionSmoothTime: 0.01
+  positionSmoothTime: 0.02
   followRotation: 0
   rotationSmoothTime: 0.1
   minimumAngleToFollow: 10
@@ -853,7 +853,7 @@ MonoBehaviour:
   targetTransform: {fileID: 4807188258160747642}
   followPosition: 1
   offset: {x: 0.0018291064, y: 0.46822575, z: -0.0048925877}
-  positionSmoothTime: 0.005
+  positionSmoothTime: 0.01
   followRotation: 1
   rotationSmoothTime: 0.1
   minimumAngleToFollow: 10
@@ -970,7 +970,7 @@ MonoBehaviour:
   targetTransform: {fileID: 5936702309941762975}
   followPosition: 1
   offset: {x: 0, y: 0.00525, z: 0}
-  positionSmoothTime: 0.01
+  positionSmoothTime: 0.02
   followRotation: 1
   rotationSmoothTime: 0.1
   minimumAngleToFollow: 10
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   targetTransform: {fileID: 5936702309941762975}
   followPosition: 1
   offset: {x: -0.0048, y: -0.0024, z: 0}
-  positionSmoothTime: 0.01
+  positionSmoothTime: 0.02
   followRotation: 0
   rotationSmoothTime: 0.1
   minimumAngleToFollow: 10
