@@ -59,8 +59,6 @@ namespace LostResort.Passengers
 
         public void ClearPassengers()
         {
-            List<Passenger> destroyTargets = new();
-
             foreach (var slot in reservedSlots)
             {
                 slot.Passenger.FullyDestroy();
