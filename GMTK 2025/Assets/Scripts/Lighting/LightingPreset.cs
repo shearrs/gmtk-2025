@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 [CreateAssetMenu(fileName = "Lighting Preset",  menuName = "ScriptableObjects/LightingPreset", order = 1)]
@@ -8,5 +9,6 @@ public class LightingPreset : ScriptableObject
     public Gradient DirectionalColor;
     public Gradient FogColor;
 
-    public Gradient SunRise;
+    [FormerlySerializedAs("SunRise")] public Gradient DayOne;
+    public Gradient DayTwo;
 }
