@@ -22,6 +22,11 @@ namespace LostResort.Passengers
             StartCoroutine(IESpawn());
         }
 
+        private void Update()
+        {
+            Physics.SyncTransforms();
+        }
+
         private IEnumerator IESpawn()
         {
             while (true)

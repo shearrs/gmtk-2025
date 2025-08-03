@@ -96,8 +96,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6398847500799870833}
   - component: {fileID: 1251356321594091308}
-  - component: {fileID: 2220056626864982231}
-  - component: {fileID: 8762771282434256503}
+  - component: {fileID: 6372757496458747875}
+  - component: {fileID: 8155229923306991417}
   m_Layer: 0
   m_Name: Passenger Slot (4)
   m_TagString: Untagged
@@ -113,13 +113,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915023346480754556}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000014901161, y: -0.000000029802322, z: 0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -0.74992824, y: 0.5060001, z: -0.41249746}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!114 &1251356321594091308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,8 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 8762771282434256503}
---- !u!54 &2220056626864982231
+--- !u!54 &6372757496458747875
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +141,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 915023346480754556}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -161,7 +160,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &8762771282434256503
+--- !u!138 &8155229923306991417
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,7 +173,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &1064284088758243567
@@ -380,8 +379,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2103641257436129411}
   - component: {fileID: 1029865059595100530}
-  - component: {fileID: 6592300921909231728}
-  - component: {fileID: 773274731729117668}
+  - component: {fileID: 5552576895928256777}
+  - component: {fileID: 7153558567673397697}
   m_Layer: 0
   m_Name: Passenger Slot (10)
   m_TagString: Untagged
@@ -397,13 +396,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2271074203054264318}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000014901161, y: -0.000000029802322, z: 0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -0.7498677, y: 0.5060001, z: -2.6624947}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!114 &1029865059595100530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,8 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 773274731729117668}
---- !u!54 &6592300921909231728
+--- !u!54 &5552576895928256777
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -426,7 +424,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2271074203054264318}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -445,7 +443,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &773274731729117668
+--- !u!138 &7153558567673397697
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -458,7 +456,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &2777771475083845407
@@ -669,8 +667,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4727896400358053282}
   - component: {fileID: 4779182397794377972}
-  - component: {fileID: 5368135257324058759}
-  - component: {fileID: 6381043167481750821}
+  - component: {fileID: 2321643722817789441}
+  - component: {fileID: 6675809453322396205}
   m_Layer: 0
   m_Name: Passenger Slot (6)
   m_TagString: Untagged
@@ -706,8 +704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 6381043167481750821}
---- !u!54 &5368135257324058759
+--- !u!54 &2321643722817789441
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -715,7 +712,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2993961441439874957}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -734,7 +731,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &6381043167481750821
+--- !u!138 &6675809453322396205
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -747,7 +744,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &3296400348810910185
@@ -950,8 +947,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7181102649971883337}
   - component: {fileID: 3431586871404988298}
-  - component: {fileID: 7496233550612372309}
-  - component: {fileID: 7067656095943532643}
+  - component: {fileID: 8139793465210517902}
+  - component: {fileID: 4064347609648902000}
   m_Layer: 0
   m_Name: Passenger Slot (8)
   m_TagString: Untagged
@@ -967,13 +964,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4022325157257206078}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014901161, y: -0.000000029802322, z: -0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0.75007993, y: 0.5060001, z: -1.6624963}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!114 &3431586871404988298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,8 +984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 7067656095943532643}
---- !u!54 &7496233550612372309
+--- !u!54 &8139793465210517902
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -996,7 +992,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4022325157257206078}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1015,7 +1011,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &7067656095943532643
+--- !u!138 &4064347609648902000
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1028,7 +1024,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &4181766769523733495
@@ -1041,8 +1037,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8080467290109803119}
   - component: {fileID: 5582245340730397972}
-  - component: {fileID: 881364268226598695}
-  - component: {fileID: 4623826992004550299}
+  - component: {fileID: 6199237814250215576}
+  - component: {fileID: 6682690969663563394}
   m_Layer: 0
   m_Name: Passenger Slot (1)
   m_TagString: Untagged
@@ -1058,13 +1054,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4181766769523733495}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000014901161, y: -0.000000029802322, z: 0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -0.7499805, y: 0.5060001, z: 0.6500004}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!114 &5582245340730397972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,8 +1074,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 4623826992004550299}
---- !u!54 &881364268226598695
+--- !u!54 &6199237814250215576
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1087,7 +1082,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4181766769523733495}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1106,7 +1101,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &4623826992004550299
+--- !u!138 &6682690969663563394
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1119,7 +1114,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &4277132764622544312
@@ -1285,8 +1280,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8780037840483895405}
   - component: {fileID: 6038630346492055150}
-  - component: {fileID: 2793098819183146029}
-  - component: {fileID: 1439700406625843264}
+  - component: {fileID: 4483612218896716942}
+  - component: {fileID: 5953973881140562360}
   m_Layer: 0
   m_Name: Passenger Slot (11)
   m_TagString: Untagged
@@ -1302,13 +1297,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4621156268465055585}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014901161, y: -0.000000029802322, z: -0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0.7500933, y: 0.5060001, z: -2.662496}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!114 &6038630346492055150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,8 +1317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 1439700406625843264}
---- !u!54 &2793098819183146029
+--- !u!54 &4483612218896716942
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1331,7 +1325,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4621156268465055585}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1350,7 +1344,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1439700406625843264
+--- !u!138 &5953973881140562360
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1363,7 +1357,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &4666620717681068552
@@ -1702,8 +1696,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8824821661039007715}
   - component: {fileID: 4724227926722347348}
-  - component: {fileID: 475447743815638400}
-  - component: {fileID: 1309076993884790259}
+  - component: {fileID: 7844230286728370461}
+  - component: {fileID: 4100739798588932509}
   m_Layer: 0
   m_Name: Passenger Slot (7)
   m_TagString: Untagged
@@ -1719,13 +1713,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5399993306872966793}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000014901161, y: -0.000000029802322, z: 0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -0.74988097, y: 0.5060001, z: -1.6624954}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!114 &4724227926722347348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1739,8 +1733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 1309076993884790259}
---- !u!54 &475447743815638400
+--- !u!54 &7844230286728370461
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1748,7 +1741,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5399993306872966793}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1767,7 +1760,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1309076993884790259
+--- !u!138 &4100739798588932509
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1780,7 +1773,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &5566806410107230598
@@ -1966,8 +1959,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4896722524823078841}
   - component: {fileID: 2217756262613475048}
-  - component: {fileID: 8031325068773882416}
-  - component: {fileID: 1114020377993609383}
+  - component: {fileID: 915814411187983899}
+  - component: {fileID: 2752234338492551405}
   m_Layer: 0
   m_Name: Passenger Slot (9)
   m_TagString: Untagged
@@ -2003,8 +1996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 1114020377993609383}
---- !u!54 &8031325068773882416
+--- !u!54 &915814411187983899
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2012,7 +2004,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6498489874923382709}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2031,7 +2023,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &1114020377993609383
+--- !u!138 &2752234338492551405
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2044,7 +2036,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &6511774122260649949
@@ -2057,8 +2049,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6601795843717229932}
   - component: {fileID: 454980059799221315}
-  - component: {fileID: 4416454498158661870}
-  - component: {fileID: 3048443917013060603}
+  - component: {fileID: 192587531267847179}
+  - component: {fileID: 769788267024019652}
   m_Layer: 0
   m_Name: Passenger Slot (0)
   m_TagString: Untagged
@@ -2094,8 +2086,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 3048443917013060603}
---- !u!54 &4416454498158661870
+--- !u!54 &192587531267847179
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2103,7 +2094,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6511774122260649949}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2122,7 +2113,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &3048443917013060603
+--- !u!138 &769788267024019652
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2135,7 +2126,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &6610574453903948085
@@ -2148,8 +2139,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3812277709453381250}
   - component: {fileID: 457686679535742228}
-  - component: {fileID: 171444978123038186}
-  - component: {fileID: 7832878002067095491}
+  - component: {fileID: 1210763786938660640}
+  - component: {fileID: 6708801131289115096}
   m_Layer: 0
   m_Name: Passenger Slot (5)
   m_TagString: Untagged
@@ -2165,13 +2156,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610574453903948085}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014901161, y: -0.000000029802322, z: -0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0.7500328, y: 0.5060001, z: -0.41249925}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!114 &457686679535742228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2185,8 +2176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 7832878002067095491}
---- !u!54 &171444978123038186
+--- !u!54 &1210763786938660640
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2194,7 +2184,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6610574453903948085}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2213,7 +2203,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &7832878002067095491
+--- !u!138 &6708801131289115096
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2226,7 +2216,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &6757501388049060090
@@ -2393,8 +2383,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3205748335599550730}
   - component: {fileID: 887893825426456773}
-  - component: {fileID: 7970152887990810955}
-  - component: {fileID: 5744077365434638471}
+  - component: {fileID: 2697030866841744944}
+  - component: {fileID: 536246053780960394}
   m_Layer: 0
   m_Name: Passenger Slot (2)
   m_TagString: Untagged
@@ -2410,13 +2400,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6864671503629543228}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000014901161, y: -0.000000029802322, z: -0.25881895, w: 0.96592593}
+  m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0.7499805, y: 0.5060001, z: 0.6499986}
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 0.74999994}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9156813239290942346}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
 --- !u!114 &887893825426456773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2430,8 +2420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 5744077365434638471}
---- !u!54 &7970152887990810955
+--- !u!54 &2697030866841744944
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2439,7 +2428,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6864671503629543228}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2458,7 +2447,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &5744077365434638471
+--- !u!138 &536246053780960394
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2471,7 +2460,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &7187461788586423212
@@ -2555,8 +2544,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8584674956963088257}
   - component: {fileID: 1948540104776212437}
-  - component: {fileID: 4163640775201580494}
-  - component: {fileID: 8778013313126011915}
+  - component: {fileID: 6043660346829062284}
+  - component: {fileID: 8051398952964530515}
   m_Layer: 0
   m_Name: Passenger Slot (3)
   m_TagString: Untagged
@@ -2592,8 +2581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   passenger: {fileID: 0}
-  joint: {fileID: 8778013313126011915}
---- !u!54 &4163640775201580494
+--- !u!54 &6043660346829062284
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2601,7 +2589,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7518120898835559516}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2620,7 +2608,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!138 &8778013313126011915
+--- !u!138 &8051398952964530515
 FixedJoint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2633,7 +2621,7 @@ FixedJoint:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
-  m_EnablePreprocessing: 0
+  m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
 --- !u!1 &8040406011073544460

@@ -12,7 +12,6 @@ namespace LostResort.Passengers
     {
         [Header("References")]
         [SerializeField] private NavMeshAgent agent;
-        [SerializeField] private Rigidbody rb;
         [SerializeField] private Collider col;
         [SerializeField] private SkinnedMeshRenderer mesh;
 
@@ -108,12 +107,19 @@ namespace LostResort.Passengers
             Destroy(gameObject);
         }
 
-        public void SetAnchor(Joint joint)
+        public void SetParent(Transform parent)
         {
-            rb.position = joint.transform.position;
-            rb.rotation = joint.transform.rotation;
-            rb.PublishTransform();
-            joint.connectedBody = rb;
+            agent.transform.parent = parent;
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            agent.transform.position = position;
+        }
+
+        public void SetRotation(Quaternion rotation)
+        {
+            agent.transform.rotation = rotation;
         }
 
         public void OnPickup()
@@ -122,7 +128,6 @@ namespace LostResort.Passengers
 
             IsPickedUp = true;
             agent.enabled = false;
-            rb.useGravity = false;
             col.enabled = false;
         }
 
