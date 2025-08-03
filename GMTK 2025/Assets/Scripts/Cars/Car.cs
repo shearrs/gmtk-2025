@@ -10,14 +10,33 @@ namespace LostResort.Cars
         [SerializeField] private CarMovementData movementData;
         [SerializeField] private Wheel[] wheels;
 
+        private bool isEnabled = true;
+
         public Rigidbody Rigidbody => rb;
         public CarInput Input => input;
         public CarMovementData MovementData => movementData;
 
         private void FixedUpdate()
         {
+            if (!isEnabled)
+                return;
+
             ClampHorizontalVelocity();
             ApplyFallSpeed();
+        }
+
+        public void Enable()
+        {
+            isEnabled = true;
+
+            input.Enable();
+        }
+
+        public void Disable()
+        {
+            isEnabled = false;
+
+            input.Disable();
         }
 
         public bool IsOnGround()

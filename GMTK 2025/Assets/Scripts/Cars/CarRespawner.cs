@@ -1,7 +1,9 @@
 using LostResort.Passengers;
 using Shears;
+using Shears.Tweens;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace LostResort.Cars
 {
@@ -10,6 +12,9 @@ namespace LostResort.Cars
         [SerializeField] private Car car;
         [SerializeField] private PassengerStorage passengerStorage;
         [SerializeField] private Canvas respawnCanvas;
+        [SerializeField] private Image background;
+
+        private bool isRespawning = false;
 
         public Vector3 RespawnLocation { get; set; }
 
@@ -20,21 +25,39 @@ namespace LostResort.Cars
 
         public void Respawn()
         {
+            if (isRespawning)
+                return;
+
             StartCoroutine(IERespawn());
         }
 
         private IEnumerator IERespawn()
         {
+            isRespawning = true;
+
             car.Rigidbody.isKinematic = true;
-            car.Input.Disable();
+            car.Disable();
             passengerStorage.ClearPassengers();
+            background.color = Color.clear;
             respawnCanvas.enabled = true;
+            var tween = background.DoColorTween(Color.midnightBlue);
+
+            while (tween.IsPlaying)
+                yield return null;
 
             car.Rigidbody.position = RespawnLocation;
 
             yield return CoroutineUtil.WaitForSeconds(1.5f);
 
+            tween = background.DoColorTween(Color.clear);
+
+            while (tween.IsPlaying)
+                yield return null;
+
             respawnCanvas.enabled = false;
+            car.Rigidbody.isKinematic = false;
+            car.Enable();
+            isRespawning = false;
         }
     }
 }
