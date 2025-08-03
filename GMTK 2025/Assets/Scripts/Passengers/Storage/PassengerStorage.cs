@@ -57,6 +57,18 @@ namespace LostResort.Passengers
             passenger.OnDropoff();
         }
 
+        public void ClearPassengers()
+        {
+            foreach (var slot in reservedSlots)
+            {
+                Destroy(slot.Passenger);
+                slot.ClearPassenger();
+            }
+
+            openSlots.AddRange(reservedSlots);
+            reservedSlots.Clear();
+        }
+
         public void DropoffAtLocation(ResortLocation location)
         {
             instancePassengers.Clear();

@@ -18,5 +18,15 @@ namespace LostResort.Cars
                 ("Drift", (i) => DriftInput = i)
             );
         }
+
+        public void Enable()
+        {
+            inputMap.EnableAllInputs();
+        }
+
+        public void Disable()
+        {
+            inputMap.DisableAllInputs();
+        }
     }
 }
