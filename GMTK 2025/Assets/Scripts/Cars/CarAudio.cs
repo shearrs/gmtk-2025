@@ -37,6 +37,8 @@ namespace LostResort.Cars
         private AudioSource twoBeeps;
         [SerializeField] 
         private AudioSource whoosh;
+        [SerializeField] 
+        private AudioSource carCrash;
 
         [Header("References")]
         [SerializeField] 
@@ -70,6 +72,14 @@ namespace LostResort.Cars
             passengerKiller.KilledSomeone += OnKilledSomeone;
             car.Input.MoveInput.Performed += OnAccelerationInput;
             SignalShuttle.Register<InteractableAudioTriggeredSignal>(OnInteracted);
+            SignalShuttle.Register<HitSomethingSignal>(OnWallHit);
+
+        }
+
+        private void OnWallHit(HitSomethingSignal signal)
+        {
+            carCrash.pitch = Random.Range(carLoopRange.x, carLoopRange.y);
+            carCrash.Play();
         }
 
         private void OnDisable()
@@ -162,5 +172,10 @@ namespace LostResort.Cars
             if (endVolume == 0f)
                 audioSource.Stop();
         }
+    }
+    
+    public struct HitSomethingSignal : ISignal
+    {
+        
     }
 }
