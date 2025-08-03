@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using LostResort.SignalShuttles;
 using UnityEngine;
 
 namespace LostResort.Passengers
@@ -28,6 +29,9 @@ namespace LostResort.Passengers
 
             passenger.OnPickup();
             slot.SetPassenger(passenger);
+            
+            Debug.Log(passenger.targetLocation.resortLocationName);
+            SignalShuttle.Emit(new PassengersChangedSignal(true, passenger.targetLocation.resortLocationName));
         }
 
         public void RemovePassenger(Passenger passenger)
