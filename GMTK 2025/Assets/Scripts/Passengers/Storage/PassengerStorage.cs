@@ -11,6 +11,7 @@ namespace LostResort.Passengers
         private readonly List<PassengerSlot> openSlots = new();
         private readonly List<PassengerSlot> reservedSlots = new();
         private readonly List<Passenger> instancePassengers = new();
+        private readonly List<Passenger> secondInstancePassengers = new();
 
         private void Awake()
         {
@@ -81,7 +82,10 @@ namespace LostResort.Passengers
                     instancePassengers.Add(slot.Passenger);
             }
 
-            foreach (var passenger in instancePassengers)
+            secondInstancePassengers.Clear();
+            secondInstancePassengers.AddRange(instancePassengers);
+
+            foreach (var passenger in secondInstancePassengers)
                 RemovePassenger(passenger);
         }
 
