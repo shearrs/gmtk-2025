@@ -1,3 +1,4 @@
+using System;
 using Shears.Input;
 using UnityEngine;
 
@@ -29,6 +30,7 @@ namespace LostResort.Cars
 
         private IManagedInput moveInput;
         private float accelerationInput;
+  
 
         public float Grip { get => grip; set => grip = value; }
 
@@ -40,6 +42,7 @@ namespace LostResort.Cars
         private void Update()
         {
             accelerationInput = moveInput.ReadValue<Vector2>().y;
+            
         }
 
         private void FixedUpdate()
@@ -51,8 +54,10 @@ namespace LostResort.Cars
                 ApplyAcceleration();
                 SnapModelToFloorPos(hit.point);
             }
-            else
+            else{
                 ApplyGravityToModel();
+             
+            }
         }
 
         public bool IsOnGround()
@@ -105,7 +110,9 @@ namespace LostResort.Cars
                 ApplyDrag();
                 return;
             }
+            
 
+            
             float carSpeed = Vector3.Dot(car.Rigidbody.transform.forward, car.Rigidbody.linearVelocity);
             float availableTorque = accelerationInput * car.MovementData.Acceleration;
 

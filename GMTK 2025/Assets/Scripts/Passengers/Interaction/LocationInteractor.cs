@@ -1,4 +1,4 @@
-using LostResort.Interaction;
+    using LostResort.Interaction;
 using UnityEngine;
 
 namespace LostResort.Passengers
