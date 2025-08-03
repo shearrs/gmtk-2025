@@ -44,6 +44,8 @@ namespace LostResort.Cars
 
         public event Action BeganDrifting;
         public event Action EndedDrifting;
+        public event Action PreformingWhoosh;
+
 
         private void OnEnable()
         {
@@ -122,8 +124,10 @@ namespace LostResort.Cars
 
             if (speedupTimer.IsDone)
             {
+                PreformingWhoosh?.Invoke();
                 Vector3 forceDirection = car.transform.forward;
                 car.Rigidbody.AddForce(driftSpeedupForce * forceDirection, ForceMode.Impulse);
+                
             }
 
             speedupTimer.Stop();

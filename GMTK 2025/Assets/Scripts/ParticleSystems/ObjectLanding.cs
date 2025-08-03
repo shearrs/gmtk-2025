@@ -26,7 +26,7 @@ namespace LostResort.ParticleSystems
                 _isCarGrounded = false;
                 
                 StopAllCoroutines();
-                Debug.Log("we are in air");
+                //Debug.Log("we are in air");
 
                 StartCoroutine(AirTime());
             }
@@ -35,12 +35,12 @@ namespace LostResort.ParticleSystems
             {
                 _isCarGrounded = true;
 
-                Debug.Log("we are hitting the ground");
+                //Debug.Log("we are hitting the ground");
 
                 
                 if (_canImpact)
                 {
-                    Debug.Log("Playing impact particles");
+                    //Debug.Log("Playing impact particles");
                     _impactLineParticles.Play();
                 }
                 else

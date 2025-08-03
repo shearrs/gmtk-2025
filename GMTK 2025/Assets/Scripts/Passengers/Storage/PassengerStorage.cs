@@ -50,6 +50,7 @@ namespace LostResort.Passengers
             if (targetSlot == null)
                 return;
 
+            SignalShuttle.Emit(new PassengersChangedSignal(false, passenger.targetLocation.resortLocationName));
             targetSlot.ClearPassenger();
             reservedSlots.Remove(targetSlot);
             openSlots.Add(targetSlot);
