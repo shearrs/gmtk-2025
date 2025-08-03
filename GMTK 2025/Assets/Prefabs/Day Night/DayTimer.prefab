@@ -672,7 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e157761fb3e6ec84da8da121c2de1b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doesLoop: 1
+  doesLoop: 0
   _gameDuration: 320
   _timerCircle: {fileID: 2200714135243713808}
   _hourDots:

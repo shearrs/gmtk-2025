@@ -18,6 +18,7 @@ namespace LostResort.Timers
         /// </summary>
         [SerializeField] private float _gameDuration = 60f;
     
+        public bool dayOne { private set; get; }
         /// <summary>
         /// How much time has elapsed in the game in float.
         /// </summary>
@@ -40,6 +41,7 @@ namespace LostResort.Timers
         
         void Awake()
         {
+            dayOne = true;
             AssignComponents();
             RegisterSignals();
         }
@@ -90,8 +92,9 @@ namespace LostResort.Timers
                 yield return null;
             }
 
-            if (doesLoop)
+            if (doesLoop || dayOne)
             {
+                dayOne = false;
                 ResetUI();
                 StopAllCoroutines();
                 _gameTimer = GameTimer(_gameDuration);
