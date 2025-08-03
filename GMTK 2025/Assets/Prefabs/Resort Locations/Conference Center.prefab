@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5914519362974613806}
   - component: {fileID: 4783779625345627096}
-  m_Layer: 0
+  - component: {fileID: 2578879832811244256}
+  m_Layer: 7
   m_Name: Interactable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,6 +47,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   location: {fileID: 6428068199611548361}
+--- !u!135 &2578879832811244256
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685320135639837311}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7983206837517044014
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,9 +247,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7395136439307816593, guid: 7515d8fe145839d4aa248e693d5d461f, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8354833134274942686, guid: 7515d8fe145839d4aa248e693d5d461f, type: 3}
       propertyPath: m_Name
       value: Bus Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 8354833134274942686, guid: 7515d8fe145839d4aa248e693d5d461f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
