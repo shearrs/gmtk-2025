@@ -30,7 +30,7 @@ namespace LostResort.Passengers
             passenger.OnPickup();
             slot.SetPassenger(passenger);
             
-            Debug.Log(passenger.targetLocation.resortLocationName);
+            //Debug.Log(passenger.targetLocation.resortLocationName);
             SignalShuttle.Emit(new PassengersChangedSignal(true, passenger.targetLocation.resortLocationName));
         }
 

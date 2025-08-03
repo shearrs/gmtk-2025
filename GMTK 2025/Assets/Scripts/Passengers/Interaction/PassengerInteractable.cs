@@ -11,7 +11,7 @@ namespace LostResort.Passengers
 
         public void Interact(Interactor interactor)
         {
-            Debug.Log("interacted with: picked up: " + Passenger.IsPickedUp + " alive: " + Passenger.IsAlive);
+            //Debug.Log("interacted with: picked up: " + Passenger.IsPickedUp + " alive: " + Passenger.IsAlive);
 
             if (!Passenger.IsPickedUp && Passenger.IsAlive)
                 interactor.InteractWith(this);
