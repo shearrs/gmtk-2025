@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using LostResort.Interaction;
 using LostResort.Passengers;
 using LostResort.SignalShuttles;
 using Shears.Input;
@@ -20,9 +18,15 @@ namespace LostResort.Cars
         private float carFadeIn;
         [SerializeField]
         private float carFadeOut;
-        
+
+        [Header("Ranges")]
+        [SerializeField]
+        private Vector2 carLoopRange;
+
+        [SerializeField]
+        private Vector2 deathRange;
+
         [Header("Clips")]
-        
         [SerializeField]
         private AudioSource loopDrift;
         [SerializeField]
@@ -32,15 +36,12 @@ namespace LostResort.Cars
         [SerializeField] 
         private AudioSource twoBeeps;
 
-        
         [Header("References")]
-
         [SerializeField] 
         private DriftController driftController;
 
-        [SerializeField] 
+        [SerializeField]
         private PassengerKiller passengerKiller;
-
         
         [SerializeField]
         private Car car;
@@ -56,7 +57,6 @@ namespace LostResort.Cars
         private void Update()
         {
             accelerationInput = moveInput.ReadValue<Vector2>().y;
-            
         }
         
         private void OnEnable()
@@ -64,9 +64,8 @@ namespace LostResort.Cars
             driftController.BeganDrifting += OnBeganDrifting;
             driftController.EndedDrifting += OnEndedDrifting;
             passengerKiller.KilledSomeone += OnKilledSomeone;
+            car.Input.MoveInput.Performed += OnAccelerationInput;
             SignalShuttle.Register<InteractableAudioTriggeredSignal>(OnInteracted);
-
-
         }
 
         private void OnDisable()
@@ -74,9 +73,8 @@ namespace LostResort.Cars
             driftController.BeganDrifting -= OnBeganDrifting;
             driftController.EndedDrifting -= OnEndedDrifting;
             passengerKiller.KilledSomeone -= OnKilledSomeone;
+            car.Input.MoveInput.Performed -= OnAccelerationInput;
             SignalShuttle.Deregister<InteractableAudioTriggeredSignal>(OnInteracted);
-
-
         }
 
         private void OnInteracted(InteractableAudioTriggeredSignal interactableAudioTriggered)
@@ -85,21 +83,27 @@ namespace LostResort.Cars
             twoBeeps.Play();
         }
 
+        private void OnAccelerationInput(ManagedInputInfo info)
+        {
+            carSound.pitch = Random.Range(carLoopRange.x, carLoopRange.y);
+        }
+
         private void FixedUpdate()
         {
-            if (accelerationInput > 0.1f)
+            if (Mathf.Abs(accelerationInput) > 0.1f)
             {
                 if (!carSound.isPlaying)
+                {
                     FadeIn(carSound, carFadeIn);
+                }
             }
             else
-            {
                 FadeOut(carSound, carFadeOut);
-            }
         }
 
         private void OnKilledSomeone()
         {
+            passengerDeath.pitch = Random.Range(deathRange.x, deathRange.y);
             passengerDeath.Play();
         }
 
@@ -115,7 +119,12 @@ namespace LostResort.Cars
      
         private void FadeIn(AudioSource audioSource, float fadeDuration)
         {
-            StartCoroutine(FadeAudio(0f, 1f, audioSource, fadeDuration));
+            float endVolume = 1f;
+
+            if (audioSource == loopDrift)
+                endVolume = 0.1f;
+
+            StartCoroutine(FadeAudio(0f, endVolume, audioSource, fadeDuration));
         }
 
         private void FadeOut(AudioSource audioSource, float fadeDuration)

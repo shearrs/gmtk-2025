@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - LIGHTS_DISABLED
   - _CLUSTER_LIGHT_LOOP
   m_InvalidKeywords:
   - _ADDITIONAL_LIGHTS
@@ -89,6 +90,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - LIGHTS_DISABLED: 1
     - _ADDITIONAL_LIGHTS: 1
     - _ADDITIONAL_LIGHTS_VERTEX: 1
     - _AddPrecomputedVelocity: 0
