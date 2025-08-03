@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using LostResort.SignalShuttles;
 using LostResort.Timers;
 using UnityEngine;
 
@@ -18,6 +19,11 @@ public class Lighting : MonoBehaviour
    //[SerializeField, Range(0, 24)]
    //private float TimeOfDay;
 
+   private void Start()
+   {
+      SignalShuttle.Emit(new OnGameStart());
+   }
+   
    private void Update()
    {
       if (Preset == null)
@@ -26,14 +32,15 @@ public class Lighting : MonoBehaviour
          return;
       }
 
-      /*
-      if (Application.isPlaying)
-      {
-         TimeOfDay += Time.deltaTime;
-         TimeOfDay %= 24;
-      }
-      */
 
+      if (!Application.isPlaying)
+      {
+         UpdateLighting(0.5f);
+         return;
+      }
+
+
+      //Debug.Log(dayTimer.TimeElapsedPercent + "from lighting");
       UpdateLighting(dayTimer.TimeElapsedPercent);
 
       
@@ -41,6 +48,7 @@ public class Lighting : MonoBehaviour
    }
    private void UpdateLighting(float timePercent)
    {
+      //Debug.Log(timePercent);
       RenderSettings.skybox.SetColor("_Tint",Preset.SunRise.Evaluate(timePercent));
       
       DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI

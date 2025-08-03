@@ -60,6 +60,16 @@ namespace LostResort.Cars
             return Physics.Raycast(transform.position, -transform.up, raycastDistance, collisionLayer);
         }
 
+        public RaycastHit GetRaycastHit()
+        {
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, raycastDistance, collisionLayer))
+            {
+                return hit;
+            }
+
+            return new RaycastHit();
+        }
+
         private void ApplySuspension(RaycastHit hit)
         {
             Vector3 springDirection = transform.up;

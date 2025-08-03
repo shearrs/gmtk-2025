@@ -10,6 +10,10 @@ namespace LostResort.Timers
     public class DayTimer : MonoBehaviour
     {
         /// <summary>
+        /// If the timer should loop
+        /// </summary>
+        [SerializeField] private bool doesLoop;
+        /// <summary>
         /// How long is the game (in seconds).
         /// </summary>
         [SerializeField] private float _gameDuration = 60f;
@@ -86,11 +90,38 @@ namespace LostResort.Timers
                     //Debug.Log("Game Time: " + TimeElapsedInt);
                 }
                 
+                //Debug.Log(TimeElapsedPercent);
                 yield return null;
+            }
+
+            if (doesLoop)
+            {
+                //Debug.Log("Restarting clock");
+                ResetUI();
+                StopAllCoroutines();
+                _gameTimer = GameTimer(_gameDuration);
+                StartCoroutine(_gameTimer);
+                yield break;
             }
             //end the game
             SignalShuttle.Emit(new OnGameEnd());
             yield break;
+        }
+        
+        void ResetUI()
+        {
+            if (!_timerCircle.enabled)
+            {
+                _timerCircle.enabled = true;
+            }
+
+            foreach (Image hourDot in _hourDots)
+            {
+                if (!hourDot.enabled)
+                {
+                    hourDot.enabled = true;
+                }
+            }
         }
         
         void StartTimer(OnGameStart signal)
