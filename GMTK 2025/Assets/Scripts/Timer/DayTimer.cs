@@ -81,22 +81,17 @@ namespace LostResort.Timers
                 {
                     //a second has ticked
                     lastSecond = TimeElapsedInt;
-                    //Debug.Log("Game Time: " + TimeElapsedInt);
                 }
                 if (TimeElapsedInt < lastSecond)
                 {
-                    //TimeElapsedInt should never be less than lastSecond
                     lastSecond = TimeElapsedInt;
-                    //Debug.Log("Game Time: " + TimeElapsedInt);
                 }
                 
-                //Debug.Log(TimeElapsedPercent);
                 yield return null;
             }
 
             if (doesLoop)
             {
-                //Debug.Log("Restarting clock");
                 ResetUI();
                 StopAllCoroutines();
                 _gameTimer = GameTimer(_gameDuration);
