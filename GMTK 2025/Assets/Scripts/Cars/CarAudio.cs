@@ -119,7 +119,12 @@ namespace LostResort.Cars
      
         private void FadeIn(AudioSource audioSource, float fadeDuration)
         {
-            StartCoroutine(FadeAudio(0f, 1f, audioSource, fadeDuration));
+            float endVolume = 1f;
+
+            if (audioSource == loopDrift)
+                endVolume = 0.1f;
+
+            StartCoroutine(FadeAudio(0f, endVolume, audioSource, fadeDuration));
         }
 
         private void FadeOut(AudioSource audioSource, float fadeDuration)
