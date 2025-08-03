@@ -19,6 +19,8 @@ namespace LostResort.Cars
                 ("Drift", (i) => DriftInput = i),
                 ("Reset", (i) => ResetInput = i)
             );
+
+            Enable();
         }
 
         public void Enable()
