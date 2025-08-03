@@ -10,12 +10,14 @@ namespace LostResort.Cars
 
         public IManagedInput MoveInput { get; private set; }
         public IManagedInput DriftInput { get; private set; }
+        public IManagedInput ResetInput { get; private set; }
 
         private void Awake()
         {
             inputMap.GetInputs(
                 ("Move", (i) => MoveInput = i),
-                ("Drift", (i) => DriftInput = i)
+                ("Drift", (i) => DriftInput = i),
+                ("Reset", (i) => ResetInput = i)
             );
         }
 

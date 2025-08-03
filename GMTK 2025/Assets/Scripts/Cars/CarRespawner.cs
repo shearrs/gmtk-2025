@@ -1,5 +1,6 @@
 using LostResort.Passengers;
 using Shears;
+using Shears.Input;
 using Shears.Tweens;
 using System.Collections;
 using UnityEngine;
@@ -18,9 +19,25 @@ namespace LostResort.Cars
 
         public Vector3 RespawnLocation { get; set; }
 
+        private void OnEnable()
+        {
+            car.Input.ResetInput.Performed += OnResetInput;
+        }
+
+        private void OnDisable()
+        {
+            car.Input.ResetInput.Performed -= OnResetInput;
+        }
+
         private void Start()
         {
             RespawnLocation = car.transform.position;
+        }
+
+        private void OnResetInput(ManagedInputInfo info)
+        {
+            Debug.Log("respawn");
+            Respawn();
         }
 
         public void Respawn()
