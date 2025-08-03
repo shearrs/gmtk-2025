@@ -37,6 +37,8 @@ namespace LostResort.Cars
         private AudioSource twoBeeps;
         [SerializeField] 
         private AudioSource whoosh;
+        [SerializeField] 
+        private AudioSource carCrash;
 
         [Header("References")]
         [SerializeField] 
@@ -44,6 +46,10 @@ namespace LostResort.Cars
 
         [SerializeField]
         private PassengerKiller passengerKiller;
+        [SerializeField]
+        private WallHit wallHit;
+
+        
         
         [SerializeField]
         private Car car;
@@ -68,8 +74,14 @@ namespace LostResort.Cars
             driftController.PreformingWhoosh += OnWhoosh;
 
             passengerKiller.KilledSomeone += OnKilledSomeone;
+            wallHit.HitAWall += OnWallHit;
             car.Input.MoveInput.Performed += OnAccelerationInput;
             SignalShuttle.Register<InteractableAudioTriggeredSignal>(OnInteracted);
+        }
+
+        private void OnWallHit()
+        {
+            carCrash.Play();
         }
 
         private void OnDisable()
