@@ -15,7 +15,6 @@ namespace LostResort.Passengers
             passenger.SetParent(transform);
             passenger.SetPosition(transform.position);
             passenger.SetRotation(transform.rotation);
-            passenger.SetLocalScale(Vector3.zero);
         }
 
         public void ClearPassenger()
