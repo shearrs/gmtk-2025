@@ -2,6 +2,7 @@ using System;
 using System.Linq.Expressions;
 using LostResort.SignalShuttles;
 using LostResort.Timers;
+using Shears.Tweens;
 using UnityEngine;
 
 [ExecuteAlways]
@@ -51,6 +52,17 @@ public class Lighting : MonoBehaviour
             RenderSettings.skybox.SetColor("_Tint", Preset.DayOne.Evaluate(timePercent));
             RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
             DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
+
+            var start = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.x, 170, 0));
+            var end = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.y, 170, 0));
+
+            start.ToAngleAxis(out float sourceAngle, out Vector3 sourceAxis);
+            end.ToAngleAxis(out float targetAngle, out Vector3 targetAxis);
+
+            float angle = Mathf.LerpUnclamped(sourceAngle, targetAngle, timePercent);
+            Vector3 axis = Vector3.SlerpUnclamped(sourceAxis, targetAxis, timePercent);
+
+            DirectionalLight.transform.localRotation = Quaternion.AngleAxis(angle, axis);
         }
          
         else
@@ -58,9 +70,18 @@ public class Lighting : MonoBehaviour
             RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
             RenderSettings.ambientLight = Preset.DayTwoAmbientColor.Evaluate(timePercent);
             DirectionalLight.color = Preset.DayTwoDirectionalColor.Evaluate(timePercent);
-        }
 
-        DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360) - 90, 170, 0));
+            var start = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.x, 170, 0));
+            var end = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.y, 170, 0));
+
+            start.ToAngleAxis(out float sourceAngle, out Vector3 sourceAxis);
+            end.ToAngleAxis(out float targetAngle, out Vector3 targetAxis);
+
+            float angle = Mathf.LerpUnclamped(sourceAngle, targetAngle, timePercent);
+            Vector3 axis = Vector3.SlerpUnclamped(sourceAxis, targetAxis, timePercent);
+
+            DirectionalLight.transform.localRotation = Quaternion.AngleAxis(angle, axis);
+        }
 
         DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
         RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);      

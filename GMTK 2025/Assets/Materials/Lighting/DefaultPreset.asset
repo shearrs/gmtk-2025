@@ -222,3 +222,5 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 6
     m_NumAlphaKeys: 2
+  dayOneSunAngles: {x: 45, y: 360}
+  dayTwoSunAngles: {x: 0, y: 360}

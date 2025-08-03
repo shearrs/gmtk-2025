@@ -13,4 +13,7 @@ public class LightingPreset : ScriptableObject
 
     [FormerlySerializedAs("SunRise")] public Gradient DayOne;
     public Gradient DayTwo;
+
+    public Vector2 dayOneSunAngles;
+    public Vector2 dayTwoSunAngles;
 }
