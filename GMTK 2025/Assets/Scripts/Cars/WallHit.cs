@@ -7,8 +7,6 @@ namespace LostResort.Cars
 {
     public class WallHit : MonoBehaviour
     {
-        public event Action HitAWall;
-
         private void OnTriggerEnter(Collider other)
         {
             if (other.isTrigger)
