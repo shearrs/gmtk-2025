@@ -35,6 +35,8 @@ namespace LostResort.Cars
         private AudioSource carSound;
         [SerializeField] 
         private AudioSource twoBeeps;
+        [SerializeField] 
+        private AudioSource whoosh;
 
         [Header("References")]
         [SerializeField] 
@@ -63,6 +65,8 @@ namespace LostResort.Cars
         {
             driftController.BeganDrifting += OnBeganDrifting;
             driftController.EndedDrifting += OnEndedDrifting;
+            driftController.PreformingWhoosh += OnWhoosh;
+
             passengerKiller.KilledSomeone += OnKilledSomeone;
             car.Input.MoveInput.Performed += OnAccelerationInput;
             SignalShuttle.Register<InteractableAudioTriggeredSignal>(OnInteracted);
@@ -101,6 +105,12 @@ namespace LostResort.Cars
                 FadeOut(carSound, carFadeOut);
         }
 
+        private void OnWhoosh()
+        {
+            whoosh.pitch = Random.Range(carLoopRange.x, carLoopRange.y);
+            whoosh.Play();
+        }
+
         private void OnKilledSomeone()
         {
             passengerDeath.pitch = Random.Range(deathRange.x, deathRange.y);
@@ -109,11 +119,13 @@ namespace LostResort.Cars
 
         private void OnBeganDrifting()
         {
+            loopDrift.pitch = Random.Range(carLoopRange.x, carLoopRange.y);
             FadeIn(loopDrift, driftFadeIn);
         }
 
         private void OnEndedDrifting()
         {
+            
             FadeOut(loopDrift, driftFadeOut);
         }
      
@@ -121,8 +133,6 @@ namespace LostResort.Cars
         {
             float endVolume = 1f;
 
-            if (audioSource == loopDrift)
-                endVolume = 0.1f;
 
             StartCoroutine(FadeAudio(0f, endVolume, audioSource, fadeDuration));
         }
