@@ -5,9 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CarScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: Assets/Scenes/StartScreen.unity
+    guid: a6eea4b9cdf668e47ba87ff2b7f6caeb
+  - enabled: 1
+    path: Assets/Scenes/ResortMap.unity
+    guid: afd3527473ee9414595d4a67fb1ea818
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a1070b412af612f42a3debbf8b22cb85, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
