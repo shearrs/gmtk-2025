@@ -317,6 +317,7 @@ MonoBehaviour:
   agent: {fileID: 805811179213410019}
   col: {fileID: 5483663297858150567}
   mesh: {fileID: 3183032133294583516}
+  rb: {fileID: 4206044124531536959}
   isMale: 1
   waitingTime: 30
   scoreValue: 100
@@ -632,6 +633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4807188258160747642}
   - component: {fileID: 805811179213410019}
+  - component: {fileID: 4206044124531536959}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -678,6 +680,33 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &4206044124531536959
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5839735952914986167}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5900939459422039164
 GameObject:
   m_ObjectHideFlags: 0

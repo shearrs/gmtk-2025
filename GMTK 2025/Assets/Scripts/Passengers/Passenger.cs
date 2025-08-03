@@ -14,6 +14,7 @@ namespace LostResort.Passengers
         [SerializeField] private NavMeshAgent agent;
         [SerializeField] private Collider col;
         [SerializeField] private SkinnedMeshRenderer mesh;
+        [SerializeField] private Rigidbody rb;
 
         [Header("Settings")]
         [SerializeField] private bool isMale = true;
@@ -34,8 +35,10 @@ namespace LostResort.Passengers
 
         private ResortLocation originLocation;
         private ResortLocation targetLocation;
+        private bool alive = true;
 
         public bool IsPickedUp { get; private set; } = false;
+        public bool IsAlive => alive;
         public ResortLocation TargetLocation => targetLocation;
 
         public static Passenger Create(Passenger prefab, ResortLocation originLocation, ResortLocation targetLocation)
@@ -107,6 +110,13 @@ namespace LostResort.Passengers
             Destroy(gameObject);
         }
 
+        private IEnumerator IEDyingTime()
+        {
+            yield return CoroutineUtil.WaitForSeconds(10f);
+
+            Destroy(gameObject);
+        }
+
         public void SetParent(Transform parent)
         {
             agent.transform.parent = parent;
@@ -122,6 +132,11 @@ namespace LostResort.Passengers
             agent.transform.rotation = rotation;
         }
 
+        public void SetLocalScale(Vector3 scale)
+        {
+            agent.transform.localScale = scale;
+        }
+
         public void OnPickup()
         {
             StopAllCoroutines();
@@ -135,6 +150,7 @@ namespace LostResort.Passengers
         {
             IsPickedUp = false;
             SignalShuttle.Emit(new AddScoreSignal(scoreValue));
+            Destroy(agent.gameObject);
             Destroy(gameObject);
         }
 
@@ -151,6 +167,22 @@ namespace LostResort.Passengers
                 Accessory.AccessoryType.Feet => feetSlot,
                 _ => null
             };
+        }
+
+        public void Die()
+        {
+            if (!alive || IsPickedUp)
+                return;
+
+            StopAllCoroutines();
+            StartCoroutine(IEDyingTime());
+
+            agent.enabled = false;
+            rb.isKinematic = false;
+            alive = false;
+
+            rb.AddForce(Vector3.up * 10, ForceMode.Impulse);
+            rb.AddTorque(-transform.forward * 1, ForceMode.Impulse);
         }
     }
 }

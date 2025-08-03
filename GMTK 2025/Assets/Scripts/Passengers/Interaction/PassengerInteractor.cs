@@ -9,7 +9,6 @@ namespace LostResort.Passengers
 
         protected override void InteractWithType(PassengerInteractable interactable)
         {
-            Debug.Log("Passenger interact");
             passengerStorage.AddPassenger(interactable.Passenger);
         }
     }
