@@ -27,8 +27,6 @@ namespace LostResort.Passengers
             int beachCount = 0;
             int gymCount = 0;
 
-            Debug.Log(signal.Passengers == null);
-
             foreach (var passenger in signal.Passengers)
             {
                 if (passenger == null || passenger.TargetLocation == null)

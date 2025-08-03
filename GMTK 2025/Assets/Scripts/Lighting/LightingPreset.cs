@@ -6,7 +6,9 @@ using UnityEngine.Serialization;
 public class LightingPreset : ScriptableObject
 {
     public Gradient AmbientColor;
+    public Gradient DayTwoAmbientColor;
     public Gradient DirectionalColor;
+    public Gradient DayTwoDirectionalColor;
     public Gradient FogColor;
 
     [FormerlySerializedAs("SunRise")] public Gradient DayOne;

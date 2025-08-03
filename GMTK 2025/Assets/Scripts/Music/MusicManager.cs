@@ -34,6 +34,11 @@ namespace LostResort.Music
             gymMusicSource.volume = 0.0f;
         }
 
+        public void SetVolume(float volume)
+        {
+            current.volume = volume;
+        }
+
         private void OnMusicChangeSignal(MusicChangeSignal signal)
         {
             AudioSource next = null;

@@ -21,8 +21,8 @@ namespace Shears.Tweens
         }
 
         #region Custom Tween
-        public static ITween DoTween(Action<float> update, TweenData data) => Do(CreateTween(update, data));
-        public static ITween CreateTween(Action<float> update, TweenData data) => Instance.InstCreateTween(update, data);
+        public static ITween DoTween(Action<float> update, TweenData data = null) => Do(CreateTween(update, data));
+        public static ITween CreateTween(Action<float> update, TweenData data = null) => Instance.InstCreateTween(update, data);
         private ITween InstCreateTween(Action<float> update, TweenData data)
         {
             Tween tween = tweenPool.Get();

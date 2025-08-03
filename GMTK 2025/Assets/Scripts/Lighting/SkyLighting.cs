@@ -42,31 +42,28 @@ public class Lighting : MonoBehaviour
 
       //Debug.Log(dayTimer.TimeElapsedPercent + "from lighting");
       UpdateLighting(dayTimer.TimeElapsedPercent);
-
-      
-      
    }
+
    private void UpdateLighting(float timePercent)
    {
-      if (dayTimer.dayOne)
-         RenderSettings.skybox.SetColor("_Tint",Preset.DayOne.Evaluate(timePercent));
-      else
-      {
-         RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
+        if (dayTimer.dayOne)
+        {
+            RenderSettings.skybox.SetColor("_Tint", Preset.DayOne.Evaluate(timePercent));
+            RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
+            DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
+        }
+         
+        else
+        {
+            RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
+            RenderSettings.ambientLight = Preset.DayTwoAmbientColor.Evaluate(timePercent);
+            DirectionalLight.color = Preset.DayTwoDirectionalColor.Evaluate(timePercent);
+        }
 
-      }
-      
-      DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
+        DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 360) - 90, 170, 0));
 
-      RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
-      RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
-
-      if (DirectionalLight != null)
-      {
-         DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
-         DirectionalLight.transform.localRotation = Quaternion.Euler(new Vector3((timePercent * 180f), 170, 0));
-      }
-      
+        DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
+        RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);      
    }
 
    //try to find a directional light if one has not been signed
@@ -83,7 +80,7 @@ public class Lighting : MonoBehaviour
       }
       else
       {
-         Light[] lights = GameObject.FindObjectsByType<Light>(sortMode: FindObjectsSortMode.None);
+         Light[] lights = FindObjectsByType<Light>(sortMode: FindObjectsSortMode.None);
          foreach (Light light in lights)
          {
             if (light.type == LightType.Directional)

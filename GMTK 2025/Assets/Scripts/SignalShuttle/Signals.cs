@@ -6,5 +6,5 @@ namespace LostResort.SignalShuttles
 
     public struct OnGameStart : ISignal { }
 
-    public struct OnGameEnd : ISignal { }
+    public struct GameEndSignal : ISignal { }
 }
