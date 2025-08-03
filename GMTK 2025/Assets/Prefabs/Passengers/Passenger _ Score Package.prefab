@@ -548,6 +548,54 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &5164039798723059030
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3093213017318127873}
+  - component: {fileID: 7864443339888273022}
+  m_Layer: 0
+  m_Name: Passenger UI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3093213017318127873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164039798723059030}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -316.23962, y: 0.004189968, z: 129.23767}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2138518142981595035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7864443339888273022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164039798723059030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c90d9681a292b45ae6ee6e02de729d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passengersCarriedConferenceText: {fileID: 6554162795760086735}
+  passengersCarriedHotelText: {fileID: 1148067652787087175}
+  passengersCarriedBeachText: {fileID: 8179172256560885783}
+  passengersCarriedGymText: {fileID: 572334883033173836}
 --- !u!1 &5949598737517014309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,84 +1229,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!1001 &4476018584729329482
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2138518142981595035}
-    m_Modifications:
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -316.23962
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.004189968
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 129.23767
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8769733219412640284, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: m_Name
-      value: passengerCarryingUIHandler
-      objectReference: {fileID: 0}
-    - target: {fileID: 9145645284599139773, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: passengersCarriedGymText
-      value: 
-      objectReference: {fileID: 572334883033173836}
-    - target: {fileID: 9145645284599139773, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: passengersCarriedBeachText
-      value: 
-      objectReference: {fileID: 8179172256560885783}
-    - target: {fileID: 9145645284599139773, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: passengersCarriedHotelText
-      value: 
-      objectReference: {fileID: 1148067652787087175}
-    - target: {fileID: 9145645284599139773, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      propertyPath: passengersCarriedConferenceText
-      value: 
-      objectReference: {fileID: 6554162795760086735}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
---- !u!4 &3093213017318127873 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-  m_PrefabInstance: {fileID: 4476018584729329482}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8455861431520030367
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1311,9 +1281,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6705771328300585389, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 4370034382371852609}
     - target: {fileID: 8769733219412640284, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
       propertyPath: m_Name
-      value: scoremanager
+      value: Score Manager
       objectReference: {fileID: 0}
     - target: {fileID: 9145645284599139773, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
       propertyPath: passengersCarriedGymText
@@ -1335,29 +1309,8 @@ PrefabInstance:
     - {fileID: 9145645284599139773, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8769733219412640284, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 959984308734573606}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
---- !u!1 &931427969260711043 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8769733219412640284, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
-  m_PrefabInstance: {fileID: 8455861431520030367}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &959984308734573606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931427969260711043}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5190307f6eb41a4bbe77913e558e054, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 4370034382371852609}
 --- !u!4 &7037453595962738900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1509638165752374859, guid: ce5048cbc12891540a815020fa2818cb, type: 3}
