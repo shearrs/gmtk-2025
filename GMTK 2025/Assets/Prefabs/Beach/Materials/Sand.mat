@@ -140,7 +140,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Remap: {r: 0, g: 1, b: 0, a: 0}
     - _Second_Albedo: {r: 1, g: 0.83908355, b: 0.6245283, a: 1}
-    - _Shadow_Color: {r: 0.86855817, g: 0.87313926, b: 0.97735846, a: 1}
+    - _Shadow_Color: {r: 0.7418654, g: 0.7524989, b: 0.86415094, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
