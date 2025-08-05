@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6628647174458795741}
   - component: {fileID: 5943507877178838685}
   - component: {fileID: 3227907689909217851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: fencePiece (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 4321886188833355537}
   - component: {fileID: 6595545078370300541}
   - component: {fileID: 3467810422340990622}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: fencePiece (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 5791383122912807132}
   - component: {fileID: 1624810758728294802}
   - component: {fileID: 7840736650317475548}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: fenceBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
