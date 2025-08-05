@@ -89,6 +89,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - LIGHTS_DISABLED: 0
     - _ADDITIONAL_LIGHTS: 1
     - _ADDITIONAL_LIGHTS_VERTEX: 1
     - _AddPrecomputedVelocity: 0
