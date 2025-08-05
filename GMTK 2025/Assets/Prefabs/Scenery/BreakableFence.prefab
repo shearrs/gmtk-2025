@@ -545,7 +545,6 @@ GameObject:
   - component: {fileID: 8043617050948913858}
   - component: {fileID: 6864756757941800082}
   - component: {fileID: 1191106188262843340}
-  - component: {fileID: 184019472912021923}
   - component: {fileID: 9205562950396663245}
   m_Layer: 0
   m_Name: fenceBase
@@ -622,27 +621,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &184019472912021923
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5119458415587180604}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &9205562950396663245
 Rigidbody:
   m_ObjectHideFlags: 0

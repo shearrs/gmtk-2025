@@ -43,8 +43,6 @@ namespace LostResort.Music
         {
             AudioSource next = null;
 
-            Debug.Log("Switching to music for: " + signal.Type);
-
             switch (signal.Type)
             {
                 case MusicChangeSignal.MusicType.Hotel:
