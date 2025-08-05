@@ -1,114 +1,97 @@
-using System;
-using System.Linq.Expressions;
 using LostResort.SignalShuttles;
 using LostResort.Timers;
-using Shears.Tweens;
 using UnityEngine;
 
-[ExecuteAlways]
-public class Lighting : MonoBehaviour
+public class SkyLighting : MonoBehaviour
 {
-   [SerializeField]
-   private DayTimer dayTimer;
-   
-   [SerializeField]
-   private Light DirectionalLight;
-   
-   [SerializeField]
-   private LightingPreset Preset;
-   
-   //[SerializeField, Range(0, 24)]
-   //private float TimeOfDay;
+    [SerializeField]
+    private DayTimer dayTimer;
 
-   private void Start()
-   {
-      SignalShuttle.Emit(new OnGameStart());
-   }
-   
-   private void Update()
-   {
-      if (Preset == null)
-      {
-         Debug.Log("Preset is null");
-         return;
-      }
+    [SerializeField]
+    private Light DirectionalLight;
 
+    [SerializeField]
+    private LightingPreset Preset;
 
-      if (!Application.isPlaying)
-      {
-         UpdateLighting(0.5f);
-         return;
-      }
+    private float dayOneStartAngle;
+    private Vector3 dayOneStartAxis;
+    private float dayOneEndAngle;
+    private Vector3 dayOneEndAxis;
+    private float dayTwoStartAngle;
+    private Vector3 dayTwoStartAxis;
+    private float dayTwoEndAngle;
+    private Vector3 dayTwoEndAxis;
 
+    private void Start()
+    {
+        var start1 = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.x, 170, 0));
+        var end1 = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.y, 170, 0));
 
-      //Debug.Log(dayTimer.TimeElapsedPercent + "from lighting");
-      UpdateLighting(dayTimer.TimeElapsedPercent);
-   }
+        start1.ToAngleAxis(out dayOneStartAngle, out dayOneStartAxis);
+        end1.ToAngleAxis(out dayOneEndAngle, out dayOneEndAxis);
 
-   private void UpdateLighting(float timePercent)
-   {
+        var start2 = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.x, 170, 0));
+        var end2 = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.y, 170, 0));
+
+        start2.ToAngleAxis(out dayTwoStartAngle, out dayTwoStartAxis);
+        end2.ToAngleAxis(out dayTwoEndAngle, out dayTwoEndAxis);
+
+        SignalShuttle.Emit(new OnGameStart());
+    }
+
+    private void Update()
+    {
+        UpdateLighting(dayTimer.TimeElapsedPercent);
+    }
+
+    private void UpdateLighting(float timePercent)
+    {
         if (dayTimer.dayOne)
         {
             RenderSettings.skybox.SetColor("_Tint", Preset.DayOne.Evaluate(timePercent));
             RenderSettings.ambientLight = Preset.AmbientColor.Evaluate(timePercent);
             DirectionalLight.color = Preset.DirectionalColor.Evaluate(timePercent);
 
-            var start = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.x, 170, 0));
-            var end = Quaternion.Euler(new Vector3(Preset.dayOneSunAngles.y, 170, 0));
-
-            start.ToAngleAxis(out float sourceAngle, out Vector3 sourceAxis);
-            end.ToAngleAxis(out float targetAngle, out Vector3 targetAxis);
-
-            float angle = Mathf.LerpUnclamped(sourceAngle, targetAngle, timePercent);
-            Vector3 axis = Vector3.SlerpUnclamped(sourceAxis, targetAxis, timePercent);
+            float angle = Mathf.LerpUnclamped(dayOneStartAngle, dayOneEndAngle, timePercent);
+            Vector3 axis = Vector3.SlerpUnclamped(dayOneStartAxis, dayOneEndAxis, timePercent);
 
             DirectionalLight.transform.localRotation = Quaternion.AngleAxis(angle, axis);
         }
-         
         else
         {
-            RenderSettings.skybox.SetColor("_Tint",Preset.DayTwo.Evaluate(timePercent));
+            RenderSettings.skybox.SetColor("_Tint", Preset.DayTwo.Evaluate(timePercent));
             RenderSettings.ambientLight = Preset.DayTwoAmbientColor.Evaluate(timePercent);
             DirectionalLight.color = Preset.DayTwoDirectionalColor.Evaluate(timePercent);
 
-            var start = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.x, 170, 0));
-            var end = Quaternion.Euler(new Vector3(Preset.dayTwoSunAngles.y, 170, 0));
-
-            start.ToAngleAxis(out float sourceAngle, out Vector3 sourceAxis);
-            end.ToAngleAxis(out float targetAngle, out Vector3 targetAxis);
-
-            float angle = Mathf.LerpUnclamped(sourceAngle, targetAngle, timePercent);
-            Vector3 axis = Vector3.SlerpUnclamped(sourceAxis, targetAxis, timePercent);
+            float angle = Mathf.LerpUnclamped(dayTwoStartAngle, dayTwoEndAngle, timePercent);
+            Vector3 axis = Vector3.SlerpUnclamped(dayTwoStartAxis, dayTwoEndAxis, timePercent);
 
             DirectionalLight.transform.localRotation = Quaternion.AngleAxis(angle, axis);
         }
 
         DynamicGI.UpdateEnvironment(); // Optional, updates lighting if you're baking GI
-        RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);      
-   }
+        RenderSettings.fogColor = Preset.FogColor.Evaluate(timePercent);
+    }
 
-   //try to find a directional light if one has not been signed
-   private void OnValidate()
-   {
-      if (DirectionalLight != null)
-      {
-         return;
-      }
+    //try to find a directional light if one has not been signed
+    private void OnValidate()
+    {
+        if (DirectionalLight != null)
+            return;
 
-      if (RenderSettings.sun != null)
-      {
-         DirectionalLight = RenderSettings.sun;
-      }
-      else
-      {
-         Light[] lights = FindObjectsByType<Light>(sortMode: FindObjectsSortMode.None);
-         foreach (Light light in lights)
-         {
-            if (light.type == LightType.Directional)
+        if (RenderSettings.sun != null)
+            DirectionalLight = RenderSettings.sun;
+        else
+        {
+            Light[] lights = FindObjectsByType<Light>(sortMode: FindObjectsSortMode.None);
+            foreach (Light light in lights)
             {
-               DirectionalLight = light;
+                if (light.type == LightType.Directional)
+                {
+                    DirectionalLight = light;
+                    break;
+                }
             }
-         }
-      }
-   }
+        }
+    }
 }

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Palm Leaves
-  m_Shader: {fileID: -6465566751694194690, guid: 1249a1e3421fbcb4daf27e242928d806, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0611f4f3a706e6b4a9be5e9ce24751c3, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:

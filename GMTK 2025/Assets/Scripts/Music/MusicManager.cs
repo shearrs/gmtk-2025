@@ -10,7 +10,7 @@ namespace LostResort.Music
         [SerializeField] private AudioSource beachMusicSource;
         [SerializeField] private AudioSource gymMusicSource;
         [SerializeField] private float musicVolume;
-        [SerializeField] private float switchTime;
+        [SerializeField] private float switchTime = 0.25f;
 
         private AudioSource fadingTarget;
         private AudioSource current;
@@ -43,6 +43,8 @@ namespace LostResort.Music
         {
             AudioSource next = null;
 
+            Debug.Log("Switching to music for: " + signal.Type);
+
             switch (signal.Type)
             {
                 case MusicChangeSignal.MusicType.Hotel:
@@ -56,7 +58,7 @@ namespace LostResort.Music
                     break;
             }
 
-            if (next == current)
+            if (next == current || next == fadingTarget)
                 return;
 
             SwitchTrack(current, next);

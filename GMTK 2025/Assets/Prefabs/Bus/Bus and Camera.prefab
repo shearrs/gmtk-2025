@@ -110,7 +110,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 8400000, guid: 3761bfbe86f3abc418b1b652c0a604ee, type: 2}
+  m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -301,30 +301,6 @@ PrefabInstance:
     - target: {fileID: 3777994232140880742, guid: 141cbff2f3414484391878a0513956ac, type: 3}
       propertyPath: m_Name
       value: Bus
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214192637524034785, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-      propertyPath: m_Size.y
-      value: 1.7240825
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214192637524034785, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-      propertyPath: m_Center.x
-      value: 0.00030189173
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214192637524034785, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-      propertyPath: m_Center.y
-      value: 1.4187465
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214192637524034785, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-      propertyPath: m_Center.z
-      value: 3.6272435
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214192637524034785, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7214192637524034785, guid: 141cbff2f3414484391878a0513956ac, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 8563741535195632137, guid: 141cbff2f3414484391878a0513956ac, type: 3}
       propertyPath: m_LocalPosition.x
