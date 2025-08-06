@@ -55,7 +55,6 @@ namespace LostResort.Passengers
             UpdateText(passengersCarriedGymText, gymCount);
         }
         
-
         private void UpdateText(TMP_Text text, int count)
         {
             text.gameObject.SetActive(count != 0);

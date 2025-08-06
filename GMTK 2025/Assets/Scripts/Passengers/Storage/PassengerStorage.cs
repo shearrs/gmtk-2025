@@ -20,7 +20,7 @@ namespace LostResort.Passengers
 
         public void AddPassenger(Passenger passenger)
         {
-            if (openSlots.Count == 0)
+            if (openSlots.Count == 0 || passenger == null)
                 return;
 
             var slot = openSlots[0];
@@ -50,12 +50,12 @@ namespace LostResort.Passengers
             if (targetSlot == null)
                 return;
 
-            SignalShuttle.Emit(new PassengersChangedSignal(GetPassengers()));
             targetSlot.ClearPassenger();
             reservedSlots.Remove(targetSlot);
             openSlots.Add(targetSlot);
-
             passenger.OnDropoff();
+
+            SignalShuttle.Emit(new PassengersChangedSignal(GetPassengers()));
         }
 
         public void ClearPassengers()
